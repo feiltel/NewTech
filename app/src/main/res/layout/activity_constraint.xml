@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConstraintActivity">
+    <!--一、基本属性:
+    相对于控件布局
+layout_constraintLeft_toRightOf
+layout_constraintRight_toLeftOf
+layout_constraintLeft_toLeftOf
+layout_constraintRight_toRightOf
+layout_constraintTop_toTopOf
+layout_constraintTop_toBottomOf
+layout_constraintBottom_toTopOf
+layout_constraintBottom_toBottomOf
+layout_constraintBaseline_toBaselineOf
+layout_constraintStart_toEndOf
+layout_constraintStart_toStartOf
+layout_constraintEnd_toStartOf
+layout_constraintEnd_toEndOf
+    1.参数可为控件ID 或parent -->
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="居中（基础属性使用）"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--layout_goneMarginLeft属性使用
+    layout_goneMarginStart
+    layout_goneMarginEnd
+    layout_goneMarginLeft
+    layout_goneMarginTop
+    layout_goneMarginRight
+    layout_goneMarginBottom
+
+
+    当相对的控件为gone 时 边距为多少
+    -->
+    <Button
+        android:id="@+id/buttonGone1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="相对控件"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonGone2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="goneMargin控件"
+        app:layout_constraintLeft_toRightOf="@id/buttonGone1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginLeft="80dp" />
+    <!--  1，偏移（Bias）
+    layout_constraintHorizontal_bias 水平偏移
+    layout_constraintVertical_bias 纵向偏移
+    -->
+    <Button
+        android:id="@+id/btn3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="偏移"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3" />
+    <!--2，圆心定位（Circular positioning） 控件中心为基准
+    layout_constraintCircle : references another widget id //相对的控件ID
+    layout_constraintCircleRadius : the distance to the other widget center //控件对控件中心的距离
+    layout_constraintCircleAngle : which angle the widget should be at (in degrees, from 0 to 360) 角度
+    -->
+    <Button
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="圆心定位"
+        app:layout_constraintCircle="@id/btn3"
+        app:layout_constraintCircleRadius="80dp"
+        app:layout_constraintCircleAngle="45"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <!--WRAP_CONTENT : 强制约束（ enforcing constraints ）
+    app:layout_constrainedWidth=”true|false”
+    app:layout_constrainedHeight=”true|false”
+    -->
+  <Button
+      android:layout_width=""
+      android:layout_height="" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
