@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ConstraintActivity">
+    tools:context=".constraint.ConstraintActivity">
     <!--一、基本属性:
     相对于控件布局
 layout_constraintLeft_toRightOf

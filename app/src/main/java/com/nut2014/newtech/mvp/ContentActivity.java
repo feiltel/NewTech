@@ -25,6 +25,7 @@ public class ContentActivity extends BaseMvpActivity<ContentView,ContentPresente
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content);
+        //https://blog.csdn.net/yulong0809/article/details/78622428
         pb_view=findViewById(R.id.pb_view);
         user_name=findViewById(R.id.user_name);
         password=findViewById(R.id.password);

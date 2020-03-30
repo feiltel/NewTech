@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.nut2014.newtech.constraint.ConstraintActivity;
 import com.nut2014.newtech.mvp.ContentActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //constraint
-                startActivity(new Intent(MainActivity.this,ConstraintActivity.class));
+                startActivity(new Intent(MainActivity.this, ConstraintActivity.class));
             }
         });
         findViewById(R.id.btn2).setOnClickListener(new View.OnClickListener() {

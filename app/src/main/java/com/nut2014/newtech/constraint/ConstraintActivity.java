@@ -1,8 +1,10 @@
-package com.nut2014.newtech;
+package com.nut2014.newtech.constraint;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.nut2014.newtech.R;
 
 public class ConstraintActivity extends AppCompatActivity {
 
