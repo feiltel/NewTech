@@ -23,7 +23,7 @@ public abstract class BaseMvpPresenter<V extends BaseMvpView> {
      * 获取V层
      * @return
      */
-    public V getmMvpView() {
+    public V getMvpView() {
         return mMvpView;
     }
 }

@@ -9,23 +9,23 @@ public class ContentPresenter extends BaseMvpPresenter<ContentView> {
         this.contentModel = new ContentModel();
     }
     public void login(String userName,String password){
-        if (getmMvpView()!=null){
-            getmMvpView().showLoad();
+        if (getMvpView()!=null){
+            getMvpView().showLoad();
         }
         contentModel.loginAct(userName, password, new LoginCallBack() {
             @Override
             public void success(String msg) {
-                if (getmMvpView()!=null){
-                    getmMvpView().dissLoad();
-                    getmMvpView().jumpMain();
+                if (getMvpView()!=null){
+                    getMvpView().dissLoad();
+                    getMvpView().jumpMain();
                 }
             }
 
             @Override
             public void error(String msg) {
-                if (getmMvpView()!=null){
-                    getmMvpView().dissLoad();
-                    getmMvpView().showToast();
+                if (getMvpView()!=null){
+                    getMvpView().dissLoad();
+                    getMvpView().showToast();
                 }
             }
         });
