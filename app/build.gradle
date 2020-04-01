@@ -43,5 +43,7 @@ dependencies {
     implementation 'com.trello.rxlifecycle2:rxlifecycle-components:2.0.1'
 
 
-
+    implementation 'top.zibin:Luban:1.1.8'
+    implementation 'id.zelory:compressor:2.1.0'
+    //implementation 'id.zelory:compressor:3.0.0'
 }
