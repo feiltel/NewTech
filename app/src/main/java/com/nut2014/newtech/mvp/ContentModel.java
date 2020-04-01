@@ -1,20 +1,32 @@
 package com.nut2014.newtech.mvp;
 
 
-import android.os.Handler;
+import com.nut2014.newtech.retrofit.ResponseBean;
+import com.nut2014.newtech.retrofit.RetrofitHelper;
+import com.nut2014.newtech.retrofit.RetrofitService;
+
+import io.reactivex.Observable;
 
 public class ContentModel {
-    public void loginAct(String userName, String passWord, LoginCallBack callBack) {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (userName.equals(passWord)) {
-                    callBack.success("user");
-                } else {
-                    callBack.error("error");
+    private static ContentModel manager;
+    public static ContentModel getInstance() {
+        if (manager == null) {
+            synchronized (ContentModel.class) {
+                if (manager == null) {
+                    manager = new ContentModel();
                 }
             }
-        },3000);
-
+        }
+        return manager;
     }
+    private RetrofitService retrofitService;
+
+    public ContentModel() {
+        retrofitService = RetrofitHelper.getInstance().getApiService(RetrofitService.class);
+    }
+
+    public Observable<ResponseBean> loginAct(String userName, String password) {
+        return retrofitService.login(userName, password);
+    }
+
 }

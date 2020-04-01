@@ -53,10 +53,11 @@ public class Node {
             this.right.preOrder();
         }
     }
-
+    //前序查找
     public Node preNode(int num) {
-//        System.out.println(this);
+        System.out.println(this.num+">>>"+num);
         if (this.num == num) {
+
             return this;
         }
         Node resoureNode = null;
@@ -77,5 +78,64 @@ public class Node {
         //  8  9
         //
         //
+
+        //          1
+        //      2       3
+        //                 4
+        //
+        //
+        //          1
+        //        |
+        //      2       3
+        //                 4
+        //
+    }
+
+
+    public Node afterNode(int num) {
+
+
+        Node resoureNode = null;
+        if (this.left != null) {
+            resoureNode = this.left.afterNode(num);
+        }
+
+        if (resoureNode != null) {
+            return resoureNode;
+        }
+        if (this.right != null) {
+            resoureNode = this.right.afterNode(num);
+        }
+
+        System.out.println(this.num+">>>"+num);
+        if (this.num == num) {
+            return this;
+        }
+
+        return resoureNode;
+    }
+
+    public Node centerNode(int num) {
+
+
+        Node resoureNode = null;
+        if (this.left != null) {
+            resoureNode = this.left.centerNode(num);
+        }
+
+        if (resoureNode != null) {
+            return resoureNode;
+        }
+        System.out.println(this.num+">>>"+num);
+        if (this.num == num) {
+            return this;
+        }
+        if (this.right != null) {
+            resoureNode = this.right.centerNode(num);
+        }
+
+
+        return resoureNode;
+
     }
 }

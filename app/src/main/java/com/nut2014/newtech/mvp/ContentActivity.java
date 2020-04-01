@@ -42,7 +42,7 @@ public class ContentActivity extends BaseMvpActivity<ContentView,ContentPresente
 
     @Override
     protected ContentPresenter createPresenter() {
-        return new ContentPresenter();
+        return new ContentPresenter(this);
     }
 
     @Override

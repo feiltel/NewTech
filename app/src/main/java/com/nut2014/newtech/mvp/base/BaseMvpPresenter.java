@@ -1,5 +1,8 @@
 package com.nut2014.newtech.mvp.base;
 
+import com.trello.rxlifecycle2.LifecycleProvider;
+import com.trello.rxlifecycle2.android.ActivityEvent;
+
 public abstract class BaseMvpPresenter<V extends BaseMvpView> {
 
     private V mMvpView;
@@ -25,5 +28,17 @@ public abstract class BaseMvpPresenter<V extends BaseMvpView> {
      */
     public V getMvpView() {
         return mMvpView;
+    }
+
+
+
+    private LifecycleProvider<ActivityEvent> provider;
+
+    public BaseMvpPresenter(LifecycleProvider<ActivityEvent> provider) {
+        this.provider = provider;
+    }
+
+    public LifecycleProvider<ActivityEvent> getProvider() {
+        return provider;
     }
 }
