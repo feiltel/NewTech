@@ -6,4 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".compress.CompressActivity">
 
+
+
+    <TextView
+        android:id="@+id/path_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:text="输入路径"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/path_et"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintLeft_toLeftOf="@id/path_title_tv"
+        app:layout_constraintRight_toRightOf="@id/path_title_tv"
+        app:layout_constraintTop_toBottomOf="@id/path_title_tv" />
+
+    <Button
+        android:id="@+id/start_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="开始压缩"
+        app:layout_constraintLeft_toLeftOf="@id/path_et"
+        app:layout_constraintRight_toRightOf="@id/path_et"
+        app:layout_constraintTop_toBottomOf="@id/path_et" />
+    <TextView
+
+        android:layout_marginTop="32dp"
+        app:layout_constraintLeft_toLeftOf="@id/start_btn"
+        app:layout_constraintRight_toRightOf="@id/start_btn"
+        app:layout_constraintTop_toBottomOf="@id/start_btn"
+        android:id="@+id/info_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

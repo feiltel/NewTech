@@ -1,49 +1,55 @@
 package com.nut2014.newtech.compress;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.nut2014.newtech.R;
+import com.nut2014.newtech.mvp.base.BaseMvpActivity;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import id.zelory.compressor.Compressor;
-import io.reactivex.Flowable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
-import top.zibin.luban.Luban;
+import java.io.IOException;
 
 //压缩图片 调整图片尺寸
-public class CompressActivity extends AppCompatActivity {
+public class CompressActivity extends BaseMvpActivity<CompressView, CompressPresenter> implements CompressView {
+    private static final String TAG = "CompressActivity";
+    private EditText pathEt;
+    private Button startBtn;
+    private TextView infoTv;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compress);
-       /* compressedImage = new Compressor(this)
-                .setMaxWidth(640)
-                .setMaxHeight(480)
-                .setQuality(75)
-                .setCompressFormat(Bitmap.CompressFormat.WEBP)
-                .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
-                        Environment.DIRECTORY_PICTURES).getAbsolutePath())
-                .compressToFile(actualImage);*/
-        List<String> photos=new ArrayList<>();
-        Flowable.just(photos)
-                .observeOn(Schedulers.io())
-                .map(list -> {
-                    // 同步方法直接返回压缩后的文件
-                    return Luban.with(CompressActivity.this).load(list).get();
-                })
-                .observeOn(AndroidSchedulers.mainThread());
+        initView();
+        initEvent();
+    }
+
+    @Override
+    protected CompressPresenter createPresenter() {
+        return new CompressPresenter(this);
+    }
+
+    @Override
+    public void setLogInfo(String msg) {
+        infoTv.setText(msg);
+    }
+
+    @Override
+    public void initView() {
+        pathEt = findViewById(R.id.path_et);
+        startBtn = findViewById(R.id.start_btn);
+        infoTv = findViewById(R.id.info_tv);
+    }
+
+    @Override
+    public void initEvent() {
+        startBtn.setOnClickListener(v -> {
+            String pathStr = pathEt.getText().toString();
+            Log.d(TAG, pathStr);
+                getPresenter().starCompress(pathStr, this);
+        });
     }
 }

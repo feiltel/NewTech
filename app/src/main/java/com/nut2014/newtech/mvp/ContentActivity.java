@@ -17,6 +17,10 @@ import com.nut2014.newtech.mvp.base.BaseMvpActivity;
 import java.util.Objects;
 
 public class ContentActivity extends BaseMvpActivity<ContentView,ContentPresenter> implements ContentView{
+    /**
+     * MVP
+     * https://blog.csdn.net/yulong0809/article/details/78622428
+     */
     private ProgressBar pb_view;
     private AppCompatEditText user_name;
     private AppCompatEditText password;
@@ -25,21 +29,25 @@ public class ContentActivity extends BaseMvpActivity<ContentView,ContentPresente
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content);
-        //https://blog.csdn.net/yulong0809/article/details/78622428
+        initView();
+        initEvent();
+    }
+    @Override
+    public void initView() {
         pb_view=findViewById(R.id.pb_view);
         user_name=findViewById(R.id.user_name);
         password=findViewById(R.id.password);
         login_btn=findViewById(R.id.login_btn);
-        login_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String userNameStr= Objects.requireNonNull(user_name.getText()).toString();
-                String passwordStr= Objects.requireNonNull(password.getText()).toString();
-                getPresenter().login(userNameStr,passwordStr);
-            }
-        });
     }
 
+    @Override
+    public void initEvent() {
+        login_btn.setOnClickListener(v -> {
+            String userNameStr= Objects.requireNonNull(user_name.getText()).toString();
+            String passwordStr= Objects.requireNonNull(password.getText()).toString();
+            getPresenter().login(userNameStr,passwordStr);
+        });
+    }
     @Override
     protected ContentPresenter createPresenter() {
         return new ContentPresenter(this);
@@ -51,7 +59,7 @@ public class ContentActivity extends BaseMvpActivity<ContentView,ContentPresente
     }
 
     @Override
-    public void dissLoad() {
+    public void hideLoad() {
         pb_view.setVisibility(View.GONE);
     }
 
@@ -64,4 +72,6 @@ public class ContentActivity extends BaseMvpActivity<ContentView,ContentPresente
     public void showToast() {
         Toast.makeText(this,"error",Toast.LENGTH_SHORT).show();
     }
+
+
 }

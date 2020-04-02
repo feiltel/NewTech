@@ -50,7 +50,7 @@ public class ContentPresenter extends BaseMvpPresenter<ContentView> {
                     @Override
                     public void onComplete() {
                         if (getMvpView() != null) {
-                            getMvpView().dissLoad();
+                            getMvpView().hideLoad();
                         }
                     }
                 });
