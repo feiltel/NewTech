@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_cl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".compress.CompressActivity">
-
 
 
     <TextView
@@ -26,11 +26,106 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintLeft_toLeftOf="@id/path_title_tv"
         app:layout_constraintRight_toRightOf="@id/path_title_tv"
         app:layout_constraintTop_toBottomOf="@id/path_title_tv" />
+
+    <TextView
+        android:id="@+id/quality_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="选择压缩质量"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintLeft_toLeftOf="@id/path_et"
+        app:layout_constraintRight_toRightOf="@id/path_et"
+        app:layout_constraintTop_toBottomOf="@id/path_et" />
+
+    <SeekBar
+        android:id="@+id/quality_sb"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="56dp"
+        android:max="100"
+        android:progress="20"
+        app:layout_constraintLeft_toLeftOf="@id/quality_title_tv"
+        app:layout_constraintRight_toRightOf="@id/quality_title_tv"
+        app:layout_constraintTop_toBottomOf="@id/quality_title_tv" />
+
+    <TextView
+        android:id="@+id/quality_number_tv"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:text="12"
+        android:textColor="@android:color/primary_text_light"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/quality_sb"
+        app:layout_constraintLeft_toRightOf="@id/quality_sb"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/quality_sb" />
+
+
+    <TextView
+        android:id="@+id/limit_hw_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="输入压缩最大尺寸"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintLeft_toLeftOf="@id/quality_sb"
+        app:layout_constraintRight_toRightOf="@id/quality_sb"
+        app:layout_constraintTop_toBottomOf="@id/quality_sb" />
+
+    <TextView
+        android:textColor="@android:color/primary_text_light"
+        android:gravity="center"
+        android:text="高度"
+        android:id="@+id/limit_h_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/limit_h_et"
+        app:layout_constraintTop_toBottomOf="@id/limit_hw_title_tv" />
+    <EditText
+        android:id="@+id/limit_h_et"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@id/limit_h_tv"
+        app:layout_constraintRight_toLeftOf="@id/limit_w_tv"
+        app:layout_constraintTop_toBottomOf="@id/limit_hw_title_tv" />
+    <TextView
+        android:textColor="@android:color/primary_text_light"
+        android:gravity="center"
+        android:text="宽度"
+        android:id="@+id/limit_w_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@id/limit_h_et"
+        app:layout_constraintRight_toLeftOf="@id/limit_w_et"
+        app:layout_constraintTop_toBottomOf="@id/limit_hw_title_tv" />
+
+    <EditText
+        android:id="@+id/limit_w_et"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintLeft_toRightOf="@id/limit_w_tv"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/limit_hw_title_tv" />
 
     <Button
         android:id="@+id/start_btn"
@@ -38,16 +133,25 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="开始压缩"
-        app:layout_constraintLeft_toLeftOf="@id/path_et"
-        app:layout_constraintRight_toRightOf="@id/path_et"
-        app:layout_constraintTop_toBottomOf="@id/path_et" />
-    <TextView
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/limit_h_et" />
 
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
         app:layout_constraintLeft_toLeftOf="@id/start_btn"
         app:layout_constraintRight_toRightOf="@id/start_btn"
-        app:layout_constraintTop_toBottomOf="@id/start_btn"
-        android:id="@+id/info_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintTop_toBottomOf="@id/start_btn">
+
+        <TextView
+            android:id="@+id/info_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

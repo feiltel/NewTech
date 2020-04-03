@@ -6,10 +6,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.nut2014.newtech.R;
 import com.nut2014.newtech.mvp.base.BaseMvpActivity;
-
-import java.io.IOException;
 
 //压缩图片 调整图片尺寸
 public class CompressActivity extends BaseMvpActivity<CompressView, CompressPresenter> implements CompressView {
@@ -17,7 +17,7 @@ public class CompressActivity extends BaseMvpActivity<CompressView, CompressPres
     private EditText pathEt;
     private Button startBtn;
     private TextView infoTv;
-
+    private ConstraintLayout rootCl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +38,21 @@ public class CompressActivity extends BaseMvpActivity<CompressView, CompressPres
     }
 
     @Override
+    public void startCompress() {
+        rootCl.setEnabled(false);
+    }
+
+    @Override
+    public void endCompress() {
+        rootCl.setEnabled(true);
+    }
+
+    @Override
     public void initView() {
         pathEt = findViewById(R.id.path_et);
         startBtn = findViewById(R.id.start_btn);
         infoTv = findViewById(R.id.info_tv);
+        rootCl = findViewById(R.id.root_cl);
     }
 
     @Override
@@ -49,7 +60,7 @@ public class CompressActivity extends BaseMvpActivity<CompressView, CompressPres
         startBtn.setOnClickListener(v -> {
             String pathStr = pathEt.getText().toString();
             Log.d(TAG, pathStr);
-                getPresenter().starCompress(pathStr, this);
+            getPresenter().starCompress(pathStr, this);
         });
     }
 }
