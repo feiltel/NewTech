@@ -36,14 +36,22 @@ public class CompressPresenter extends BaseMvpPresenter<CompressView> {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if (getMvpView() != null) {
-                stringBuilder.append(msg.obj + "\n");
-                getMvpView().setLogInfo(stringBuilder.toString());
+            if (msg.what==2){
+                if (getMvpView() != null) {
+                    getMvpView().endCompress();
+                }
+            }else {
+                if (getMvpView() != null) {
+                    stringBuilder.append(msg.obj + "\n");
+                    getMvpView().setLogInfo(stringBuilder.toString());
+                }
             }
+
         }
     };
 
     public void starCompress(String path, Context context) {
+        getMvpView().startCompress();
         new Thread(() -> {
             try {
                 initFilePath();
@@ -63,6 +71,7 @@ public class CompressPresenter extends BaseMvpPresenter<CompressView> {
                         message.obj = file2.getName() + "\nCompressor压缩后大小：" + FileSizeUtil.getAutoFileOrFilesSize(file2.getPath());
                         handler.sendMessage(message);
                     }
+                    handler.sendEmptyMessage(2);
                 }
             } catch (IOException e) {
                 e.printStackTrace();

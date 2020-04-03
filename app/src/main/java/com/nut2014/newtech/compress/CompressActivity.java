@@ -39,12 +39,12 @@ public class CompressActivity extends BaseMvpActivity<CompressView, CompressPres
 
     @Override
     public void startCompress() {
-        rootCl.setEnabled(false);
+        startBtn.setEnabled(false);
     }
 
     @Override
     public void endCompress() {
-        rootCl.setEnabled(true);
+        startBtn.setEnabled(true);
     }
 
     @Override
