@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -17,6 +18,10 @@ public class CompressActivity extends BaseMvpActivity<CompressView, CompressPres
     private EditText pathEt;
     private Button startBtn;
     private TextView infoTv;
+    private SeekBar quality_sb;
+    private TextView quality_number_tv;
+    private EditText limit_h_et;
+    private EditText limit_w_et;
     private ConstraintLayout rootCl;
 
     @Override
@@ -53,6 +58,10 @@ public class CompressActivity extends BaseMvpActivity<CompressView, CompressPres
         startBtn = findViewById(R.id.start_btn);
         infoTv = findViewById(R.id.info_tv);
         rootCl = findViewById(R.id.root_cl);
+        quality_sb = findViewById(R.id.quality_sb);
+        quality_number_tv = findViewById(R.id.quality_number_tv);
+        limit_h_et = findViewById(R.id.limit_h_et);
+        limit_w_et = findViewById(R.id.limit_w_et);
     }
 
     @Override
@@ -60,7 +69,27 @@ public class CompressActivity extends BaseMvpActivity<CompressView, CompressPres
         startBtn.setOnClickListener(v -> {
             String pathStr = pathEt.getText().toString();
             Log.d(TAG, pathStr);
-            getPresenter().starCompress(pathStr, this);
+            // int quality,int maxHeight,int maxWidth
+            int quality = Integer.decode(quality_number_tv.getText().toString());
+            int maxHeight = Integer.decode(limit_h_et.getText().toString());
+            int maxWidth = Integer.decode(limit_w_et.getText().toString());
+            getPresenter().starCompress(pathStr, this, quality, maxHeight, maxWidth);
+        });
+        quality_sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                quality_number_tv.setText(String.valueOf(progress));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
         });
     }
 }

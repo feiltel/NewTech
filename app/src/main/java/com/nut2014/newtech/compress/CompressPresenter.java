@@ -50,7 +50,7 @@ public class CompressPresenter extends BaseMvpPresenter<CompressView> {
         }
     };
 
-    public void starCompress(String path, Context context) {
+    public void starCompress(String path, Context context, int quality,int maxHeight,int maxWidth) {
         getMvpView().startCompress();
         new Thread(() -> {
             try {
@@ -66,7 +66,7 @@ public class CompressPresenter extends BaseMvpPresenter<CompressView> {
                         message1.obj = file1.getName() + "\nLuban压缩后大小：" + FileSizeUtil.getAutoFileOrFilesSize(file1.getPath());
                         handler.sendMessage(message1);
 
-                        File file2 = compressWithCompressor(context, file1, 20,300,300);
+                        File file2 = compressWithCompressor(context, file1, quality,maxHeight,maxWidth);
                         Message message = new Message();
                         message.obj = file2.getName() + "\nCompressor压缩后大小：" + FileSizeUtil.getAutoFileOrFilesSize(file2.getPath());
                         handler.sendMessage(message);

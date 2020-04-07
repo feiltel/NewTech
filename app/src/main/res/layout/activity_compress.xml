@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:gravity="center"
-        android:text="12"
+        android:text="20"
         android:textColor="@android:color/primary_text_light"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@id/quality_sb"
@@ -97,6 +97,8 @@
         app:layout_constraintRight_toLeftOf="@id/limit_h_et"
         app:layout_constraintTop_toBottomOf="@id/limit_hw_title_tv" />
     <EditText
+        android:text="300"
+        android:inputType="number"
         android:id="@+id/limit_h_et"
         android:layout_width="0dp"
         android:layout_height="48dp"
@@ -118,6 +120,8 @@
         app:layout_constraintTop_toBottomOf="@id/limit_hw_title_tv" />
 
     <EditText
+        android:text="200"
+        android:inputType="number"
         android:id="@+id/limit_w_et"
         android:layout_width="0dp"
         android:layout_height="48dp"
