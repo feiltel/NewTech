@@ -65,9 +65,18 @@ public class CompressModel {
     }
 
     private void sendMsg(String msg) {
-        Message message1 = new Message();
-        message1.obj = msg;
-        handler.sendMessage(message1);
+        char[] chars = msg.toCharArray();
+        for (char aChar : chars) {
+            try {
+                Thread.sleep(20);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Message message1 = new Message();
+            message1.obj = aChar;
+            handler.sendMessage(message1);
+        }
+
     }
 
     private void initFilePath() {
