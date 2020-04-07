@@ -22,6 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:text="/newtech"
         android:id="@+id/path_et"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -144,11 +145,13 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:orientation="vertical"
+        android:layout_marginBottom="16dp"
         app:layout_constraintLeft_toLeftOf="@id/start_btn"
         app:layout_constraintRight_toRightOf="@id/start_btn"
         app:layout_constraintTop_toBottomOf="@id/start_btn">

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 
+import com.nut2014.newtech.utils.FLog;
 import com.nut2014.newtech.utils.FileSizeUtil;
 import com.nut2014.newtech.utils.PathUtils;
 
@@ -17,6 +18,7 @@ import id.zelory.compressor.Compressor;
 import top.zibin.luban.Luban;
 
 public class CompressModel {
+    private static final String TAG = "CompressModel";
     private Context context;
     private static final int FINSIH_KEY = 1;
     private String lubanTargetPath = PathUtils.getSDCardPath() + "/newtech1";
@@ -29,10 +31,12 @@ public class CompressModel {
 
     public interface CompressCallBack {
         void success();
+
         void compressInfo(String msg);
     }
 
-    public void compressPictures(String path, int quality, int maxHeight, int maxWidth,  CompressCallBack callBack) {
+    public void compressPictures(String path, int quality, int maxHeight, int maxWidth, CompressCallBack callBack) {
+        FLog.e(TAG, path);
         compressCallBack = callBack;
         new Thread(() -> {
             try {
@@ -42,11 +46,15 @@ public class CompressModel {
                 if (file.isDirectory()) {
                     File[] listFiles = file.listFiles();
                     List<File> photos = new ArrayList<>(Arrays.asList(listFiles));
-                    List<File> fileList = compressWithLuban(context, photos);
-                    for (File file1 : fileList) {
-                        sendMsg(file1.getName() + "\nLuban压缩后大小：" + FileSizeUtil.getAutoFileOrFilesSize(file1.getPath())+"\n");
-                        File file2 = compressWithCompressor(context, file1, quality, maxHeight, maxWidth);
-                        sendMsg(file2.getName() + "\nCompressor压缩后大小：" + FileSizeUtil.getAutoFileOrFilesSize(file2.getPath())+"\n");
+
+                    for (File file1 : photos) {
+                        sendMsg(file1.getName() + "\n压缩前大小：" + FileSizeUtil.getAutoFileOrFilesSize(file1.getPath()) + "\n");
+                        File lubanFile = compressWithLuban(context, file1);
+                        if (lubanFile!=null){
+                            sendMsg("Luban压缩后大小：" + FileSizeUtil.getAutoFileOrFilesSize(lubanFile.getPath()) + "\n");
+                            File file2 = compressWithCompressor(context, lubanFile, quality, maxHeight, maxWidth);
+                            sendMsg("Compressor压缩后大小：" + FileSizeUtil.getAutoFileOrFilesSize(file2.getPath()) + "\n\n");
+                        }
                     }
                     handler.sendEmptyMessage(FINSIH_KEY);
                 }
@@ -94,14 +102,28 @@ public class CompressModel {
 
     //使用Luban 压缩
     private List<File> compressWithLuban(Context context, List<File> files) throws IOException {
-        return Luban.with(context).setRenameListener(filePath -> {
+        FLog.d(TAG, files.size() + "");
+        return Luban.with(context).ignoreBy(1).setRenameListener(filePath -> {
             File file = new File(filePath);
             return file.getName();
         }).load(files).setTargetDir(lubanTargetPath).get();
     }
 
+    private File compressWithLuban(Context context, File file) throws IOException {
+        FLog.d(TAG, file.getName());
+        List<File> list = Luban.with(context).ignoreBy(1).setRenameListener(filePath -> {
+            File mfile = new File(filePath);
+            return mfile.getName();
+        }).load(file).setTargetDir(lubanTargetPath).get();
+        if (list != null && list.size() > 0) {
+            return list.get(0);
+        }
+        return null;
+    }
+
     //使用Compressor压缩
     private File compressWithCompressor(Context context, File file, int quality, int maxHeight, int maxWidth) throws IOException {
+        FLog.d(TAG, file.getName() + "");
         return new Compressor(context)
                 .setQuality(quality)
                 .setMaxHeight(maxHeight)
