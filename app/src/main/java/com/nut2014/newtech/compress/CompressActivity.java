@@ -29,7 +29,7 @@ public class CompressActivity extends BaseMvpActivity<CompressView, CompressPres
 
     @Override
     protected CompressPresenter createPresenter() {
-        return new CompressPresenter(this);
+        return new CompressPresenter();
     }
 
     @Override
@@ -60,7 +60,7 @@ public class CompressActivity extends BaseMvpActivity<CompressView, CompressPres
         startBtn.setOnClickListener(v -> {
             String pathStr = pathEt.getText().toString();
             Log.d(TAG, pathStr);
-            getPresenter().starCompress(pathStr, this);
+            getPresenter().starCompress(pathStr, 20, 300, 300);
         });
     }
 }

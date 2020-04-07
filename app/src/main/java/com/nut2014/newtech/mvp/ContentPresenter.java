@@ -4,8 +4,6 @@ import androidx.annotation.NonNull;
 
 import com.nut2014.newtech.mvp.base.BaseMvpPresenter;
 import com.nut2014.newtech.retrofit.ResponseBean;
-import com.trello.rxlifecycle2.LifecycleProvider;
-import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DefaultObserver;
@@ -14,8 +12,7 @@ import io.reactivex.schedulers.Schedulers;
 public class ContentPresenter extends BaseMvpPresenter<ContentView> {
 
 
-    public ContentPresenter(LifecycleProvider<ActivityEvent> provider) {
-        super(provider);
+    public ContentPresenter() {
 
     }
 
@@ -23,11 +20,9 @@ public class ContentPresenter extends BaseMvpPresenter<ContentView> {
         if (getMvpView() != null) {
             getMvpView().showLoad();
         }
-
         ContentModel.getInstance().loginAct(userName, password)
                 .subscribeOn(Schedulers.io()) // 在子线程中进行Http访问
                 .observeOn(AndroidSchedulers.mainThread()) // UI线程处理返回接口
-                .compose(getProvider().bindUntilEvent(ActivityEvent.DESTROY))// onDestroy取消订阅
                 .subscribe(new DefaultObserver<ResponseBean>() {  // 订阅
                     @Override
                     public void onNext(@NonNull ResponseBean mainListBean) {
