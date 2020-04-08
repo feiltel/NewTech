@@ -105,6 +105,60 @@ public class FPermission {
         }
     }
 
+    private boolean checkGranted(Activity activity, String[] permissions) {
+        for (String permission : permissions) {
+            if (ContextCompat.checkSelfPermission(activity, permission)
+                    != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void checkPermission(final @NonNull Activity activity, @NonNull String[] permissions, final @IntRange(from = 0) int requestCode, FPermissionCallBack callBack) {
+        this.requestCode = requestCode;
+        this.callBack = callBack;
+        if (!checkGranted(activity, permissions)) {
+            //请求权限
+            ActivityCompat.requestPermissions(activity,
+                    permissions,
+                    requestCode);
+        } else {
+            //有权限访问
+            if (callBack != null) {
+                callBack.granted();
+            }
+        }
+    }
+    private boolean checkPass(@NonNull int[] grantResults){
+        for (int grantResult : grantResults) {
+            if (grantResult != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 多权限检查 只有所以权限都通过才返回已授权
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    public void onRequestResults(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (this.requestCode == requestCode) {
+
+            if (checkPass(grantResults)) {
+                if (callBack != null) {
+                    callBack.granted();
+                }
+            } else {
+                if (callBack != null) {
+                    callBack.refuse();
+                }
+            }
+        }
+    }
     public void onRequestResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (this.requestCode == requestCode) {
             if (grantResults.length > 0
