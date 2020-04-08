@@ -8,7 +8,7 @@ import android.widget.ProgressBar;
 
 import androidx.appcompat.widget.AppCompatEditText;
 
-import com.nut2014.newtech.MainActivity;
+import com.nut2014.newtech.main.MainActivity;
 import com.nut2014.newtech.R;
 import com.nut2014.newtech.base.BaseMvpActivity;
 import com.nut2014.newtech.utils.MToast;

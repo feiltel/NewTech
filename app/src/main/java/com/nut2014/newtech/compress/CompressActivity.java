@@ -3,8 +3,10 @@ package com.nut2014.newtech.compress;
 import android.Manifest;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -28,6 +30,7 @@ public class CompressActivity extends BaseMvpActivity<CompressView, CompressPres
     private EditText limit_h_et;
     private EditText limit_w_et;
     private ConstraintLayout rootCl;
+    private ScrollView info_sv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,8 @@ public class CompressActivity extends BaseMvpActivity<CompressView, CompressPres
     @Override
     public void setLogInfo(String msg) {
         infoTv.setText(msg);
+        info_sv.fullScroll(View.FOCUS_DOWN);
+       // info_sv.smoothScrollBy(0,20);
     }
 
     @Override
@@ -67,6 +72,7 @@ public class CompressActivity extends BaseMvpActivity<CompressView, CompressPres
         quality_number_tv = findViewById(R.id.quality_number_tv);
         limit_h_et = findViewById(R.id.limit_h_et);
         limit_w_et = findViewById(R.id.limit_w_et);
+        info_sv = findViewById(R.id.info_sv);
     }
 
     @Override

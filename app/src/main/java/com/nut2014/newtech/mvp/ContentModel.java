@@ -1,6 +1,7 @@
 package com.nut2014.newtech.mvp;
 
 
+
 import com.alibaba.fastjson.JSON;
 import com.nut2014.newtech.Constant;
 import com.nut2014.newtech.base.ResponseBean;

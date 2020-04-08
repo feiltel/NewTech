@@ -22,12 +22,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:text="/newtech"
         android:id="@+id/path_et"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:text="/newtech"
         app:layout_constraintLeft_toLeftOf="@id/path_title_tv"
         app:layout_constraintRight_toRightOf="@id/path_title_tv"
         app:layout_constraintTop_toBottomOf="@id/path_title_tv" />
@@ -86,49 +86,51 @@
         app:layout_constraintTop_toBottomOf="@id/quality_sb" />
 
     <TextView
-        android:textColor="@android:color/primary_text_light"
-        android:gravity="center"
-        android:text="高度"
         android:id="@+id/limit_h_tv"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
+        android:gravity="center"
+        android:text="高度"
+        android:textColor="@android:color/primary_text_light"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/limit_h_et"
         app:layout_constraintTop_toBottomOf="@id/limit_hw_title_tv" />
+
     <EditText
-        android:text="300"
-        android:inputType="number"
         android:id="@+id/limit_h_et"
         android:layout_width="0dp"
         android:layout_height="48dp"
+        android:inputType="number"
+        android:text="300"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toRightOf="@id/limit_h_tv"
         app:layout_constraintRight_toLeftOf="@id/limit_w_tv"
         app:layout_constraintTop_toBottomOf="@id/limit_hw_title_tv" />
+
     <TextView
-        android:textColor="@android:color/primary_text_light"
-        android:gravity="center"
-        android:text="宽度"
         android:id="@+id/limit_w_tv"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
+        android:gravity="center"
+        android:text="宽度"
+        android:textColor="@android:color/primary_text_light"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toRightOf="@id/limit_h_et"
         app:layout_constraintRight_toLeftOf="@id/limit_w_et"
         app:layout_constraintTop_toBottomOf="@id/limit_hw_title_tv" />
 
     <EditText
-        android:text="200"
-        android:inputType="number"
         android:id="@+id/limit_w_et"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintLeft_toRightOf="@id/limit_w_tv"
+        android:inputType="number"
+        android:text="200"
         app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@id/limit_w_tv"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/limit_hw_title_tv" />
 
@@ -141,17 +143,17 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/limit_h_et" />
-
-
+    
     <ScrollView
+        android:id="@+id/info_sv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:orientation="vertical"
         android:layout_marginBottom="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/start_btn"
         app:layout_constraintRight_toRightOf="@id/start_btn"
         app:layout_constraintTop_toBottomOf="@id/start_btn">
@@ -161,4 +163,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </ScrollView>
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
