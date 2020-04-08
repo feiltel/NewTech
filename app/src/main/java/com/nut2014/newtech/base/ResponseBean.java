@@ -1,4 +1,4 @@
-package com.nut2014.newtech.retrofit;
+package com.nut2014.newtech.base;
 
 /**
  * @author feiltel 2020/3/31 0031

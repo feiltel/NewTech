@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.nut2014.newtech.R;
-import com.nut2014.newtech.mvp.base.BaseMvpActivity;
+import com.nut2014.newtech.base.BaseMvpActivity;
 import com.nut2014.newtech.utils.FPermission;
 import com.nut2014.newtech.utils.MToast;
 

@@ -12,7 +12,7 @@ public class FLog {
         if (isShowLog) {
             Throwable stack = new Throwable().fillInStackTrace();
             StackTraceElement[] trace = stack.getStackTrace();
-            return trace[1].getClassName().toString() + "   " + trace[1].getMethodName() + "   line:" + trace[1].getLineNumber() + " >>> " + show.toString();
+            return trace[1].getClassName() + "   " + trace[1].getMethodName() + "   line:" + trace[1].getLineNumber() + " >>> " + show.toString();
         } else {
             return "";
         }

@@ -1,22 +1,18 @@
-package com.nut2014.newtech.mvp.base;
+package com.nut2014.newtech.base;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 
-/**
- * @author feiltel 2020/3/31 0031
- */
-public abstract class BaseMvpFragment<V extends BaseMvpView, P extends BaseMvpPresenter<V>> extends Fragment implements BaseMvpView {
+public abstract class BaseMvpActivity<V extends BaseMvpView, P extends BaseMvpPresenter<V>> extends AppCompatActivity implements BaseMvpView {
+
     private P presenter;
-    @Nullable
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
         //创建Presenter
         if (presenter == null) {
             presenter = createPresenter();
@@ -27,13 +23,11 @@ public abstract class BaseMvpFragment<V extends BaseMvpView, P extends BaseMvpPr
         }
         //绑定view
         presenter.attachMvpView((V) this);
-
-        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    protected void onDestroy() {
+        super.onDestroy();
         //解除绑定
         if (presenter != null) {
             presenter.detachMvpView();

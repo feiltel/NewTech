@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import id.zelory.compressor.Compressor;
+import top.zibin.luban.CompressionPredicate;
 import top.zibin.luban.Luban;
 
 public class CompressModel {
@@ -119,6 +120,9 @@ public class CompressModel {
     }
 
     private File compressWithLuban(Context context, File file) throws IOException {
+        if (file.isDirectory()){
+            return null;
+        }
         FLog.d(TAG, file.getName());
         List<File> list = Luban.with(context).ignoreBy(1).setRenameListener(filePath -> {
             File mfile = new File(filePath);

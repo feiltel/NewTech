@@ -1,13 +1,6 @@
 package com.nut2014.newtech.mvp;
 
-import androidx.annotation.NonNull;
-
-import com.nut2014.newtech.mvp.base.BaseMvpPresenter;
-import com.nut2014.newtech.retrofit.ResponseBean;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.observers.DefaultObserver;
-import io.reactivex.schedulers.Schedulers;
+import com.nut2014.newtech.base.BaseMvpPresenter;
 
 public class ContentPresenter extends BaseMvpPresenter<ContentView> {
 
@@ -20,35 +13,23 @@ public class ContentPresenter extends BaseMvpPresenter<ContentView> {
         if (getMvpView() != null) {
             getMvpView().showLoad();
         }
-        ContentModel.getInstance().loginAct(userName, password)
-                .subscribeOn(Schedulers.io()) // 在子线程中进行Http访问
-                .observeOn(AndroidSchedulers.mainThread()) // UI线程处理返回接口
-                .subscribe(new DefaultObserver<ResponseBean>() {  // 订阅
-                    @Override
-                    public void onNext(@NonNull ResponseBean mainListBean) {
-                        if (getMvpView() != null) {
-                            if (mainListBean.getCode() == 1) {
-                                getMvpView().jumpMain();
-                            } else {
-                                getMvpView().showToast();
-                            }
-                        }
-                    }
+        ContentModel.loginRequest(userName, password, new ContentModel.LoginCallBack() {
+            @Override
+            public void success() {
+                if (getMvpView() != null) {
+                    getMvpView().hideLoad();
+                    getMvpView().jumpMain();
+                }
+            }
 
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                        if (getMvpView() != null) {
-                            getMvpView().showToast();
-                        }
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        if (getMvpView() != null) {
-                            getMvpView().hideLoad();
-                        }
-                    }
-                });
+            @Override
+            public void error(String msg) {
+                if (getMvpView() != null) {
+                    getMvpView().hideLoad();
+                    getMvpView().showToast(msg);
+                }
+            }
+        });
     }
 
 }

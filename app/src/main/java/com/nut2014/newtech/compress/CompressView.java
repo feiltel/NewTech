@@ -1,6 +1,6 @@
 package com.nut2014.newtech.compress;
 
-import com.nut2014.newtech.mvp.base.BaseMvpView;
+import com.nut2014.newtech.base.BaseMvpView;
 
 /**
  * @author feiltel 2020/4/3 0003

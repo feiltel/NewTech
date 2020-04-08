@@ -1,4 +1,4 @@
-package com.nut2014.newtech.mvp.base;
+package com.nut2014.newtech.base;
 
 public interface BaseMvpView {
     void initView();
