@@ -1,0 +1,123 @@
+package com.nut2014.newtech.utils;
+
+import android.app.Activity;
+import android.content.pm.PackageManager;
+
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+/**
+ * @author feiltel 2020/4/8 0008
+ */
+public class FPermission {
+    /**
+     * group:android.permission-group.CONTACTS
+     * permission:android.permission.WRITE_CONTACTS
+     * permission:android.permission.GET_ACCOUNTS
+     * permission:android.permission.READ_CONTACTS
+     * <p>
+     * group:android.permission-group.PHONE
+     * permission:android.permission.READ_CALL_LOG
+     * permission:android.permission.READ_PHONE_STATE
+     * permission:android.permission.CALL_PHONE
+     * permission:android.permission.WRITE_CALL_LOG
+     * permission:android.permission.USE_SIP
+     * permission:android.permission.PROCESS_OUTGOING_CALLS
+     * permission:com.android.voicemail.permission.ADD_VOICEMAIL
+     * <p>
+     * group:android.permission-group.CALENDAR
+     * permission:android.permission.READ_CALENDAR
+     * permission:android.permission.WRITE_CALENDAR
+     * <p>
+     * group:android.permission-group.CAMERA
+     * permission:android.permission.CAMERA
+     * <p>
+     * group:android.permission-group.SENSORS
+     * permission:android.permission.BODY_SENSORS
+     * <p>
+     * group:android.permission-group.LOCATION
+     * permission:android.permission.ACCESS_FINE_LOCATION
+     * permission:android.permission.ACCESS_COARSE_LOCATION
+     * <p>
+     * group:android.permission-group.STORAGE
+     * permission:android.permission.READ_EXTERNAL_STORAGE
+     * permission:android.permission.WRITE_EXTERNAL_STORAGE
+     * <p>
+     * group:android.permission-group.MICROPHONE
+     * permission:android.permission.RECORD_AUDIO
+     * <p>
+     * group:android.permission-group.SMS
+     * permission:android.permission.READ_SMS
+     * permission:android.permission.RECEIVE_WAP_PUSH
+     * permission:android.permission.RECEIVE_MMS
+     * permission:android.permission.RECEIVE_SMS
+     * permission:android.permission.SEND_SMS
+     * permission:android.permission.READ_CELL_BROADCASTS
+     */
+    private static FPermission manager;
+
+    public static FPermission getInstance() {
+        if (manager == null) {
+            synchronized (FPermission.class) {
+                if (manager == null) {
+                    manager = new FPermission();
+                }
+            }
+        }
+        return manager;
+    }
+
+    public interface FPermissionCallBack {
+        void granted();//允许
+
+        void refuse();//拒绝
+    }
+
+    private int requestCode = 0;
+    private FPermissionCallBack callBack;
+
+    public void checkPermission(final @NonNull Activity activity, @NonNull String permission, final @IntRange(from = 0) int requestCode, FPermissionCallBack callBack) {
+        this.requestCode = requestCode;
+        this.callBack = callBack;
+        if (ContextCompat.checkSelfPermission(activity, permission)
+                != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
+                new AlertDialog.Builder(activity)
+                        .setTitle("请求权限")
+                        .setMessage("需要获取权限保证软件正常使用")
+                        .setPositiveButton("确定", (dialog, which) -> ActivityCompat.requestPermissions(activity,
+                                new String[]{permission},
+                                requestCode)).show();
+            } else {
+                //请求权限
+                ActivityCompat.requestPermissions(activity,
+                        new String[]{permission},
+                        requestCode);
+            }
+        } else {
+            //有权限访问
+            if (callBack != null) {
+                callBack.granted();
+            }
+        }
+    }
+
+    public void onRequestResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (this.requestCode == requestCode) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (callBack != null) {
+                    callBack.granted();
+                }
+            } else {
+                if (callBack != null) {
+                    callBack.refuse();
+                }
+            }
+        }
+    }
+
+}

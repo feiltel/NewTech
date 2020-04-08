@@ -31,7 +31,6 @@ public class CompressPresenter extends BaseMvpPresenter<CompressView> {
             }
         });
 
-
     }
 
 
