@@ -41,7 +41,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void showProgress(String msg, boolean hasProgress) {
         FProgressDialog.getInstance().show(this, msg, hasProgress);
     }
-
+    protected void showProgress(String msg) {
+        FProgressDialog.getInstance().show(this, msg, false);
+    }
 
 
     @Override

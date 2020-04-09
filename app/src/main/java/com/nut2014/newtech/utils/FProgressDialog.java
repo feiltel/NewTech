@@ -1,5 +1,6 @@
 package com.nut2014.newtech.utils;
 
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,32 +11,37 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.nut2014.newtech.R;
 
-/**
- * @author feiltel 2020/4/9 0009
- */
 public class FProgressDialog {
-    private static final FProgressDialog ourInstance = new FProgressDialog();
-
-
-    public static FProgressDialog getInstance() {
-        return ourInstance;
+    private volatile static FProgressDialog instance;
+    private FProgressDialog() {
     }
 
-    private FProgressDialog() {
+    public static FProgressDialog getInstance() {
+        if (instance == null) {
+            synchronized (FProgressDialog.class) {
+                if (instance == null) {
+                    instance = new FProgressDialog();
+                }
+            }
+        }
+        return instance;
     }
 
     private AlertDialog alertDialog;
     private ProgressBar progressBar1;
+    private TextView progress_tv;
 
     public void show(Context context, String msg, boolean hasProgress) {
         if (alertDialog == null) {
             alertDialog = new AlertDialog.Builder(context, R.style.ProgressDialog).create();
             View inflate = LayoutInflater.from(context).inflate(R.layout.layout_alert_progress, null);
-            TextView tv_tip = inflate.findViewById(R.id.tv_tip);
+            TextView  tv_tip = inflate.findViewById(R.id.tv_tip);
+            progress_tv = inflate.findViewById(R.id.progress_tv);
             progressBar1 = inflate.findViewById(R.id.iv_pb1);
             ProgressBar progressBar2 = inflate.findViewById(R.id.iv_pb2);
             tv_tip.setText(msg);
             progressBar1.setVisibility(hasProgress ? View.VISIBLE : View.GONE);
+            progress_tv.setVisibility(hasProgress ? View.VISIBLE : View.GONE);
             progressBar2.setVisibility(hasProgress ? View.GONE : View.VISIBLE);
             alertDialog.setView(inflate);
             alertDialog.setCanceledOnTouchOutside(false);
@@ -45,8 +51,9 @@ public class FProgressDialog {
     }
 
     public void setProgress(int progress) {
-        if (alertDialog != null && alertDialog.isShowing() && progressBar1 != null) {
+        if (alertDialog != null && alertDialog.isShowing() && progressBar1 != null&& progress_tv != null) {
             progressBar1.setProgress(progress);
+            progress_tv.setText(progress+"%");
         }
     }
 

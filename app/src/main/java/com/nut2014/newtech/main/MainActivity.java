@@ -6,6 +6,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +24,7 @@ import com.nut2014.newtech.mvp.ContentActivity;
 import com.nut2014.newtech.networklibrary.NetWorkManager;
 import com.nut2014.newtech.networklibrary.annotaion.NetWork;
 import com.nut2014.newtech.networklibrary.type.NetType;
+import com.nut2014.newtech.test.TestActivity;
 import com.nut2014.newtech.utils.FPermission;
 import com.nut2014.newtech.utils.GlideEngine;
 
@@ -36,15 +38,20 @@ public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
     @BindView(R.id.list_rv)
     RecyclerView listRv;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     @Override
     protected void initView() {
+        toolbar.setTitle(getString(R.string.app_name));
+        setSupportActionBar(toolbar);
         NetWorkManager.getDefault().registerObserver(this);
         listRv.setLayoutManager(new LinearLayoutManager(this));
         List<String> titleList = new ArrayList<>();
         titleList.add("1.约束布局");
         titleList.add("2.MVP架构");
         titleList.add("3.压缩图片工具");
+        titleList.add("4.图片选择库");
         titleList.add("4.图片选择库");
         MainListAdapter mainListAdapter = new MainListAdapter(titleList);
         listRv.setAdapter(mainListAdapter);
@@ -69,6 +76,9 @@ public class MainActivity extends BaseActivity {
                                     .imageSpanCount(3)
                                     .loadImageEngine(GlideEngine.createGlideEngine()) // 请参考Demo GlideEngine.java
                                     .forResult(PictureConfig.CHOOSE_REQUEST);
+                            break;
+                        case 4:
+                            jumpActivity(TestActivity.class,null);
                             break;
                     }
                 }

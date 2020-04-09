@@ -25,7 +25,8 @@
         <activity android:name=".mvp.ContentActivity" />
         <activity android:name=".compress.CompressActivity" />
         <activity android:name=".constraint.ConstraintActivity" />
-        <activity android:name=".main.MainActivity">
+        <activity android:name=".test.TestActivity" />
+        <activity android:name=".main.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />

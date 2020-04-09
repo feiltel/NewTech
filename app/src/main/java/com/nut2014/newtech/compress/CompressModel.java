@@ -54,16 +54,17 @@ public class CompressModel {
                     for (File file1 : photos) {
                         sendMsg(file1.getName() + "\n压缩前大小：" + FileSizeUtil.getAutoFileOrFilesSize(file1.getPath()) + "\n");
                         File lubanFile = compressWithLuban(context, file1);
+                        finishNum++;
+                        int progress1 =  (int) ((finishNum / (fileNum*2.0)) * 100);
+                        sendProgress(progress1);
                         if (lubanFile != null) {
                             sendMsg("Luban压缩后大小：" + FileSizeUtil.getAutoFileOrFilesSize(lubanFile.getPath()) + "\n");
                             File file2 = compressWithCompressor(context, lubanFile, quality, maxHeight, maxWidth);
                             sendMsg("Compressor压缩后大小：" + FileSizeUtil.getAutoFileOrFilesSize(file2.getPath()) + "\n\n");
                         }
                         finishNum++;
-                        int progress =  (int) ((finishNum / (fileNum*1.0)) * 100);
-                        Message message = new Message();
-                        message.arg1 = progress;
-                        handler.sendMessage(message);
+                        int progress =  (int) ((finishNum / (fileNum*2.0)) * 100);
+                        sendProgress(progress);
                     }
                     handler.sendEmptyMessage(FINISH_KEY);
                 }
@@ -71,6 +72,11 @@ public class CompressModel {
                 e.printStackTrace();
             }
         }).start();
+    }
+    private void sendProgress(int progress){
+        Message message = new Message();
+        message.arg1 = progress;
+        handler.sendMessage(message);
     }
 
     private void sendMsg(String msg) {
