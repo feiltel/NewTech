@@ -1,19 +1,25 @@
-# Java 基础笔记
-#### 1.super 方法
-##### 在构造器里第一行代码总是调用super()，不论写或者不写，即默认调用了父类的构造器，构造方法会自动向上追溯
-```
-class childClass extends fatherClass{
-    public childClass(){
-        super(); //默认会调用 不管写还是不写
-        //TODO
-    }
-}
-```
-#### 2.封装
-##### 高内聚,低耦合  高内聚：封装细节 便于修改内部代码，提高可维护性
-低耦合：简化外部调用 便于调用者使用 便于扩展和协作
- 
-#### 3.类模板
+Android 脚手架
+===========
+
+1.封装
+----
+
+
+##### 高内聚,低耦合  高内聚：封装细节 便于修改内部代码，提高可维护性低耦合：简化外部调用 便于调用者使用 便于扩展和协作
+
+2.完成的工程
+-------
+##### 2.1  MVP 自动生成
+##### 2.2  网络请求库加入 OkHttp
+##### 2.3 ButterKnife 加入
+##### 2.4 图片压缩库加入 Luban compressor
+##### 2.5 RecyclerViewAdapter库加入 BaseRecyclerViewAdapterHelper
+##### 2.6 加入状态栏工具 statusbarutil
+##### 2.7 图片加载框架 glide
+##### 2.8 图片选择框架 PictureSelector
+
+4.类模板
+-----
  ```  
  <!--单例模式模板-->
  
@@ -103,5 +109,23 @@ public interface ${NAME}View extends BaseMvpView {
   
 
 }
+ <!--BaseAdapter-->
+ package ${PACKAGE_NAME};
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+
+
+import java.util.List;
+#parse("File Header.java")
+public class ${NAME}Adapter extends BaseQuickAdapter<${BeanName},BaseViewHolder> {
+    public ${NAME}Adapter(int layoutId,List<${BeanName}> list) {
+        super(layoutId, list);
+    }
+    @Override
+    protected void convert( BaseViewHolder helper,  ${BeanName} item) {
+      
+    }
+}
+ 
  
  ```
