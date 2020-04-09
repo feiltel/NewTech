@@ -1,20 +1,24 @@
 package com.nut2014.newtech.constraint;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-
 import com.nut2014.newtech.R;
+import com.nut2014.newtech.base.BaseActivity;
 
-public class ConstraintActivity extends AppCompatActivity {
+public class ConstraintActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_constraint);
-        /**
-         * https://www.jianshu.com/p/519332518bcc
-         */
+    protected void initView() {
 
     }
+
+    @Override
+    protected void initEvent() {
+
+    }
+
+    @Override
+    protected int getViewId() {
+        return R.layout.activity_constraint;
+    }
+
+
 }

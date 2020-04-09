@@ -26,7 +26,7 @@ public class ContentPresenter extends BaseMvpPresenter<ContentView> {
             public void error(String msg) {
                 if (getMvpView() != null) {
                     getMvpView().hideLoad();
-                    getMvpView().showToast(msg);
+                    getMvpView().showInfo(msg);
                 }
             }
         });

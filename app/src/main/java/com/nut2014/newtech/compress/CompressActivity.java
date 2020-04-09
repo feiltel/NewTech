@@ -1,7 +1,6 @@
 package com.nut2014.newtech.compress;
 
 import android.Manifest;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,27 +17,32 @@ import com.nut2014.newtech.base.BaseMvpActivity;
 import com.nut2014.newtech.utils.FPermission;
 import com.nut2014.newtech.utils.MToast;
 
+import butterknife.BindView;
+
 //压缩图片 调整图片尺寸
 public class CompressActivity extends BaseMvpActivity<CompressView, CompressPresenter> implements CompressView {
     private static final String TAG = "CompressActivity";
     private static final int WRITE_EXTERNAL_STORAGE_REQUEST_CODE = 12;
-    private EditText pathEt;
-    private Button startBtn;
-    private TextView infoTv;
-    private SeekBar quality_sb;
-    private TextView quality_number_tv;
-    private EditText limit_h_et;
-    private EditText limit_w_et;
-    private ConstraintLayout rootCl;
-    private ScrollView info_sv;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_compress);
-        initView();
-        initEvent();
-    }
+    @BindView(R.id.path_et)
+    EditText pathEt;
+    @BindView(R.id.start_btn)
+    Button startBtn;
+    @BindView(R.id.info_tv)
+    TextView infoTv;
+    @BindView(R.id.quality_sb)
+    SeekBar quality_sb;
+    @BindView(R.id.quality_number_tv)
+    TextView quality_number_tv;
+    @BindView(R.id.limit_h_et)
+    EditText limit_h_et;
+    @BindView(R.id.limit_w_et)
+    EditText limit_w_et;
+    @BindView(R.id.root_cl)
+    ConstraintLayout rootCl;
+    @BindView(R.id.info_sv)
+    ScrollView info_sv;
+
 
     @Override
     protected CompressPresenter createPresenter() {
@@ -49,30 +53,30 @@ public class CompressActivity extends BaseMvpActivity<CompressView, CompressPres
     public void setLogInfo(String msg) {
         infoTv.setText(msg);
         info_sv.fullScroll(View.FOCUS_DOWN);
-       // info_sv.smoothScrollBy(0,20);
+        // info_sv.smoothScrollBy(0,20);
     }
 
     @Override
     public void startCompress() {
         startBtn.setEnabled(false);
+        showProgress("压缩中...",false);
     }
 
     @Override
     public void endCompress() {
         startBtn.setEnabled(true);
+        hideProgress();
+        showToast("压缩完成");
+    }
+
+    @Override
+    public void compressProgress(int progress) {
+        setDialogProgress(progress);
     }
 
     @Override
     public void initView() {
-        pathEt = findViewById(R.id.path_et);
-        startBtn = findViewById(R.id.start_btn);
-        infoTv = findViewById(R.id.info_tv);
-        rootCl = findViewById(R.id.root_cl);
-        quality_sb = findViewById(R.id.quality_sb);
-        quality_number_tv = findViewById(R.id.quality_number_tv);
-        limit_h_et = findViewById(R.id.limit_h_et);
-        limit_w_et = findViewById(R.id.limit_w_et);
-        info_sv = findViewById(R.id.info_sv);
+
     }
 
     @Override
@@ -86,7 +90,7 @@ public class CompressActivity extends BaseMvpActivity<CompressView, CompressPres
 
                 @Override
                 public void refuse() {
-                    MToast.show(CompressActivity.this, "存储权限被拒绝");
+                    showToast( "存储权限被拒绝");
                 }
             });
         });
@@ -106,6 +110,11 @@ public class CompressActivity extends BaseMvpActivity<CompressView, CompressPres
 
             }
         });
+    }
+
+    @Override
+    protected int getViewId() {
+        return R.layout.activity_compress;
     }
 
     private void compressAct() {

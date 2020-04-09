@@ -29,6 +29,13 @@ public class CompressPresenter extends BaseMvpPresenter<CompressView> {
                     getMvpView().setLogInfo(msg);
                 }
             }
+
+            @Override
+            public void progress(int progress) {
+                if (getMvpView() != null) {
+                    getMvpView().compressProgress(progress);
+                }
+            }
         });
 
     }

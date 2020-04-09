@@ -15,13 +15,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import id.zelory.compressor.Compressor;
-import top.zibin.luban.CompressionPredicate;
 import top.zibin.luban.Luban;
 
 public class CompressModel {
     private static final String TAG = "CompressModel";
     private Context context;
-    private static final int FINSIH_KEY = 1;
+    private static final int FINISH_KEY = 1;
     private String lubanTargetPath = PathUtils.getSDCardPath() + "/newtech1";
     private String compressorTargetPath = PathUtils.getSDCardPath() + "/newtech2";
     private CompressCallBack compressCallBack;
@@ -34,6 +33,8 @@ public class CompressModel {
         void success();
 
         void compressInfo(String msg);
+
+        void progress(int progress);
     }
 
     public void compressPictures(String path, int quality, int maxHeight, int maxWidth, CompressCallBack callBack) {
@@ -41,23 +42,30 @@ public class CompressModel {
         compressCallBack = callBack;
         new Thread(() -> {
             try {
+                int finishNum = 0;
+
                 initFilePath();
                 String fileParentPath = PathUtils.getSDCardPath() + path;
                 File file = new File(fileParentPath);
                 if (file.isDirectory()) {
                     File[] listFiles = file.listFiles();
                     List<File> photos = new ArrayList<>(Arrays.asList(listFiles));
-
+                    int fileNum = photos.size();
                     for (File file1 : photos) {
                         sendMsg(file1.getName() + "\n压缩前大小：" + FileSizeUtil.getAutoFileOrFilesSize(file1.getPath()) + "\n");
                         File lubanFile = compressWithLuban(context, file1);
-                        if (lubanFile!=null){
+                        if (lubanFile != null) {
                             sendMsg("Luban压缩后大小：" + FileSizeUtil.getAutoFileOrFilesSize(lubanFile.getPath()) + "\n");
                             File file2 = compressWithCompressor(context, lubanFile, quality, maxHeight, maxWidth);
                             sendMsg("Compressor压缩后大小：" + FileSizeUtil.getAutoFileOrFilesSize(file2.getPath()) + "\n\n");
                         }
+                        finishNum++;
+                        int progress =  (int) ((finishNum / (fileNum*1.0)) * 100);
+                        Message message = new Message();
+                        message.arg1 = progress;
+                        handler.sendMessage(message);
                     }
-                    handler.sendEmptyMessage(FINSIH_KEY);
+                    handler.sendEmptyMessage(FINISH_KEY);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -96,9 +104,14 @@ public class CompressModel {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if (msg.what == FINSIH_KEY) {
+            if (msg.what == FINISH_KEY) {
                 if (compressCallBack != null) {
                     compressCallBack.success();
+                }
+            } else if (msg.arg1 > 0) {
+                if (compressCallBack != null) {
+                    compressCallBack.progress(msg.arg1);
+                    FLog.d(TAG, msg.arg1+">>>");
                 }
             } else {
                 if (compressCallBack != null) {
@@ -120,7 +133,7 @@ public class CompressModel {
     }
 
     private File compressWithLuban(Context context, File file) throws IOException {
-        if (file.isDirectory()){
+        if (file.isDirectory()) {
             return null;
         }
         FLog.d(TAG, file.getName());

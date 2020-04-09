@@ -6,5 +6,5 @@ public interface ContentView extends BaseMvpView {
     void showLoad();
     void hideLoad();
     void jumpMain();
-    void showToast(String msg);
+    void showInfo(String msg);
 }

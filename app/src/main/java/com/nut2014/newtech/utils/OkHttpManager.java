@@ -30,7 +30,7 @@ import okhttp3.Response;
 public class OkHttpManager {
     public static final String TAG = "OkHttpManger";
     private static OkHttpClient okHttpClient;
-    public static OkHttpManager manager;
+    private volatile static OkHttpManager manager;
     private Handler mDelivery;
 
     private OkHttpManager() {
@@ -100,7 +100,7 @@ public class OkHttpManager {
     }
 
     private void _postAsyn(String url, final ResultCallback callback, Map<String, String> map) {
-        JSONObject jsonObject=new JSONObject();
+        JSONObject jsonObject = new JSONObject();
 
         FormBody.Builder build = new FormBody.Builder();
         if (map != null) {
@@ -108,7 +108,7 @@ public class OkHttpManager {
             for (Map.Entry<String, String> entry : map.entrySet()) {
                 Log.d("key", entry.getKey() + "  " + entry.getValue());
                 try {
-                    jsonObject.put(entry.getKey(),entry.getValue());
+                    jsonObject.put(entry.getKey(), entry.getValue());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

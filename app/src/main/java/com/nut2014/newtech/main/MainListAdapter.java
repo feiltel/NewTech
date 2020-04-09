@@ -13,7 +13,7 @@ public class MainListAdapter extends BaseQuickAdapter<String, BaseViewHolder> {
      * 如果后期设置数据，不需要传入初始List，直接调用 super(layoutResId); 即可
      */
     public MainListAdapter( List<String> list) {
-        super(R.layout.layout_demo, list);
+        super(R.layout.layout_main_list_item, list);
     }
 
 

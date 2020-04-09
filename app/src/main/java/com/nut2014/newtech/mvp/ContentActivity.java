@@ -1,44 +1,38 @@
 package com.nut2014.newtech.mvp;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
 import androidx.appcompat.widget.AppCompatEditText;
 
-import com.nut2014.newtech.main.MainActivity;
 import com.nut2014.newtech.R;
 import com.nut2014.newtech.base.BaseMvpActivity;
+import com.nut2014.newtech.main.MainActivity;
 import com.nut2014.newtech.utils.MToast;
 
 import java.util.Objects;
+
+import butterknife.BindView;
 
 public class ContentActivity extends BaseMvpActivity<ContentView, ContentPresenter> implements ContentView {
     /**
      * MVP
      * https://blog.csdn.net/yulong0809/article/details/78622428
      */
-    private ProgressBar pb_view;
-    private AppCompatEditText user_name;
-    private AppCompatEditText password;
-    private Button login_btn;
+    @BindView(R.id.pb_view)
+    ProgressBar pb_view;
+    @BindView(R.id.user_name)
+    AppCompatEditText user_name;
+    @BindView(R.id.password)
+    AppCompatEditText password;
+    @BindView(R.id.login_btn)
+    Button login_btn;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_content);
-        initView();
-        initEvent();
-    }
 
     @Override
     public void initView() {
-        pb_view = findViewById(R.id.pb_view);
-        user_name = findViewById(R.id.user_name);
-        password = findViewById(R.id.password);
-        login_btn = findViewById(R.id.login_btn);
     }
 
     @Override
@@ -48,6 +42,11 @@ public class ContentActivity extends BaseMvpActivity<ContentView, ContentPresent
             String passwordStr = Objects.requireNonNull(password.getText()).toString();
             getPresenter().login(userNameStr, passwordStr);
         });
+    }
+
+    @Override
+    protected int getViewId() {
+        return R.layout.activity_content;
     }
 
     @Override
@@ -71,8 +70,8 @@ public class ContentActivity extends BaseMvpActivity<ContentView, ContentPresent
     }
 
     @Override
-    public void showToast(String msg) {
-        MToast.show(this, msg);
+    public void showInfo(String msg) {
+        showToast(msg);
     }
 
 

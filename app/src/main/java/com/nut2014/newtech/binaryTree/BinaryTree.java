@@ -35,7 +35,7 @@ public class BinaryTree {
     }
 
     public static void main(String[] args) {
-        BinaryTree treenew = new BinaryTree();
+        BinaryTree treeNew = new BinaryTree();
         Node root = new Node(1);
         Node node2 = new Node(2);
         Node node3 = new Node(3);
@@ -44,7 +44,7 @@ public class BinaryTree {
         root.setLeft(node2);
         root.setRight(node3);
         node3.setRight(node4);
-        treenew.setRoot(root);
+        treeNew.setRoot(root);
         //遍历节点
         //  treenew.preOrder();
         //查找节点
@@ -52,11 +52,11 @@ public class BinaryTree {
         System.out.println("               2    3");
         System.out.println("                       4");
         System.out.println("前置查找");
-        treenew.preNode(4);
+        treeNew.preNode(4);
         System.out.println("后置查找");
-        treenew.afterNode(4);
+        treeNew.afterNode(4);
         System.out.println("中置查找");
-        treenew.centerNode(4);
+        treeNew.centerNode(4);
     }
 
     public void setRoot(Node root) {
