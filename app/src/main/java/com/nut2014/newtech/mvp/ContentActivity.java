@@ -50,6 +50,11 @@ public class ContentActivity extends BaseMvpActivity<ContentView, ContentPresent
     }
 
     @Override
+    protected boolean haveToolbar() {
+        return false;
+    }
+
+    @Override
     protected ContentPresenter createPresenter() {
         return new ContentPresenter();
     }

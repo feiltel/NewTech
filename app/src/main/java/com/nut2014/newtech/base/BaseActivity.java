@@ -3,6 +3,9 @@ package com.nut2014.newtech.base;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +27,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract void initEvent();
 
     protected abstract int getViewId();
+    protected abstract boolean haveToolbar();
+
 
 
     @Override
@@ -31,13 +36,22 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //沉浸式状态栏
         StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary), 0);
-        setContentView(getViewId());
+        if (haveToolbar()){
+            super.setContentView(R.layout.base_layout);
+            setContentView1(getViewId());
+        }else {
+            setContentView(getViewId());
+        }
         ButterKnife.bind(this);
 
         initView();
         initEvent();
     }
-
+    public void setContentView1(int layoutResID) {
+        LinearLayout root_lin = findViewById(R.id.root_lin);
+        View inflate = LayoutInflater.from(this).inflate(layoutResID, null);
+        root_lin.addView(inflate);
+    }
     protected void showProgress(String msg, boolean hasProgress) {
         FProgressDialog.getInstance().show(this, msg, hasProgress);
     }

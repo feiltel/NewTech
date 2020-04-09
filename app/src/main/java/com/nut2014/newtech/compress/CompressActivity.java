@@ -117,6 +117,11 @@ public class CompressActivity extends BaseMvpActivity<CompressView, CompressPres
         return R.layout.activity_compress;
     }
 
+    @Override
+    protected boolean haveToolbar() {
+        return false;
+    }
+
     private void compressAct() {
         String pathStr = pathEt.getText().toString();
         Log.d(TAG, pathStr);

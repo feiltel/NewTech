@@ -20,5 +20,10 @@ public class ConstraintActivity extends BaseActivity {
         return R.layout.activity_constraint;
     }
 
+    @Override
+    protected boolean haveToolbar() {
+        return false;
+    }
+
 
 }
