@@ -14,8 +14,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.nut2014.newtech.R;
 import com.nut2014.newtech.base.BaseMvpActivity;
+import com.nut2014.newtech.base.BaseParam;
 import com.nut2014.newtech.utils.FPermission;
-import com.nut2014.newtech.utils.MToast;
 
 import butterknife.BindView;
 
@@ -59,7 +59,7 @@ public class CompressActivity extends BaseMvpActivity<CompressView, CompressPres
     @Override
     public void startCompress() {
         startBtn.setEnabled(false);
-        showProgress("压缩中...",false);
+        showProgress("压缩中...", false);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class CompressActivity extends BaseMvpActivity<CompressView, CompressPres
 
                 @Override
                 public void refuse() {
-                    showToast( "存储权限被拒绝");
+                    showToast("存储权限被拒绝");
                 }
             });
         });
@@ -118,8 +118,8 @@ public class CompressActivity extends BaseMvpActivity<CompressView, CompressPres
     }
 
     @Override
-    protected boolean haveToolbar() {
-        return false;
+    public BaseParam getBaseParam() {
+        return new BaseParam().setHaveToolbar(true).setTitle("压缩工具").setHaveBackAction(true);
     }
 
     private void compressAct() {
@@ -137,6 +137,13 @@ public class CompressActivity extends BaseMvpActivity<CompressView, CompressPres
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         FPermission.getInstance().onRequestResult(requestCode, permissions, grantResults);
     }
+
+    @Override
+    public int[] hideSoftByEditViewIds() {
+        int[] ids = {R.id.path_et, R.id.limit_h_et, R.id.limit_w_et};
+        return ids;
+    }
+
 
 }
 

@@ -1,16 +1,14 @@
 package com.nut2014.newtech.mvp;
 
 import android.content.Intent;
-import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
 
 import androidx.appcompat.widget.AppCompatEditText;
 
 import com.nut2014.newtech.R;
 import com.nut2014.newtech.base.BaseMvpActivity;
+import com.nut2014.newtech.base.BaseParam;
 import com.nut2014.newtech.main.MainActivity;
-import com.nut2014.newtech.utils.MToast;
 
 import java.util.Objects;
 
@@ -21,8 +19,7 @@ public class ContentActivity extends BaseMvpActivity<ContentView, ContentPresent
      * MVP
      * https://blog.csdn.net/yulong0809/article/details/78622428
      */
-    @BindView(R.id.pb_view)
-    ProgressBar pb_view;
+
     @BindView(R.id.user_name)
     AppCompatEditText user_name;
     @BindView(R.id.password)
@@ -33,6 +30,7 @@ public class ContentActivity extends BaseMvpActivity<ContentView, ContentPresent
 
     @Override
     public void initView() {
+        setTitle("MVP");
     }
 
     @Override
@@ -50,8 +48,8 @@ public class ContentActivity extends BaseMvpActivity<ContentView, ContentPresent
     }
 
     @Override
-    protected boolean haveToolbar() {
-        return false;
+    public BaseParam getBaseParam() {
+        return new BaseParam().setFullScreen(true);
     }
 
     @Override
@@ -61,12 +59,12 @@ public class ContentActivity extends BaseMvpActivity<ContentView, ContentPresent
 
     @Override
     public void showLoad() {
-        pb_view.setVisibility(View.VISIBLE);
+        showProgress("登录中");
     }
 
     @Override
     public void hideLoad() {
-        pb_view.setVisibility(View.GONE);
+        hideProgress();
     }
 
     @Override
@@ -79,5 +77,9 @@ public class ContentActivity extends BaseMvpActivity<ContentView, ContentPresent
         showToast(msg);
     }
 
-
+    @Override
+    public int[] hideSoftByEditViewIds() {
+        int[] ids={R.id.user_name,R.id.password};
+        return ids;
+    }
 }

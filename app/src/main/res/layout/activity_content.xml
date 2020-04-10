@@ -3,13 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/mvp_bg"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".mvp.ContentActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:layout_gravity="center"
         android:layout_margin="16dp"
-        android:layout_height="match_parent" >
+        android:layout_height="wrap_content" >
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/user_name"
             android:layout_marginTop="16dp"
@@ -35,10 +37,5 @@
             android:layout_height="wrap_content"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ProgressBar
-        android:visibility="gone"
-        android:id="@+id/pb_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center" />
+
 </FrameLayout>

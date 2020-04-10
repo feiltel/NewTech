@@ -18,6 +18,7 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.nut2014.newtech.R;
 import com.nut2014.newtech.base.BaseActivity;
+import com.nut2014.newtech.base.BaseParam;
 import com.nut2014.newtech.compress.CompressActivity;
 import com.nut2014.newtech.constraint.ConstraintActivity;
 import com.nut2014.newtech.mvp.ContentActivity;
@@ -38,13 +39,10 @@ public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
     @BindView(R.id.list_rv)
     RecyclerView listRv;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+
 
     @Override
     protected void initView() {
-        toolbar.setTitle(getString(R.string.app_name));
-        setSupportActionBar(toolbar);
         NetWorkManager.getDefault().registerObserver(this);
         listRv.setLayoutManager(new LinearLayoutManager(this));
         List<String> titleList = new ArrayList<>();
@@ -52,7 +50,7 @@ public class MainActivity extends BaseActivity {
         titleList.add("2.MVP架构");
         titleList.add("3.压缩图片工具");
         titleList.add("4.图片选择库");
-        titleList.add("4.图片选择库");
+        titleList.add("5.测试");
         MainListAdapter mainListAdapter = new MainListAdapter(titleList);
         listRv.setAdapter(mainListAdapter);
         mainListAdapter.setOnItemClickListener(new OnItemClickListener() {
@@ -143,14 +141,16 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
+    public BaseParam getBaseParam() {
+        return new BaseParam().setHaveToolbar(true).setTitle(getString(R.string.app_name));
+    }
+
+    @Override
     protected int getViewId() {
         return R.layout.activity_main;
     }
 
-    @Override
-    protected boolean haveToolbar() {
-        return true;
-    }
+
 
 
     @Override
