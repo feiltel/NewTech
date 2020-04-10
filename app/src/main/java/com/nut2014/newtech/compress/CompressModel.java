@@ -38,7 +38,7 @@ public class CompressModel {
     }
 
     public void compressPictures(String path, int quality, int maxHeight, int maxWidth, CompressCallBack callBack) {
-        FLog.e(TAG, path);
+        FLog.d(TAG, path);
         compressCallBack = callBack;
         new Thread(() -> {
             try {
@@ -51,19 +51,24 @@ public class CompressModel {
                     File[] listFiles = file.listFiles();
                     List<File> photos = new ArrayList<>(Arrays.asList(listFiles));
                     int fileNum = photos.size();
+                    if (fileNum<1){
+                        handler.sendEmptyMessage(FINISH_KEY);
+                        return;
+                    }
                     for (File file1 : photos) {
+                        if (file1.isDirectory()){
+                            continue;
+                        }
                         sendMsg(file1.getName() + "\n压缩前大小：" + FileSizeUtil.getAutoFileOrFilesSize(file1.getPath()) + "\n");
                         File lubanFile = compressWithLuban(context, file1);
                         finishNum++;
-                        int progress1 =  (int) ((finishNum / (fileNum*2.0)) * 100);
-                        sendProgress(progress1);
                         if (lubanFile != null) {
                             sendMsg("Luban压缩后大小：" + FileSizeUtil.getAutoFileOrFilesSize(lubanFile.getPath()) + "\n");
                             File file2 = compressWithCompressor(context, lubanFile, quality, maxHeight, maxWidth);
                             sendMsg("Compressor压缩后大小：" + FileSizeUtil.getAutoFileOrFilesSize(file2.getPath()) + "\n\n");
                         }
                         finishNum++;
-                        int progress =  (int) ((finishNum / (fileNum*2.0)) * 100);
+                        int progress =  (int) ((finishNum / (fileNum*1.0)) * 100);
                         sendProgress(progress);
                     }
                     handler.sendEmptyMessage(FINISH_KEY);

@@ -59,7 +59,7 @@ public class CompressActivity extends BaseMvpActivity<CompressView, CompressPres
     @Override
     public void startCompress() {
         startBtn.setEnabled(false);
-        showProgress("压缩中...", false);
+        showProgress("压缩中...", true);
     }
 
     @Override

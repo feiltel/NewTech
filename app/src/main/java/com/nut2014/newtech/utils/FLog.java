@@ -2,6 +2,15 @@ package com.nut2014.newtech.utils;
 
 import android.util.Log;
 
+import com.nut2014.newtech.Constant;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 
 /**
  * Created by admin on 2016/1/21.
@@ -18,8 +27,42 @@ public class FLog {
         }
     }
 
-    public static void d(String TAG, String msg) {
+    private static String getDay() {
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        return format1.format(new Date(System.currentTimeMillis()));
+    }
 
+    private static void write2CrashFile(String msg) {
+        if (Constant.writeLog2File) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    File dir=new File(Constant.crashPath);
+                    if (!dir.exists()) {
+                        dir.mkdirs();
+                    }
+                    FileWriter fileWriter = null;
+                    try {
+                        fileWriter = new FileWriter(Constant.crashPath + getDay() + ".txt", true);
+                        fileWriter.write(msg);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        try {
+                            if (fileWriter != null) {
+                                fileWriter.close();
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }).start();
+        }
+
+    }
+
+    public static void d(String TAG, String msg) {
 
         int LOG_MAXLENGTH = 2000;
         int strLength = msg.length();
@@ -37,6 +80,7 @@ public class FLog {
             }
         }
     }
+
     public static void e(String TAG, String msg) {
         int LOG_MAXLENGTH = 2000;
         int strLength = msg.length();
@@ -80,7 +124,8 @@ public class FLog {
                 break;
             }
         }
-        if (currentIndex>=0&&currentIndex<stackTraceElement.length){
+        String logInfo="";
+        if (currentIndex >= 0 && currentIndex < stackTraceElement.length) {
             String fullClassName = stackTraceElement[currentIndex].getClassName();
             String className = fullClassName.substring(fullClassName
                     .lastIndexOf(".") + 1);
@@ -89,13 +134,13 @@ public class FLog {
                     .valueOf(stackTraceElement[currentIndex].getLineNumber());
             String startLine = "                                            \n";
             String endLine = "\n                                            \n";
-            return startLine + "at " + fullClassName + "." + methodName + "("
+            logInfo= startLine + "at " + fullClassName + "." + methodName + "("
                     + className + ".java:" + lineNumber + ")━━>" + methodName + "\n" + object.toString() + endLine;
-        }else {
-            return  object.toString();
+        } else {
+            logInfo= object.toString();
         }
-
-
+        write2CrashFile(logInfo);
+        return logInfo;
 
     }
 
