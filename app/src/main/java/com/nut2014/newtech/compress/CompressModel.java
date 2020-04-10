@@ -6,12 +6,11 @@ import android.os.Message;
 
 import com.nut2014.newtech.utils.FLog;
 import com.nut2014.newtech.utils.FileSizeUtil;
+import com.nut2014.newtech.utils.FileUtil;
 import com.nut2014.newtech.utils.PathUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import id.zelory.compressor.Compressor;
@@ -49,26 +48,23 @@ public class CompressModel {
                 File file = new File(fileParentPath);
                 if (file.isDirectory()) {
                     File[] listFiles = file.listFiles();
-                    List<File> photos = new ArrayList<>(Arrays.asList(listFiles));
+                    List<File> photos = FileUtil.filterImage(listFiles);
                     int fileNum = photos.size();
-                    if (fileNum<1){
+                    if (fileNum < 1) {
                         handler.sendEmptyMessage(FINISH_KEY);
                         return;
                     }
                     for (File file1 : photos) {
-                        if (file1.isDirectory()){
-                            continue;
-                        }
+                        FileUtil.isImage(file1);
                         sendMsg(file1.getName() + "\n压缩前大小：" + FileSizeUtil.getAutoFileOrFilesSize(file1.getPath()) + "\n");
                         File lubanFile = compressWithLuban(context, file1);
-                        finishNum++;
                         if (lubanFile != null) {
                             sendMsg("Luban压缩后大小：" + FileSizeUtil.getAutoFileOrFilesSize(lubanFile.getPath()) + "\n");
                             File file2 = compressWithCompressor(context, lubanFile, quality, maxHeight, maxWidth);
                             sendMsg("Compressor压缩后大小：" + FileSizeUtil.getAutoFileOrFilesSize(file2.getPath()) + "\n\n");
                         }
                         finishNum++;
-                        int progress =  (int) ((finishNum / (fileNum*1.0)) * 100);
+                        int progress = (int) ((finishNum / (fileNum * 1.0)) * 100);
                         sendProgress(progress);
                     }
                     handler.sendEmptyMessage(FINISH_KEY);
@@ -78,7 +74,8 @@ public class CompressModel {
             }
         }).start();
     }
-    private void sendProgress(int progress){
+
+    private void sendProgress(int progress) {
         Message message = new Message();
         message.arg1 = progress;
         handler.sendMessage(message);
@@ -122,7 +119,7 @@ public class CompressModel {
             } else if (msg.arg1 > 0) {
                 if (compressCallBack != null) {
                     compressCallBack.progress(msg.arg1);
-                    FLog.d(TAG, msg.arg1+">>>");
+                    FLog.d(TAG, msg.arg1 + ">>>");
                 }
             } else {
                 if (compressCallBack != null) {

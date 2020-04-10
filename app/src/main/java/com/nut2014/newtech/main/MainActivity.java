@@ -24,7 +24,7 @@ import com.nut2014.newtech.mvp.ContentActivity;
 import com.nut2014.newtech.networklibrary.NetWorkManager;
 import com.nut2014.newtech.networklibrary.annotaion.NetWork;
 import com.nut2014.newtech.networklibrary.type.NetType;
-import com.nut2014.newtech.utils.FLog;
+import com.nut2014.newtech.test.TestActivity;
 import com.nut2014.newtech.utils.FPermission;
 import com.nut2014.newtech.utils.GlideEngine;
 
@@ -75,9 +75,7 @@ public class MainActivity extends BaseActivity {
                                     .forResult(PictureConfig.CHOOSE_REQUEST);
                             break;
                         case 4:
-                            FLog.d(TAG, "点击了测试");
-                            FLog.d(TAG, 1 / 0 + ">>");
-                            //jumpActivity(TestActivity.class,null);
+                            jumpActivity(TestActivity.class, null);
                             break;
                     }
                 }
