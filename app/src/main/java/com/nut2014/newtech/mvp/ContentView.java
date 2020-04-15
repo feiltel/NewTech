@@ -1,6 +1,6 @@
 package com.nut2014.newtech.mvp;
 
-import com.nut2014.newtech.base.BaseMvpView;
+import com.nut2014.baselibrary.base.BaseMvpView;
 
 public interface ContentView extends BaseMvpView {
     void showLoad();

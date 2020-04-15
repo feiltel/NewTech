@@ -2,10 +2,10 @@ package com.nut2014.newtech.mvp;
 
 
 
-import com.alibaba.fastjson.JSON;
+import com.nut2014.baselibrary.utils.JsonUtil;
 import com.nut2014.newtech.Constant;
-import com.nut2014.newtech.base.ResponseBean;
-import com.nut2014.newtech.utils.OkHttpManager;
+import com.nut2014.baselibrary.base.ResponseBean;
+import com.nut2014.baselibrary.utils.OkHttpManager;
 
 public class ContentModel {
     public interface LoginCallBack {
@@ -26,7 +26,7 @@ public class ContentModel {
             @Override
             public void onResponse(String string) {
                 if (callback != null) {
-                    ResponseBean responseBean = JSON.parseObject(string, ResponseBean.class);
+                    ResponseBean responseBean = JsonUtil.parseObject(string, ResponseBean.class);
                     if (responseBean.getCode() == 1) {
                         callback.success();
                     } else {

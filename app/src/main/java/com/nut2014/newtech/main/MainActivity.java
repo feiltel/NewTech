@@ -9,24 +9,26 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
+import com.nut2014.baselibrary.base.BaseActivity;
+import com.nut2014.baselibrary.base.BaseParam;
+import com.nut2014.baselibrary.networklibrary.NetWorkManager;
+import com.nut2014.baselibrary.networklibrary.annotaion.NetWork;
+import com.nut2014.baselibrary.networklibrary.type.NetType;
+import com.nut2014.baselibrary.utils.FPermission;
 import com.nut2014.newtech.R;
-import com.nut2014.newtech.base.BaseActivity;
-import com.nut2014.newtech.base.BaseParam;
 import com.nut2014.newtech.compress.CompressActivity;
 import com.nut2014.newtech.constraint.ConstraintActivity;
 import com.nut2014.newtech.mvp.ContentActivity;
-import com.nut2014.newtech.networklibrary.NetWorkManager;
-import com.nut2014.newtech.networklibrary.annotaion.NetWork;
-import com.nut2014.newtech.networklibrary.type.NetType;
 import com.nut2014.newtech.test.TestActivity;
-import com.nut2014.newtech.utils.FPermission;
-import com.nut2014.newtech.utils.GlideEngine;
+
+import com.nut2014.baselibrary.utils.GlideEngine;
 
 import java.util.ArrayList;
 import java.util.List;

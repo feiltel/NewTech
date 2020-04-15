@@ -2,8 +2,8 @@ package com.nut2014.newtech.compress;
 
 import android.content.Context;
 
+import com.nut2014.baselibrary.base.BaseMvpPresenter;
 import com.nut2014.newtech.MyApp;
-import com.nut2014.newtech.base.BaseMvpPresenter;
 
 public class CompressPresenter extends BaseMvpPresenter<CompressView> {
     private CompressModel compressModel;

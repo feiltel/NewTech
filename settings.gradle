@@ -1,1 +1,1 @@
-include ':app',':crashlib'
+include ':app',':crashlib', ':baselibrary'

@@ -1,6 +1,6 @@
 package com.nut2014.newtech.mvp;
 
-import com.nut2014.newtech.base.BaseMvpPresenter;
+import com.nut2014.baselibrary.base.BaseMvpPresenter;
 
 public class ContentPresenter extends BaseMvpPresenter<ContentView> {
 
