@@ -79,7 +79,17 @@ public class RetrofitManager {
     public static <T> T create(final Class<T> service) {
         return RetrofitManager.getInstance().getRetrofit().create(service);
     }
-/*    private Interceptor authorization = chain -> {
+/*
+    public interface ApiService {
+    @POST("login")
+    Call<LoginBean> login(@Query("username") String username,@Query("password") String password );
+
+
+    @POST("system/json")
+    Call<List<ConfigBean>> getConfig();
+}
+
+    private Interceptor authorization = chain -> {
         Request request = chain.request();
         //添加header
         Request build = request.newBuilder()
