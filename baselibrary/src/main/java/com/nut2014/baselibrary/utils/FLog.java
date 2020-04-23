@@ -2,8 +2,6 @@ package com.nut2014.baselibrary.utils;
 
 import android.util.Log;
 
-import com.nut2014.baselibrary.Constant;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -32,33 +30,33 @@ public class FLog {
         return format1.format(new Date(System.currentTimeMillis()));
     }
 
-    private static void write2CrashFile(final String msg) {
-        if (Constant.writeLog2File) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    File dir=new File(Constant.crashPath);
-                    if (!dir.exists()) {
-                        dir.mkdirs();
-                    }
-                    FileWriter fileWriter = null;
+    private static void write2CrashFile(final String msg, String crashPath) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                File dir = new File(crashPath);
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                FileWriter fileWriter = null;
+                try {
+                    fileWriter = new FileWriter(crashPath + getDay() + ".txt", true);
+                    fileWriter.write(msg);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
                     try {
-                        fileWriter = new FileWriter(Constant.crashPath + getDay() + ".txt", true);
-                        fileWriter.write(msg);
+                        if (fileWriter != null) {
+                            fileWriter.close();
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
-                    } finally {
-                        try {
-                            if (fileWriter != null) {
-                                fileWriter.close();
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
                     }
                 }
-            }).start();
-        }
+            }
+        }).start();
+
 
     }
 
@@ -124,7 +122,7 @@ public class FLog {
                 break;
             }
         }
-        String logInfo="";
+        String logInfo = "";
         if (currentIndex >= 0 && currentIndex < stackTraceElement.length) {
             String fullClassName = stackTraceElement[currentIndex].getClassName();
             String className = fullClassName.substring(fullClassName
@@ -134,12 +132,11 @@ public class FLog {
                     .valueOf(stackTraceElement[currentIndex].getLineNumber());
             String startLine = "                                            \n";
             String endLine = "\n                                            \n";
-            logInfo= startLine + "at " + fullClassName + "." + methodName + "("
+            logInfo = startLine + "at " + fullClassName + "." + methodName + "("
                     + className + ".java:" + lineNumber + ")━━>" + methodName + "\n" + object.toString() + endLine;
         } else {
-            logInfo= object.toString();
+            logInfo = object.toString();
         }
-        write2CrashFile(logInfo);
         return logInfo;
 
     }

@@ -1,4 +1,4 @@
-package com.nut2014.baselibrary.utils;
+package com.nut2014.baselibrary.http;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -34,7 +34,10 @@ public class OkHttpManager {
     private Handler mDelivery;
 
     private OkHttpManager() {
-        okHttpClient = new OkHttpClient();
+        okHttpClient = new OkHttpClient()
+                .newBuilder()
+                .build();
+
         mDelivery = new Handler(Looper.getMainLooper());
     }
 
@@ -49,17 +52,21 @@ public class OkHttpManager {
         return manager;
     }
 
-    private void _getAsyn(String url, final ResultCallback callback) {
+    private Request getRequest(String url) {
+        return new Request.Builder().url(url).addHeader("Authorization", "").build();
+    }
 
-        final Request request = new Request.Builder()
-                .url(url)
-                .build();
-        deliveryResult(callback, request);
+    private Request postRequest(String url, RequestBody body) {
+        return new Request.Builder().url(url).addHeader("Authorization", "").post(body).build();
+    }
+
+    private void _getAsyn(String url, final ResultCallback callback) {
+        deliveryResult(callback, getRequest(url));
     }
 
     private void _postFileAsyn(String url, File[] files, final ResultCallback callback, Map<String, String> map) {
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
-//添加文件
+        //添加文件
         if (files.length != 0) {
             for (int i = 0; i < files.length; i++) {
                 RequestBody fileBody = RequestBody.create(
@@ -67,13 +74,13 @@ public class OkHttpManager {
                 builder.addFormDataPart("uploadfile", files[i].getName(), fileBody);
             }
         }
-//添加参数
+        //添加参数
         if (map != null) {
             for (Map.Entry<String, String> entry : map.entrySet()) {
                 builder.addFormDataPart(entry.getKey(), entry.getValue());
             }
         }
-        Request request = new Request.Builder().url(url).post(builder.build()).build();
+        Request request = postRequest(url, builder.build());
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(final Call call, final IOException e) {
@@ -92,7 +99,7 @@ public class OkHttpManager {
                 mDelivery.post(new Runnable() {
                     @Override
                     public void run() {
-                        callback.onResponse(getDecodeJSONStr(string));
+                        callback.onResponse(string);
                     }
                 });
             }
@@ -119,16 +126,10 @@ public class OkHttpManager {
         }
         Log.d("GSON", jsonObject.toString());
         FormBody formBody = build.build();
-        Request request = buildPostRequest(url, formBody);
+        Request request = postRequest(url, formBody);
         deliveryResult(callback, request);
     }
 
-    private Request buildPostRequest(String url, FormBody formBody) {
-        return new Request.Builder()
-                .url(url)
-                .post(formBody)
-                .build();
-    }
 
     /**
      * 根据文件的名称判断文件的Mine值
@@ -165,7 +166,7 @@ public class OkHttpManager {
                     @Override
                     public void run() {
 
-                        callback.onResponse(getDecodeJSONStr(str));
+                        callback.onResponse(str);
                     }
                 });
             }
@@ -192,19 +193,5 @@ public class OkHttpManager {
         public abstract void onResponse(String string);
     }
 
-    public static String getDecodeJSONStr(String s) {
-        StringBuilder sb = new StringBuilder();
-        char c;
-        for (int i = 0; i < s.length(); i++) {
-            c = s.charAt(i);
-            switch (c) {
-                case '\\':
-                    sb.append("\\\\");
-                    break;
-                default:
-                    sb.append(c);
-            }
-        }
-        return sb.toString();
-    }
+
 }
