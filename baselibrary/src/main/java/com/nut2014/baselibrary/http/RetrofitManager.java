@@ -1,11 +1,24 @@
 package com.nut2014.baselibrary.http;
 
 
+import android.app.Activity;
+import android.content.Intent;
+
+import com.nut2014.baselibrary.utils.ActivityManager;
+import com.nut2014.baselibrary.utils.FLog;
+import com.nut2014.baselibrary.utils.JsonUtil;
+
+import java.nio.charset.Charset;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
+import okio.Buffer;
+import okio.BufferedSource;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -66,6 +79,41 @@ public class RetrofitManager {
     public static <T> T create(final Class<T> service) {
         return RetrofitManager.getInstance().getRetrofit().create(service);
     }
+/*    private Interceptor authorization = chain -> {
+        Request request = chain.request();
+        //添加header
+        Request build = request.newBuilder()
+                .header("Authorization", UserDataUtil.getAuthKey())
+                .header("X-Requested-With", "XMLHttpRequest")
+                .method(request.method(), request.body())
+                .build();
+        Response proceed = chain.proceed(build);
+        ResponseBody responseBody = proceed.body();
+        //处理返回结果
+        if (responseBody != null && responseBody.contentLength() != 0) {
+            BufferedSource source = responseBody.source();
+            source.request(Long.MAX_VALUE);
+            Buffer clone = source.getBuffer().clone();
+            String result = clone.readString(Charset.defaultCharset());
+            try {
+                BaseResponseBean responseBean = JsonUtil.parseObject(result, BaseResponseBean.class);
+                if (responseBean.getCode() == 1) {
+                    jump2Login();
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
 
+            FLog.d("TAG", result);
+        }
+        return proceed;
+    };
+
+    private void jump2Login() {
+        Activity currentActivity = ActivityManager.getInstance().getCurrentActivity();
+        if (currentActivity != null) {
+            currentActivity.startActivity(new Intent(currentActivity, LoginActivity.class));
+        }
+    }*/
 
 }
