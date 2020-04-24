@@ -62,7 +62,7 @@ public class AnimalTools {
     public static void playWithAfter(View view) {
 
         int[] location = new int[2];
-       // view.getLocationOnScreen(location);
+       view.getLocationOnScreen(location);
 //        int x = location[0];
         //int y = location[1];
         float cx = view.getX();

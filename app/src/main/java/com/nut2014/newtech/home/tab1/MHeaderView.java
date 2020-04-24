@@ -2,6 +2,9 @@ package com.nut2014.newtech.home.tab1;
 
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 
 import com.lcodecore.tkrefreshlayout.IHeaderView;
@@ -39,7 +42,11 @@ public class MHeaderView implements IHeaderView {
 
     @Override
     public void startAnim(float maxHeadHeight, float headHeight) {
-        AnimalTools.playWithAfter(im);
+        Animation rotateAnimation = AnimationUtils.loadAnimation(MyApp.context, R.anim.rotate_anim);
+        LinearInterpolator lin = new LinearInterpolator();
+        rotateAnimation.setInterpolator(lin);
+        im.startAnimation(rotateAnimation);
+
     }
 
     @Override
