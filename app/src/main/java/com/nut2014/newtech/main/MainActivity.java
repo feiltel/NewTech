@@ -25,6 +25,8 @@ import com.nut2014.baselibrary.utils.FPermission;
 import com.nut2014.newtech.R;
 import com.nut2014.newtech.compress.CompressActivity;
 import com.nut2014.newtech.constraint.ConstraintActivity;
+import com.nut2014.newtech.home.HomeActivity;
+import com.nut2014.newtech.login.LoginActivity;
 import com.nut2014.newtech.mvp.ContentActivity;
 import com.nut2014.newtech.test.TestActivity;
 
@@ -51,7 +53,9 @@ public class MainActivity extends BaseActivity {
         titleList.add("2.MVP架构");
         titleList.add("3.压缩图片工具");
         titleList.add("4.图片选择库");
-        titleList.add("5.测试");
+        titleList.add("5.登录常见布局");
+        titleList.add("6.主页常见布局");
+        titleList.add("7.测试");
         MainListAdapter mainListAdapter = new MainListAdapter(titleList);
         listRv.setAdapter(mainListAdapter);
         mainListAdapter.setOnItemClickListener(new OnItemClickListener() {
@@ -77,6 +81,12 @@ public class MainActivity extends BaseActivity {
                                     .forResult(PictureConfig.CHOOSE_REQUEST);
                             break;
                         case 4:
+                            jumpActivity(LoginActivity.class, null);
+                            break;
+                        case 5:
+                            jumpActivity(HomeActivity.class, null);
+                            break;
+                        case 6:
                             jumpActivity(TestActivity.class, null);
                             break;
                     }

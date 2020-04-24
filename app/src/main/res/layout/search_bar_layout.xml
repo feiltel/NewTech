@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:background="?android:windowBackground"
+    android:id="@+id/top_bar1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/search_bar_bg">
+
+        <ImageView
+            android:id="@+id/s_icon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="8dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/s_tv"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:gravity="center_vertical"
+            android:elevation="0dp"
+            android:id="@+id/s_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textSize="12sp"
+            android:minHeight="24dp"
+            android:text="搜索米饭 ，满22减10"
+            app:layout_constraintBottom_toBottomOf="@id/s_icon"
+            app:layout_constraintLeft_toRightOf="@id/s_icon"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/s_icon" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

@@ -42,7 +42,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (getBaseParam() == null) {
             throw new NullPointerException("配置参数不能返回空");
         }
-        StatusBarUtil.setDarkMode(this);
         //沉浸式状态栏
         if (getBaseParam().isFullScreen()) {
             StatusBarUtil.setTranslucent(this);
@@ -64,7 +63,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         initView();
         initEvent();
     }
-
+    public void setDarkMode(){
+        StatusBarUtil.setDarkMode(this);
+    }
+    public void setLightMode(){
+        StatusBarUtil.setLightMode(this);
+    }
     protected void setTitle(String title) {
         if (getBaseParam().isHaveToolbar()) {
             Toolbar toolbar = findViewById(R.id.toolbar);

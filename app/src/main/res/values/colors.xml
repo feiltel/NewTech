@@ -2,5 +2,12 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#FFE509</color>
+
+
+    <color name="button_color">#FFC02F</color>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="dark_line">#505050</color>
+    <color name="dark_gre">#CCCCCC</color>
 </resources>
