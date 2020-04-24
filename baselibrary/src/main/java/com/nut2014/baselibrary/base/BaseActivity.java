@@ -1,6 +1,5 @@
 package com.nut2014.baselibrary.base;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -119,7 +118,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         hideProgress();
     }
 
-    protected Activity getContext() {
+    protected AppCompatActivity getContext() {
         return this;
     }
 

@@ -59,10 +59,10 @@ public class AnimalTools {
     }
 
     //顺序播放动画
-    public void playWithAfter(View view) {
+    public static void playWithAfter(View view) {
 
         int[] location = new int[2];
-        view.getLocationOnScreen(location);
+       // view.getLocationOnScreen(location);
 //        int x = location[0];
         //int y = location[1];
         float cx = view.getX();
@@ -85,7 +85,7 @@ public class AnimalTools {
     }
 
     //属性动画
-    private void performAnimate(View view, int Hpx) {
+    public static void performAnimate(View view, int Hpx) {
         ViewWrapper wrapper = new ViewWrapper(view);
         ObjectAnimator.ofInt(wrapper, "Height", Hpx).setDuration(1000).start();
     }

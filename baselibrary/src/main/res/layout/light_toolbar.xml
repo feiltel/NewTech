@@ -12,12 +12,12 @@
         android:layout_marginBottom="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/back_iv"
-        android:background="?android:selectableItemBackgroundBorderless"
+        android:background="?attr/selectableItemBackgroundBorderless"
         android:padding="4dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginStart="16dp"
-        android:src="@drawable/ic_back"
+        app:srcCompat="@drawable/ic_back"
         android:layout_width="32dp"
         android:layout_height="48dp" />
 
@@ -45,7 +45,7 @@
         android:layout_marginTop="0dp"
         android:layout_marginBottom="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:background="?android:selectableItemBackgroundBorderless"
+        android:background="?attr/selectableItemBackgroundBorderless"
         android:padding="4dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toLeftOf="@id/info_iv"
@@ -60,12 +60,12 @@
         android:layout_marginTop="0dp"
         android:layout_marginBottom="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:background="?android:selectableItemBackgroundBorderless"
+        android:background="?attr/selectableItemBackgroundBorderless"
         android:padding="4dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginEnd="16dp"
-        android:src="@drawable/ic__add"
+        app:srcCompat="@drawable/ic__add"
         android:layout_width="32dp"
         android:layout_height="48dp" />
 

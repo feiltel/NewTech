@@ -2,6 +2,7 @@ package com.nut2014.newtech.home.tab1;
 
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
+import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.nut2014.baselibrary.utils.FLog;
 import com.nut2014.baselibrary.utils.MToast;
 import com.nut2014.baselibrary.utils.WindowUtils;
@@ -35,6 +38,8 @@ public class Tab1Fragment extends Fragment {
     FrameLayout main_top_bar;
     @BindView(R.id.top_bar1)
     FrameLayout main_top_bar1;
+    @BindView(R.id.refreshLayout)
+    TwinklingRefreshLayout refreshLayout;
     private LinearLayoutManager linearLayoutManager;
 
     @Override
@@ -79,7 +84,23 @@ public class Tab1Fragment extends Fragment {
                 MToast.show(getActivity(),"position:"+position);
             }
         });
+        refreshLayout.setEnableLoadmore(false);
+        refreshLayout.setHeaderView(new MHeaderView());
+        refreshLayout.setOnRefreshListener(new RefreshListenerAdapter(){
+            @Override
+            public void onRefresh(final TwinklingRefreshLayout refreshLayout) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshLayout.finishRefreshing();
+                    }
+                },2000);
+            }
 
+            @Override
+            public void onLoadMore(final TwinklingRefreshLayout refreshLayout) {
+            }
+        });
         return rootView;
     }
 
