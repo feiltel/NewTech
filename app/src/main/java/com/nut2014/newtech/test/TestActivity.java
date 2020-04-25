@@ -52,6 +52,6 @@ public class TestActivity extends BaseMvpActivity<TestView, TestPresenter> imple
 
     @Override
     public BaseParam getBaseParam() {
-        return new BaseParam().setHaveToolbar(true).setHaveBackAction(true).setTitle("测试");
+        return new BaseParam().setFullScreen(true);
     }
 }

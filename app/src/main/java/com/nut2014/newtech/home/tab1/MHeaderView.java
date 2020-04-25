@@ -4,13 +4,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 
 import com.lcodecore.tkrefreshlayout.IHeaderView;
 import com.lcodecore.tkrefreshlayout.OnAnimEndListener;
-import com.nut2014.baselibrary.utils.AnimalTools;
-import com.nut2014.baselibrary.utils.WindowUtils;
 import com.nut2014.newtech.MyApp;
 import com.nut2014.newtech.R;
 
@@ -30,22 +27,28 @@ public class MHeaderView implements IHeaderView {
 
     @Override
     public void onPullingDown(float fraction, float maxHeadHeight, float headHeight) {
-        im.setScaleX(fraction);
-        im.setScaleY(fraction);
+      //  im.setScaleX(fraction);
+        //im.setScaleY(fraction);
     }
 
     @Override
     public void onPullReleasing(float fraction, float maxHeadHeight, float headHeight) {
-        im.setScaleX(fraction);
-        im.setScaleY(fraction);
+      //  im.setScaleX(fraction);
+      //  im.setScaleY(fraction);
     }
-
+    Animation rotate_anim=null;
     @Override
     public void startAnim(float maxHeadHeight, float headHeight) {
-        Animation rotateAnimation = AnimationUtils.loadAnimation(MyApp.context, R.anim.rotate_anim);
+        //  AnimationSet animationSet = new AnimationSet(true);
+         rotate_anim = AnimationUtils.loadAnimation(MyApp.context, R.anim.rotate_anim);
+        im.startAnimation(rotate_anim);
+
+
+       /* Animation rotateAnimation = AnimationUtils.loadAnimation(MyApp.context, R.anim.translate_anim);
         LinearInterpolator lin = new LinearInterpolator();
         rotateAnimation.setInterpolator(lin);
-        im.startAnimation(rotateAnimation);
+        rotateAnimation.setRepeatCount(-1);
+        im.startAnimation(rotateAnimation);*/
 
     }
 
@@ -58,6 +61,8 @@ public class MHeaderView implements IHeaderView {
 
     @Override
     public void reset() {
-
+        if (rotate_anim!=null){
+            rotate_anim.reset();
+        }
     }
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+   <!-- AccelerateDecelerateInterpolator 在动画开始与结束的地方速率改变比较慢，在中间的时候加速
+
+    AccelerateInterpolator  在动画开始的地方速率改变比较慢，然后开始加速
+
+    AnticipateInterpolator 开始的时候向后然后向前甩
+
+    AnticipateOvershootInterpolator 开始的时候向后然后向前甩一定值后返回最后的值
+
+    BounceInterpolator   动画结束的时候弹起
+
+    CycleInterpolator 动画循环播放特定的次数，速率改变沿着正弦曲线
+
+    DecelerateInterpolator 在动画开始的地方快然后慢
+
+    LinearInterpolator   以常量速率改变
+
+    OvershootInterpolator    向前甩一定值后再回到原来位置-->
+    <translate android:fromXDelta="0" android:toXDelta="100%" android:duration="500"
+        android:interpolator="@android:anim/accelerate_interpolator"/>
+	<!--<alpha android:fromAlpha="1.0" android:toAlpha="0.0" android:duration="500"
+        android:interpolator="@android:anim/accelerate_interpolator"/>-->
+   <!-- <scale
+        android:fromXScale="1.0"
+        android:toXScale="0.8"
+        android:fromYScale="1.0"
+        android:toYScale="0.8"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:duration="500"/>-->
+</set>

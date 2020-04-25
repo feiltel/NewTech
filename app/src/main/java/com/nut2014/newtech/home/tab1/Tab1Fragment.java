@@ -84,6 +84,7 @@ public class Tab1Fragment extends Fragment {
                 MToast.show(getActivity(),"position:"+position);
             }
         });
+
         refreshLayout.setEnableLoadmore(false);
         refreshLayout.setHeaderView(new MHeaderView());
         refreshLayout.setOnRefreshListener(new RefreshListenerAdapter(){
@@ -103,7 +104,6 @@ public class Tab1Fragment extends Fragment {
         });
         return rootView;
     }
-
 
     @Override
     public void onDestroyView() {
