@@ -30,8 +30,8 @@ public class MyApp extends BaseApplication {
         final String BASE_URL = "http://x501.10015678.com/";
         RetrofitManager.getInstance().init(BASE_URL, authorization);
     }
+    //拦截处理网络请求
     private Interceptor authorization = chain -> {
-        //同意处理网络请求
         Request request = chain.request();
         //添加header
         Request build = request.newBuilder()
