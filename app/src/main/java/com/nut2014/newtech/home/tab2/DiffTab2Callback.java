@@ -1,9 +1,11 @@
-package com.nut2014.newtech.home.tab1;
+package com.nut2014.newtech.home.tab2;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 
-public class DiffDemoCallback extends DiffUtil.ItemCallback<Tab1ListItemBean> {
+import com.nut2014.newtech.home.tab1.Tab1ListItemBean;
+
+public class DiffTab2Callback extends DiffUtil.ItemCallback<User> {
 
     /**
      * 判断是否是同一个item
@@ -13,7 +15,7 @@ public class DiffDemoCallback extends DiffUtil.ItemCallback<Tab1ListItemBean> {
      * @return
      */
     @Override
-    public boolean areItemsTheSame(@NonNull Tab1ListItemBean oldItem, @NonNull Tab1ListItemBean newItem) {
+    public boolean areItemsTheSame(@NonNull User oldItem, @NonNull User newItem) {
         return oldItem.getId() == newItem.getId()&&oldItem.getName().equals(newItem.getName());
     }
 
@@ -25,7 +27,7 @@ public class DiffDemoCallback extends DiffUtil.ItemCallback<Tab1ListItemBean> {
      * @return
      */
     @Override
-    public boolean areContentsTheSame(@NonNull Tab1ListItemBean oldItem, @NonNull Tab1ListItemBean newItem) {
+    public boolean areContentsTheSame(@NonNull User oldItem, @NonNull User newItem) {
         return oldItem.getName().equals(newItem.getName());
     }
 
@@ -39,7 +41,7 @@ public class DiffDemoCallback extends DiffUtil.ItemCallback<Tab1ListItemBean> {
      * @return Payload info. if return null, the entire item will be refreshed.
      */
     @Override
-    public Object getChangePayload(@NonNull Tab1ListItemBean oldItem, @NonNull Tab1ListItemBean newItem) {
+    public Object getChangePayload(@NonNull User oldItem, @NonNull User newItem) {
         return null;
     }
 }

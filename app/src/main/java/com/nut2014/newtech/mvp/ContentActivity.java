@@ -49,7 +49,7 @@ public class ContentActivity extends BaseMvpActivity<ContentView, ContentPresent
 
     @Override
     public BaseParam getBaseParam() {
-        return new BaseParam().setFullScreen(true);
+        return new BaseParam().setTransparent(true);
     }
 
     @Override

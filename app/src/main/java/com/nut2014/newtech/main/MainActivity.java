@@ -9,7 +9,6 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.luck.picture.lib.PictureSelector;
@@ -22,15 +21,13 @@ import com.nut2014.baselibrary.networklibrary.NetWorkManager;
 import com.nut2014.baselibrary.networklibrary.annotaion.NetWork;
 import com.nut2014.baselibrary.networklibrary.type.NetType;
 import com.nut2014.baselibrary.utils.FPermission;
+import com.nut2014.baselibrary.utils.GlideEngine;
 import com.nut2014.newtech.R;
 import com.nut2014.newtech.compress.CompressActivity;
 import com.nut2014.newtech.constraint.ConstraintActivity;
 import com.nut2014.newtech.home.HomeActivity;
 import com.nut2014.newtech.login.LoginActivity;
 import com.nut2014.newtech.mvp.ContentActivity;
-import com.nut2014.newtech.test.TestActivity;
-
-import com.nut2014.baselibrary.utils.GlideEngine;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +84,7 @@ public class MainActivity extends BaseActivity {
                             jumpActivity(HomeActivity.class, null);
                             break;
                         case 6:
-                            jumpActivity(TestActivity.class, null);
+                            //  jumpActivity(TestActivity.class, null);
                             break;
                     }
                 }

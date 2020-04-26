@@ -4,10 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-  <!--  <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
+    <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">-->
+        android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/home_list_rv"
@@ -15,13 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" />
-<!--    </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>-->
+    </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
 
-    <FrameLayout
-        android:id="@+id/top_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#90ffffff" />
 
     <include layout="@layout/search_bar_layout" />
 

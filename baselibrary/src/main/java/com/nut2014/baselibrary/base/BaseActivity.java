@@ -33,19 +33,16 @@ public abstract class BaseActivity extends AppCompatActivity {
     public BaseParam getBaseParam() {
         return new BaseParam();
     }
-
-
+    private Bundle savedInstanceState=null;
+    public Bundle getSavedInstanceState(){
+        return savedInstanceState;
+    }
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.savedInstanceState=savedInstanceState;
         if (getBaseParam() == null) {
             throw new NullPointerException("配置参数不能返回空");
-        }
-        //沉浸式状态栏
-        if (getBaseParam().isFullScreen()) {
-            StatusBarUtil.setTranslucent(this);
-        } else {
-            StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary), 0);
         }
         //是否加载默认toolbar
         if (getBaseParam().isHaveToolbar()) {
@@ -57,6 +54,12 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         } else {
             setContentView(getViewId());
+        }
+        //沉浸式状态栏
+        if (getBaseParam().isTransparent()) {
+            StatusBarUtil.setTransparent(this);
+        } else {
+            StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary), 0);
         }
         ButterKnife.bind(this);
         initView();

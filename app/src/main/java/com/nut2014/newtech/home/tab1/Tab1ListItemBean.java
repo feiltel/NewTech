@@ -1,7 +1,7 @@
 package com.nut2014.newtech.home.tab1;
 
-public class DiffUtilDemoEntity {
-    public DiffUtilDemoEntity(int id, String name) {
+public class Tab1ListItemBean {
+    public Tab1ListItemBean(int id, String name) {
         this.id = id;
         this.name = name;
     }

@@ -13,7 +13,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.nut2014.baselibrary.base.BaseMvpActivity;
 import com.nut2014.baselibrary.base.BaseParam;
 import com.nut2014.newtech.R;
-import com.nut2014.newtech.main.MainActivity;
 
 import java.util.Objects;
 
@@ -83,7 +82,7 @@ public class LoginActivity extends BaseMvpActivity<LoginView, LoginPresenter> im
 
     @Override
     public BaseParam getBaseParam() {
-        return super.getBaseParam().setFullScreen(true);
+        return super.getBaseParam().setTransparent(true);
     }
 
     @Override

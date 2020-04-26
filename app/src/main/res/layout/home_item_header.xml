@@ -53,4 +53,11 @@
     <include
         layout="@layout/search_bar_layout"/>
 
+    <com.youth.banner.Banner
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
+
+    </com.youth.banner.Banner>
+
 </LinearLayout>

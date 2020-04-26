@@ -210,7 +210,7 @@ public final class Cockroach {
                 super.onMayBeBlackScreen(e);
                 Log.d("Cockroach", "onMayBeBlackScreen");
                 saveCrashInfo2File(e, nowPath, getLogMap(context));
-                new Thread() {
+               /* new Thread() {
                     @Override
                     public void run() {
                         Looper.prepare();
@@ -223,7 +223,7 @@ public final class Cockroach {
                 } catch (InterruptedException e1) {
                     e1.printStackTrace();
                 }
-
+*/
 
                 //黑屏时建议直接杀死app
                 android.os.Process.killProcess(android.os.Process.myPid());

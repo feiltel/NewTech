@@ -14,7 +14,7 @@ public class BaseParam {
 
 
     //设置为全屏
-    private boolean isFullScreen=false;
+    private boolean isTransparent =false;
 
 
 
@@ -41,8 +41,8 @@ public class BaseParam {
         return this;
     }
 
-    public BaseParam setFullScreen(boolean fullScreen) {
-        isFullScreen = fullScreen;
+    public BaseParam setTransparent(boolean transparent) {
+        isTransparent = transparent;
         return this;
     }
 
@@ -50,7 +50,7 @@ public class BaseParam {
         return haveToolbar;
     }
 
-    public boolean isFullScreen() {
-        return isFullScreen;
+    public boolean isTransparent() {
+        return isTransparent;
     }
 }
