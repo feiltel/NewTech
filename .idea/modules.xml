@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/NewTech.iml" filepath="$PROJECT_DIR$/NewTech.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/baselibrary/baselibrary.iml" filepath="$PROJECT_DIR$/baselibrary/baselibrary.iml" />
-      <module fileurl="file://$PROJECT_DIR$/crashlib/crashlib.iml" filepath="$PROJECT_DIR$/crashlib/crashlib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/NewTech.iml" filepath="$PROJECT_DIR$/NewTech.iml" group="NewTech" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="NewTech/app" />
+      <module fileurl="file://$PROJECT_DIR$/baselibrary/baselibrary.iml" filepath="$PROJECT_DIR$/baselibrary/baselibrary.iml" group="NewTech/baselibrary" />
+      <module fileurl="file://$PROJECT_DIR$/crashlib/crashlib.iml" filepath="$PROJECT_DIR$/crashlib/crashlib.iml" group="NewTech/crashlib" />
     </modules>
   </component>
 </project>

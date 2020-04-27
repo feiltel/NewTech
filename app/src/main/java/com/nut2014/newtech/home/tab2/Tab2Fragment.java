@@ -32,9 +32,9 @@ public class Tab2Fragment extends Fragment {
     @BindView(R.id.list_rv)
     RecyclerView list_rv;
     private Tab2Adapter adapter;
-
+    private static final Tab2Fragment ourInstance = new Tab2Fragment();
     public static Tab2Fragment newInstance() {
-        return new Tab2Fragment();
+        return ourInstance;
     }
 
     @Override

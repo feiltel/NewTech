@@ -20,7 +20,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".test.TestActivity"></activity>
+
         <activity
             android:name=".splash.SplashActivity"
             android:theme="@style/AppTheme.Splash">
@@ -36,7 +36,8 @@
         <activity android:name=".constraint.ConstraintActivity" />
         <activity android:name=".main.MainActivity" />
         <activity android:name=".login.LoginActivity" />
-        <activity android:name=".home.HomeActivity" />
+        <activity android:name=".home.HomeActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

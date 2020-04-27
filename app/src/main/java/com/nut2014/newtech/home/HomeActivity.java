@@ -4,11 +4,15 @@ import android.os.Bundle;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jaeger.library.StatusBarUtil;
 import com.nut2014.baselibrary.base.BaseMvpActivity;
 import com.nut2014.baselibrary.base.BaseParam;
+import com.nut2014.baselibrary.utils.FileSizeUtil;
+import com.nut2014.baselibrary.utils.MToast;
 import com.nut2014.newtech.R;
 import com.nut2014.newtech.home.tab1.Tab1Fragment;
 import com.nut2014.newtech.home.tab2.Tab2Fragment;
@@ -22,90 +26,68 @@ public class HomeActivity extends BaseMvpActivity<HomeView, HomePresenter> imple
     FrameLayout main_fl;
     @BindView(R.id.bottom_nv)
     BottomNavigationView bottom_nv;
-    private Tab1Fragment tab1Fragment;
-    private Tab2Fragment tab2Fragment;
-    private Tab3Fragment tab3Fragment;
+    private final Tab1Fragment fragment1 = Tab1Fragment.newInstance();
+    private final Tab2Fragment fragment2 = Tab2Fragment.newInstance();
+    private final Tab3Fragment fragment3 = Tab3Fragment.newInstance();
+    private final FragmentManager fm = getSupportFragmentManager();
+    private Fragment activeFragment = fragment1;
+
 
     @Override
     protected int getViewId() {
         return R.layout.activity_home;
     }
 
-    private int selectPos = 0;
 
     @Override
     public void initView() {
         Bundle savedInstanceState = getSavedInstanceState();
-        if (savedInstanceState!=null){
-            selectPos=savedInstanceState.getInt("pos");
-        }
+
         setLightMode();
         StatusBarUtil.setColor(this, getResources().getColor(android.R.color.transparent), 0);
         StatusBarUtil.hideFakeStatusBarView(this);
 
-        if (selectPos==0){
-            if (tab1Fragment == null) {
-                tab1Fragment = Tab1Fragment.newInstance();
-            }
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.main_fl, tab1Fragment, "f1")
-                    .commitNow();
-        }else if (selectPos==1){
-            if (tab2Fragment == null) {
-                tab2Fragment = Tab2Fragment.newInstance();
-            }
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.main_fl, tab2Fragment, "f2")
-                    .commitNow();
-        }else if (selectPos==2){
-            if (tab3Fragment == null) {
-                tab3Fragment = Tab3Fragment.newInstance();
-            }
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.main_fl, tab3Fragment, "f3")
-                    .commitNow();
-        }
-
-
+        fm.beginTransaction().add(R.id.main_fl, fragment3, "3").hide(fragment3).commit();
+        fm.beginTransaction().add(R.id.main_fl, fragment2, "2").hide(fragment2).commit();
+        fm.beginTransaction().add(R.id.main_fl,fragment1, "1").commit();
         bottom_nv.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.bottom_navigation_blue:
-                    selectPos = 0;
-                    if (tab1Fragment == null) {
-                        tab1Fragment = Tab1Fragment.newInstance();
-                    }
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.main_fl, tab1Fragment, "f1")
-                            .commitNow();
+                    selectFragment(0);
                     return true;
                 case R.id.yun_ying_center:
-                    selectPos = 1;
-                    if (tab2Fragment == null) {
-                        tab2Fragment = Tab2Fragment.newInstance();
-                    }
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.main_fl, tab2Fragment, "f2")
-                            .commitNow();
+                    selectFragment(1);
                     return true;
                 case R.id.bottom_navigation_red:
-                    selectPos = 2;
-                    if (tab3Fragment == null) {
-                        tab3Fragment = Tab3Fragment.newInstance();
-                    }
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.main_fl, tab3Fragment, "f3")
-                            .commitNow();
+                    selectFragment(2);
                     return true;
             }
             return false;
         });
+        MToast.show(this, FileSizeUtil.FormetFileSize(459952));
     }
+
+    private void selectFragment(int selectPos) {
+        System.out.println(selectPos);
+        if (selectPos == 0) {
+            fm.beginTransaction().hide(activeFragment).show(fragment1).commit();
+            activeFragment = fragment1;
+        } else if (selectPos == 1) {
+            fm.beginTransaction().hide(activeFragment).show(fragment2).commit();
+            activeFragment = fragment2;
+        } else if (selectPos == 2) {
+            fm.beginTransaction().hide(activeFragment).show(fragment3).commit();
+            activeFragment = fragment3;
+        }
+    }
+
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt("pos", selectPos);
+        //  outState.putInt("pos", selectPos);
     }
+
 
     @Override
     public void initEvent() {
