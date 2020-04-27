@@ -3,6 +3,9 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     buildToolsVersion "29.0.2"
+    dataBinding {
+        enabled true
+    }
     defaultConfig {
         applicationId "com.nut2014.newtech"
         minSdkVersion 21

@@ -25,6 +25,7 @@ import com.nut2014.baselibrary.utils.GlideEngine;
 import com.nut2014.newtech.R;
 import com.nut2014.newtech.compress.CompressActivity;
 import com.nut2014.newtech.constraint.ConstraintActivity;
+import com.nut2014.newtech.dataBinding.VmDbActivity;
 import com.nut2014.newtech.home.HomeActivity;
 import com.nut2014.newtech.login.LoginActivity;
 import com.nut2014.newtech.mvp.ContentActivity;
@@ -52,7 +53,8 @@ public class MainActivity extends BaseActivity {
         titleList.add("4.图片选择库");
         titleList.add("5.登录常见布局");
         titleList.add("6.主页常见布局");
-        titleList.add("7.测试");
+        titleList.add("7.DataBiding");
+        titleList.add("测试");
         MainListAdapter mainListAdapter = new MainListAdapter(titleList);
         listRv.setAdapter(mainListAdapter);
         mainListAdapter.setOnItemClickListener(new OnItemClickListener() {
@@ -84,7 +86,7 @@ public class MainActivity extends BaseActivity {
                             jumpActivity(HomeActivity.class, null);
                             break;
                         case 6:
-                            //  jumpActivity(TestActivity.class, null);
+                              jumpActivity(VmDbActivity.class, null);
                             break;
                     }
                 }
