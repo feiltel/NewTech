@@ -148,6 +148,7 @@ public class Tab1Fragment extends Fragment {
         //下拉刷新
         refreshLayout.setEnableLoadmore(false);
         refreshLayout.setHeaderView(new MHeaderView());
+        refreshLayout.setEnableOverScroll(false);
         refreshLayout.setOnRefreshListener(new RefreshListenerAdapter() {
             @Override
             public void onRefresh(final TwinklingRefreshLayout refreshLayout) {

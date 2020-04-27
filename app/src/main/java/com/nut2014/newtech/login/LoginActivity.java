@@ -44,7 +44,6 @@ public class LoginActivity extends BaseMvpActivity<LoginView, LoginPresenter> im
     @Override
     public void initView() {
         setLightMode();
-        toolbar_root.setPadding(0,getStatusBarHeight(this),0,0);
         back_iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -30,7 +30,8 @@
         <activity android:name=".login.LoginActivity" />
         <activity
             android:name=".home.HomeActivity"
-            android:screenOrientation="fullSensor" />
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
     </application>
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
