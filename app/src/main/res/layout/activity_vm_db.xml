@@ -22,7 +22,7 @@
 
         <Button
             android:text="测试"
-            android:onClick="@{()->goodsHandler.changeGoodsDetails()}"
+            android:onClick="@{()->goodsHandler.changeGoodsName()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
