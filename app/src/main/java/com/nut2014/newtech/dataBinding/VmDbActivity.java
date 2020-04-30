@@ -35,6 +35,8 @@ public class VmDbActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
     public class GoodsHandler {

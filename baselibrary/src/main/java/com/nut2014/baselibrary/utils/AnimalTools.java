@@ -22,7 +22,11 @@ public class AnimalTools {
                 0.5f, 1f);
         ObjectAnimator.ofPropertyValuesHolder(view, pvhX, pvhY, pvhZ).setDuration(1500).start();
     }
-
+    public static void propertyAlpha(View view) {
+        PropertyValuesHolder pvhX = PropertyValuesHolder.ofFloat("alpha", 0f,
+                0.5f, 1f);
+        ObjectAnimator.ofPropertyValuesHolder(view, pvhX).setDuration(1500).start();
+    }
     /**
      * 抛物线
      * @param view
