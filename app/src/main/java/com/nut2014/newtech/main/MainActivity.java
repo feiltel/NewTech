@@ -1,7 +1,13 @@
 package com.nut2014.newtech.main;
 
 import android.Manifest;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.IBinder;
+import android.os.RemoteException;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -22,6 +28,8 @@ import com.nut2014.baselibrary.networklibrary.annotaion.NetWork;
 import com.nut2014.baselibrary.networklibrary.type.NetType;
 import com.nut2014.baselibrary.utils.FPermission;
 import com.nut2014.baselibrary.utils.GlideEngine;
+import com.nut2014.newtech.Book;
+import com.nut2014.newtech.BookController;
 import com.nut2014.newtech.R;
 import com.nut2014.newtech.compress.CompressActivity;
 import com.nut2014.newtech.constraint.ConstraintActivity;
@@ -45,6 +53,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        bindService();
         NetWorkManager.getDefault().registerObserver(this);
         listRv.setLayoutManager(new LinearLayoutManager(this));
         List<String> titleList = new ArrayList<>();
@@ -93,6 +102,28 @@ public class MainActivity extends BaseActivity {
                         case 7:
                             jumpActivity(NavigationHomeActivity.class, null);
                             break;
+                        case 8:
+                            if (connected) {
+                                try {
+                                    bookList = bookController.getBookList();
+                                } catch (RemoteException e) {
+                                    e.printStackTrace();
+                                }
+                                log();
+                            }
+
+
+                            if (connected) {
+                                Book book = new Book("这是一本新书 InOut");
+                                try {
+                                    bookController.addBookInOut(book);
+                                    Log.e(TAG, "向服务器以InOut方式添加了一本新书");
+                                    Log.e(TAG, "新书名：" + book.getName());
+                                } catch (RemoteException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            break;
                     }
                 }
             }
@@ -100,6 +131,36 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    private BookController bookController;
+
+    private boolean connected;
+
+    private List<Book> bookList;
+
+    private ServiceConnection serviceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            bookController = BookController.Stub.asInterface(service);
+            connected = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            connected = false;
+        }
+    };
+    private void bindService() {
+        Intent intent = new Intent();
+        intent.setPackage("com.nut2014.newtech");
+        intent.setAction("com.nut2014.newtech.action");
+        bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
+    }
+
+    private void log() {
+        for (Book book : bookList) {
+            Log.e(TAG, book.toString());
+        }
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -131,6 +192,9 @@ public class MainActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         NetWorkManager.getDefault().unRegisterObserver(this);
+        if (connected) {
+            unbindService(serviceConnection);
+        }
     }
 
     @NetWork(netType = NetType.AUTO)

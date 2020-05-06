@@ -32,6 +32,15 @@
         <activity
             android:name=".home.HomeActivity"
             tools:ignore="LockedOrientationActivity" />
+        <service android:name=".AIDLService"
+            android:enabled="true"
+            android:process=":remote"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.nut2014.newtech.action"></action>
+                <category android:name="android.intent.category.DEFAULT"></category>
+            </intent-filter>
+        </service>
     </application>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" /> <!-- 监听网络变化 -->
