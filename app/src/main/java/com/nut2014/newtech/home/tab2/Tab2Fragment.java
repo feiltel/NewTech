@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chad.library.adapter.base.listener.OnLoadMoreListener;
 import com.nut2014.newtech.R;
 import com.nut2014.newtech.test.ItemListDialogFragment;
+import com.nut2014.newtech.viewModel.ShareViewModel;
 
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class Tab2Fragment extends Fragment {
 
     private static final String TAG = "Tab2Fragment";
     private Tab2ViewModel mViewModel;
+    private ShareViewModel shareViewModel;
     @BindView(R.id.test_tv)
     Button testTv;
     @BindView(R.id.list_rv)
@@ -47,14 +49,22 @@ public class Tab2Fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mViewModel.loadUsers();
+                shareViewModel.getSharedName().setValue("这是Tab2传过来的值");
             }
         });
         initModelView();
         return rootView;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+    }
+
     private void  initModelView(){
-        mViewModel = ViewModelProviders.of(this).get(Tab2ViewModel.class);
+        mViewModel = ViewModelProviders.of(getActivity()).get(Tab2ViewModel.class);
+        shareViewModel = ViewModelProviders.of(getActivity()).get(ShareViewModel.class);
         mViewModel.getListData().observe(this, new Observer<List<User>>() {
             @Override
             public void onChanged(List<User> users) {

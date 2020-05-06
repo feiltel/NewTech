@@ -16,7 +16,8 @@ import com.nut2014.baselibrary.utils.MToast;
 import com.nut2014.newtech.R;
 import com.nut2014.newtech.home.tab1.Tab1Fragment;
 import com.nut2014.newtech.home.tab2.Tab2Fragment;
-import com.nut2014.newtech.home.tab3.Tab3Fragment;
+
+import com.nut2014.newtech.viewModel.ShareFragment;
 
 import butterknife.BindView;
 
@@ -28,7 +29,7 @@ public class HomeActivity extends BaseMvpActivity<HomeView, HomePresenter> imple
     BottomNavigationView bottom_nv;
     private final Tab1Fragment fragment1 = Tab1Fragment.newInstance();
     private final Tab2Fragment fragment2 = Tab2Fragment.newInstance();
-    private final Tab3Fragment fragment3 = Tab3Fragment.newInstance();
+    private final ShareFragment fragment3 =new ShareFragment();
     private final FragmentManager fm = getSupportFragmentManager();
     private Fragment activeFragment = fragment1;
 
@@ -42,7 +43,6 @@ public class HomeActivity extends BaseMvpActivity<HomeView, HomePresenter> imple
     @Override
     public void initView() {
         Bundle savedInstanceState = getSavedInstanceState();
-
         setLightMode();
         StatusBarUtil.setColor(this, getResources().getColor(android.R.color.transparent), 0);
         StatusBarUtil.hideFakeStatusBarView(this);

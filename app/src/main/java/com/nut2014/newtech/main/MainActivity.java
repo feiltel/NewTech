@@ -29,6 +29,7 @@ import com.nut2014.newtech.dataBinding.VmDbActivity;
 import com.nut2014.newtech.home.HomeActivity;
 import com.nut2014.newtech.login.LoginActivity;
 import com.nut2014.newtech.mvp.ContentActivity;
+import com.nut2014.newtech.navigation.NavigationHomeActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +55,7 @@ public class MainActivity extends BaseActivity {
         titleList.add("5.登录常见布局");
         titleList.add("6.主页常见布局");
         titleList.add("7.DataBiding");
+        titleList.add("8.Navigation");
         titleList.add("测试");
         MainListAdapter mainListAdapter = new MainListAdapter(titleList);
         listRv.setAdapter(mainListAdapter);
@@ -87,6 +89,9 @@ public class MainActivity extends BaseActivity {
                             break;
                         case 6:
                               jumpActivity(VmDbActivity.class, null);
+                            break;
+                        case 7:
+                            jumpActivity(NavigationHomeActivity.class, null);
                             break;
                     }
                 }
