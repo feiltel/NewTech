@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 
 import com.nut2014.newtech.R
 import kotlinx.android.synthetic.main.share_fragment.*
@@ -32,7 +33,7 @@ class ShareFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var viewModel = ViewModelProviders.of(activity!!).get(ShareViewModel::class.java)
+        var viewModel = ViewModelProvider(activity!!).get(ShareViewModel::class.java)
         viewModel.sharedName.observe(activity!!, Observer {
             shareBtn.text=it
         })

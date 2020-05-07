@@ -1,12 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/main_nav" app:startDestination="@id/nav1Fragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/nav1Fragment">
 
-    <fragment android:id="@+id/nav1Fragment" android:name="com.nut2014.newtech.navigation.Nav1Fragment"
-              android:label="fragment_nav1" tools:layout="@layout/nav1_fragment">
-        <action android:id="@+id/action_homeFragment_to_settingFragment3" app:destination="@id/nav2Fragment"/>
+    <fragment
+        android:id="@+id/nav1Fragment"
+        android:name="com.nut2014.newtech.navigation.Nav1Fragment"
+        android:label="fragment_nav1"
+        tools:layout="@layout/nav1_fragment">
+        <action
+            android:id="@+id/acton_nav1_to_nav2"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:destination="@id/nav2Fragment" />
     </fragment>
-    <fragment android:id="@+id/nav2Fragment" android:name="com.nut2014.newtech.navigation.Nav2Fragment"
-              android:label="fragment_nav2" tools:layout="@layout/nav2_fragment"/>
+    <fragment
+        android:id="@+id/nav2Fragment"
+        android:name="com.nut2014.newtech.navigation.Nav2Fragment"
+        android:label="fragment_nav2"
+        tools:layout="@layout/nav2_fragment" >
+       <!-- <action
+            android:id="@+id/acton_nav2_to_nav1"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:destination="@id/nav1Fragment" />-->
+    </fragment>
 </navigation>

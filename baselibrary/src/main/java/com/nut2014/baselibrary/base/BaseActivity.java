@@ -59,6 +59,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (getBaseParam().isTransparent()) {
             StatusBarUtil.setTransparent(this);
         } else {
+            //默认状态栏全透明
             StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary), 0);
         }
         ButterKnife.bind(this);
