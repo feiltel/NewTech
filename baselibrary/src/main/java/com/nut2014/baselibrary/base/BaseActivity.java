@@ -22,6 +22,7 @@ import butterknife.ButterKnife;
 
 /**
  * @author feiltel 2020/4/9 0009
+ * 基础Activity
  */
 public abstract class BaseActivity extends AppCompatActivity {
     protected abstract int getViewId();
@@ -100,21 +101,38 @@ public abstract class BaseActivity extends AppCompatActivity {
         root_lin.addView(inflate, params);
     }
 
+    /**
+     * 显示加载进度条
+     * @param msg 进度信息
+     * @param hasProgress 是否显示进度
+     */
     protected void showProgress(String msg, boolean hasProgress) {
         FProgressDialog.getInstance().show(this, msg, hasProgress);
     }
 
+    /**
+     * 设置对话框进度
+     * @param progress 进度
+     */
+    protected void setDialogProgress(int progress) {
+        FProgressDialog.getInstance().setProgress(progress);
+    }
+    /**
+     * 显示加载进度条
+     * @param msg 进度信息
+     */
     protected void showProgress(String msg) {
         FProgressDialog.getInstance().show(this, msg, false);
     }
 
+    /**
+     * 隐藏进度
+     */
     protected void hideProgress() {
         FProgressDialog.getInstance().dismiss();
     }
 
-    protected void setDialogProgress(int progress) {
-        FProgressDialog.getInstance().setProgress(progress);
-    }
+
 
     @Override
     protected void onDestroy() {
@@ -127,8 +145,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
-    long lastClick = 0;
 
+    long lastClick = 0;
     /**
      * 防止重复点击
      */
@@ -153,11 +171,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         startActivity(intent);
     }
-
-    protected void showToast(String msg) {
-        MToast.show(this, msg);
+    protected void jumpActivity(Class<?> cls) {
+        jumpActivity(cls,null);
     }
-
     protected void jumpActivity(Class<?> cls, int requestCode, Bundle bundle) {
         Intent intent = new Intent(this, cls);
         if (bundle != null) {
@@ -165,6 +181,16 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         startActivityForResult(intent, requestCode);
     }
+
+    /**
+     * 显示toast
+     * @param msg toast信息
+     */
+    protected void showToast(String msg) {
+        MToast.show(this, msg);
+    }
+
+
 
 
     /**

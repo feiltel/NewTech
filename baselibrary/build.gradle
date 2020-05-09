@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-
 android {
     compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion "29.0.2"
@@ -71,7 +70,6 @@ dependencies {
     api 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.1'
     //下拉刷新
     api 'com.lcodecorex:tkrefreshlayout:1.0.7'
-
 
 
     //RXJAVA

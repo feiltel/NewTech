@@ -44,12 +44,18 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
     //glide
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+
+    implementation 'com.github.feiltel.NewTech:baselibrary:1.4'
+    implementation 'com.github.feiltel.NewTech:crashlib:1.4'
     //baseLib
-    implementation project(path: ':crashlib')
-    implementation project(path: ':baselibrary')
+   // implementation project(path: ':crashlib')
+   // implementation project(path: ':baselibrary')
 
 
     implementation "androidx.work:work-runtime:2.3.1"
+
+
 
 
 }
