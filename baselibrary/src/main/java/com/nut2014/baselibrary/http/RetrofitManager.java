@@ -43,6 +43,11 @@ public class RetrofitManager {
         return sInstance;
     }
 
+    /**
+     * 初始化
+     * @param baseUrl 基础URL
+     * @param interceptor 拦截器 可以为null
+     */
     public void init(String baseUrl, Interceptor interceptor) {
         if (mRetrofit == null) {
             //初始化一个OkHttpClient
@@ -50,7 +55,9 @@ public class RetrofitManager {
                     .connectTimeout(30000, TimeUnit.MILLISECONDS)
                     .readTimeout(30000, TimeUnit.MILLISECONDS)
                     .writeTimeout(30000, TimeUnit.MILLISECONDS);
-            builder.addInterceptor(interceptor);
+            if (interceptor!=null){
+                builder.addInterceptor(interceptor);
+            }
             //日志
             HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
             httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

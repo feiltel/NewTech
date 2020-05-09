@@ -127,8 +127,34 @@ public class TestPresenter extends BaseMvpPresenter<TestView> {
 }
 ```
 
-#### 2. Activity  中使用
+#### 3. Activity  中使用
 ```
 public class MainActivity extends BaseActivity {
 }
+```
+
+# 功能模块
+#### 1.Retrofit 网络请求
+###### 1.1  Application =》onCreate 初始化
+```
+   RetrofitManager.getInstance().init(baseUrl, interceptor);
+    /**
+     * @param baseUrl 基础URL
+     * @param interceptor 拦截器 可以为null
+     */
+```
+###### 1.2  使用
+```
+RetrofitManager.create(ApiService.class).login(userName, password).enqueue(new Callback<LoginBean>() {
+            @Override
+            public void onResponse(Call<LoginBean> call, Response<LoginBean> response) {
+                LoginBean body = response.body();
+            
+            }
+
+            @Override
+            public void onFailure(Call<LoginBean> call, Throwable t) {
+               
+            }
+        });
 ```
