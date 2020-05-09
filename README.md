@@ -57,8 +57,8 @@ Android项目基础库 简化Android项目开发
     api "androidx.navigation:navigation-fragment-ktx:2.1.0"
     api "androidx.navigation:navigation-ui-ktx:2.1.0"
 ```
-## 导入方式
-### 将JitPack存储库添加到您的构建文件中(项目根目录下build.gradle文件)
+# 导入方式
+#### 将JitPack存储库添加到您的构建文件中(项目根目录下build.gradle文件)
 ```
 allprojects {
     repositories {
@@ -67,7 +67,7 @@ allprojects {
     }
 }
 ```
-### 添加依赖项
+#### 添加依赖项
 
 ```
 dependencies {
@@ -78,8 +78,8 @@ dependencies {
     implementation 'com.github.feiltel.NewTech:crashlib:1.5'
 }
 ```
-###  使用
-#####  1. Application
+# 使用
+####  1. Application 中使用
 
 ```
 public class MyApp extends BaseApplication {  
@@ -88,13 +88,26 @@ public class MyApp extends BaseApplication {
 }
 
 ```
-
-##### 2. Mvp
-## 使用MVP 架构
+#### 2. Mvp  中使用
 ###### 2.1 Activity
 ```
 public class TestActivity extends BaseMvpActivity<TestView,TestPresenter> implements TestView {  
+    @Override
+    protected ContentPresenter createPresenter() {
+        return new ContentPresenter();
+    }
+    @Override
+    protected int getViewId() {
+        return layout_ID;
+    }
+    @Override
+    protected void initView() {
 
+    }
+    @Override
+    protected void initEvent() {
+
+    }
 }
 ```
 ###### 2.2 View
@@ -111,4 +124,11 @@ public class TestPresenter extends BaseMvpPresenter<TestView> {
     public ContentPresenter() {
 
     }
+}
+```
+
+#### 2. Activity  中使用
+```
+public class MainActivity extends BaseActivity {
+}
 ```
