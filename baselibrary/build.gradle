@@ -48,13 +48,13 @@ dependencies {
 
     api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     //OkHttp
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.5.0'
-    implementation 'com.squareup.okhttp3:okhttp:4.5.0'
+    api 'com.squareup.okhttp3:logging-interceptor:4.5.0'
+    api 'com.squareup.okhttp3:okhttp:4.5.0'
     //JSON
-    implementation 'com.alibaba:fastjson:1.2.68'
+    api 'com.alibaba:fastjson:1.2.68'
     //压缩
-    implementation 'top.zibin:Luban:1.1.8'
-    implementation 'id.zelory:compressor:2.1.0'
+    api 'top.zibin:Luban:1.1.8'
+    api 'id.zelory:compressor:2.1.0'
     //状态栏 https://jaeger.itscoder.com/android/2016/03/27/statusbar-util.html
     api 'com.jaeger.statusbarutil:library:1.5.1'
     //butterknife

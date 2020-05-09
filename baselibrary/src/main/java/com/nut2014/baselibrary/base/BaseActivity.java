@@ -67,12 +67,24 @@ public abstract class BaseActivity extends AppCompatActivity {
         initView();
         initEvent();
     }
+
+    /**
+     * 设置暗色模式
+     */
     public void setDarkMode(){
         StatusBarUtil.setDarkMode(this);
     }
+
+    /**
+     * 设置为亮色模式
+     */
     public void setLightMode(){
         StatusBarUtil.setLightMode(this);
     }
+    /**
+     * 设置toolBar title
+     * @param title 标题
+     */
     protected void setTitle(String title) {
         if (getBaseParam().isHaveToolbar()) {
             Toolbar toolbar = findViewById(R.id.toolbar);

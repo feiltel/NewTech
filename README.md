@@ -1,131 +1,122 @@
-Android 脚手架
-===========
-
-1.封装
-----
-
-
-##### 高内聚,低耦合  高内聚：封装细节 便于修改内部代码，提高可维护性低耦合：简化外部调用 便于调用者使用 便于扩展和协作
-
-2.完成的工程
--------
-##### 2.1  MVP 自动生成
-##### 2.2  网络请求库加入 OkHttp
-##### 2.3 ButterKnife 加入
-##### 2.4 图片压缩库加入 Luban compressor
-##### 2.5 RecyclerViewAdapter库加入 BaseRecyclerViewAdapterHelper
-##### 2.6 加入状态栏工具 statusbarutil
-##### 2.7 图片加载框架 glide
-##### 2.8 图片选择框架 PictureSelector
-
-4.类模板
------
- ```  
- <!--单例模式模板-->
- 
- package ${PACKAGE_NAME};
+# BaseLibrary
+Android项目基础库 简化Android项目开发  
+使用了以下库
+```
+   //appCompat
+    api 'androidx.appcompat:appcompat:1.1.0'
+    api 'androidx.constraintlayout:constraintlayout:1.1.3'
+    api 'androidx.legacy:legacy-support-v4:1.0.0'
+    api 'androidx.recyclerview:recyclerview:1.1.0'
+    api 'androidx.legacy:legacy-support-v4:1.0.0'
+    api 'com.google.android.material:material:1.1.0'
 
 
+    //kotlin_java
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.50"
+    api "androidx.core:core-ktx:1.1.0"
+    //kotlin 组件
+    api "org.jetbrains.anko:anko:0.10.8"
 
-#parse("File Header.java")
-public class ${NAME} {
-  private volatile static ${NAME} instance;
+    api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    //OkHttp
+    api 'com.squareup.okhttp3:logging-interceptor:4.5.0'
+    api 'com.squareup.okhttp3:okhttp:4.5.0'
+    //JSON
+    api 'com.alibaba:fastjson:1.2.68'
+    //压缩
+    api 'top.zibin:Luban:1.1.8'
+    api 'id.zelory:compressor:2.1.0'
+    //状态栏 https://jaeger.itscoder.com/android/2016/03/27/statusbar-util.html
+    api 'com.jaeger.statusbarutil:library:1.5.1'
+    //butterknife
+    api 'com.jakewharton:butterknife:10.2.1'
+    //annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
+    //glide
+    api 'com.github.bumptech.glide:glide:4.11.0'
+    //annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
-    private ${NAME}() {
+    //RecyclerView Adapter https://github.com/CymChad/BaseRecyclerViewAdapterHelper/blob/master/readme/1-BaseQuickAdapter.md
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.2'
+    //图片选择 https://github.com/LuckSiege/PictureSelector
+    api 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.1'
+    //下拉刷新
+    api 'com.lcodecorex:tkrefreshlayout:1.0.7'
+
+
+    //RXJAVA
+    api 'io.reactivex.rxjava2:rxjava:2.1.0'
+    api 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    //retrofit
+    api 'com.squareup.retrofit2:retrofit:2.8.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.8.1'
+    //banner
+    api 'com.youth.banner:banner:2.0.8'
+
+    //Navigation
+    api "androidx.navigation:navigation-fragment-ktx:2.1.0"
+    api "androidx.navigation:navigation-ui-ktx:2.1.0"
+```
+## 导入方式
+### 将JitPack存储库添加到您的构建文件中(项目根目录下build.gradle文件)
+```
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
     }
-
-    public static ${NAME} getInstance() {
-        if (instance == null) {
-            synchronized (${NAME}.class) {
-                if (instance == null) {
-                    instance = new ${NAME}();
-                }
-            }
-        }
-        return instance;
-    }
-
 }
+```
+### 添加依赖项
 
-<!--MvpActivity-->
-
-package ${PACKAGE_NAME};
-
-import android.app.Activity;
-import android.os.Bundle;
-
-import com.nut2014.newtech.base.BaseMvpActivity;
-import com.nut2014.newtech.R;
-
-#parse("File Header.java")
-public class ${NAME}Activity extends BaseMvpActivity<${NAME}View,${NAME}Presenter> implements ${NAME}View {
-
-    @Override
-    protected int getViewId() {
-        return R.layout.activity_${LAYOUT};
-    }
-    
-    @Override
-    public void initView() {
-      
-    }
+```
+dependencies {
+    '''
+    //基础库
+    implementation 'com.github.feiltel.NewTech:baselibrary:1.5'
+    //异常捕获
+    implementation 'com.github.feiltel.NewTech:crashlib:1.5'
+}
+```
+###  使用
+1. Application
+```
+public class MyApp extends BaseApplication {
 
     @Override
-    public void initEvent() {
+    public void onCreate() {
+        super.onCreate();
+        //异常捕获
+        Cockroach.init(this, Constant.crashPath, null);
+        //网络状态监听类注册
+        NetWorkManager.getDefault().init(this);
+        // Retrofit 初始化
+        final String BASE_URL = "";
+        RetrofitManager.getInstance().init(BASE_URL, authorization);
         
     }
-     @Override
-    protected ${NAME}Presenter createPresenter() {
-        return new ${NAME}Presenter();
-    }
 
-
+    //拦截处理网络请求
+    private Interceptor authorization = chain -> {
+        Request request = chain.request();
+        //添加header
+        Request build = request.newBuilder()
+                .header("Authorization", "token")
+                .method(request.method(), request.body())
+                .build();
+        Response proceed = chain.proceed(build);
+        ResponseBody responseBody = proceed.body();
+        //处理返回结果
+        if (responseBody != null && responseBody.contentLength() != 0) {
+            BufferedSource source = responseBody.source();
+            source.request(Long.MAX_VALUE);
+            Buffer clone = source.getBuffer().clone();
+            String result = clone.readString(Charset.defaultCharset());
+            //Do something
+        }
+        return proceed;
+    };
 }
 
-<!--MVPPresenter-->
+```
 
-package ${PACKAGE_NAME};
-
-
-
-import com.nut2014.newtech.base.BaseMvpPresenter;
-
-#parse("File Header.java")
-public class ${NAME}Presenter extends BaseMvpPresenter<${NAME}View> {
-   public ${NAME}Presenter() {
-
-    }
-
-}
-
-<!--MVP_VIEW-->
-package ${PACKAGE_NAME};
-
-
-import com.nut2014.newtech.base.BaseMvpView;
-
-#parse("File Header.java")
-public interface ${NAME}View extends BaseMvpView {
-  
-
-}
- <!--BaseAdapter-->
- package ${PACKAGE_NAME};
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.viewholder.BaseViewHolder;
-
-
-import java.util.List;
-#parse("File Header.java")
-public class ${NAME}Adapter extends BaseQuickAdapter<${BeanName},BaseViewHolder> {
-    public ${NAME}Adapter(int layoutId,List<${BeanName}> list) {
-        super(layoutId, list);
-    }
-    @Override
-    protected void convert( BaseViewHolder helper,  ${BeanName} item) {
-      
-    }
-}
- 
- 
- ```
