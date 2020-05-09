@@ -79,44 +79,36 @@ dependencies {
 }
 ```
 ###  使用
-1. Application
+#####  1. Application
+
 ```
-public class MyApp extends BaseApplication {
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        //异常捕获
-        Cockroach.init(this, Constant.crashPath, null);
-        //网络状态监听类注册
-        NetWorkManager.getDefault().init(this);
-        // Retrofit 初始化
-        final String BASE_URL = "";
-        RetrofitManager.getInstance().init(BASE_URL, authorization);
-        
-    }
-
-    //拦截处理网络请求
-    private Interceptor authorization = chain -> {
-        Request request = chain.request();
-        //添加header
-        Request build = request.newBuilder()
-                .header("Authorization", "token")
-                .method(request.method(), request.body())
-                .build();
-        Response proceed = chain.proceed(build);
-        ResponseBody responseBody = proceed.body();
-        //处理返回结果
-        if (responseBody != null && responseBody.contentLength() != 0) {
-            BufferedSource source = responseBody.source();
-            source.request(Long.MAX_VALUE);
-            Buffer clone = source.getBuffer().clone();
-            String result = clone.readString(Charset.defaultCharset());
-            //Do something
-        }
-        return proceed;
-    };
+public class MyApp extends BaseApplication {  
+//DO something  
+ 
 }
 
 ```
 
+##### 2. Mvp
+## 使用MVP 架构
+###### 2.1 Activity
+```
+public class TestActivity extends BaseMvpActivity<TestView,TestPresenter> implements TestView {  
+
+}
+```
+###### 2.2 View
+
+```
+public interface TestView extends BaseMvpView {
+  
+}
+```
+###### 2.3 Presenter
+
+```
+public class TestPresenter extends BaseMvpPresenter<TestView> {
+    public ContentPresenter() {
+
+    }
+```
