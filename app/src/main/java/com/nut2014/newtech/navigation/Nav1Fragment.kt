@@ -9,7 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.chad.library.adapter.base.listener.OnItemClickListener
+import com.jaeger.library.StatusBarUtil
 import com.nut2014.newtech.R
 import kotlinx.android.synthetic.main.nav1_fragment.*
 
@@ -20,6 +21,7 @@ class Nav1Fragment : Fragment() {
     }
 
     private lateinit var viewModel: Nav1ViewModel
+    private lateinit var listAdapter: Nav1Adapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -28,8 +30,7 @@ class Nav1Fragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        // TODO: Use the ViewModel
-
+        StatusBarUtil.setTransparent(activity)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,61 +42,29 @@ class Nav1Fragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        list_rv.layoutManager = LinearLayoutManager(activity);
-        list_rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                viewModel.scrollInfoY.value=dy;
-                println("$dx>>$dy")
-                val positionAndOffset = getPositionAndOffset(recyclerView)
-                viewModel.scrollInfoPos.value= positionAndOffset!![0]
-                viewModel.scrollInfoY.value= positionAndOffset!![1]
+        initView();
+        initEvent();
+    }
 
-            }
-        })
-        viewModel.btnName.observe(activity!!, Observer {
-            jump_btn.text = it
-        })
+    private fun initEvent() {
+        //数据变化监听
         viewModel.listData.observe(activity!!, Observer {
-            list_rv.adapter=Nav1Adapter(it);
-            (list_rv.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(viewModel.scrollInfoPos.value!!,viewModel.scrollInfoY.value!!)
+            //(list_rv.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(viewModel.scrollInfoPos.value!!, viewModel.scrollInfoY.value!!)
+            listAdapter.setList(it)
+            println("数据变化监听:$it")
         })
-
-
-        jump_btn.setOnClickListener(View.OnClickListener {
-            viewModel.btnName.value = "已跳转"
-            var listData=ArrayList<String>();
-            listData.add(">>>1");
-            listData.add(">>>2");
-            listData.add(">>>3");
-            listData.add(">>>4");
-            listData.add(">>>5");
-            listData.add(">>>6");
-            listData.add(">>>6");
-            listData.add(">>>6");
-            viewModel.listData.value=listData;
+        //点击事件
+        listAdapter.setOnItemClickListener(OnItemClickListener { adapter, view, position ->
+            val value = viewModel.listData.value!!.toMutableList()
+            value[position] = "已点击"
+            viewModel.listData.value = value;
             findNavController().navigate(R.id.acton_nav1_to_nav2)
         })
-        initData()
     }
-    private fun initData(){
-        var listData=ArrayList<String>();
-        for (i in 1..30) {
-           listData.add("测试$i")
-        }
-        viewModel.listData.value=listData;
-    }
-    private fun getPositionAndOffset(recyclerView: RecyclerView): IntArray? {
-        val posArr = IntArray(2)
-        val layoutManager = recyclerView.layoutManager
-        //获取可视的第一个view
-        val topView = layoutManager!!.getChildAt(0)
-        if (topView != null) {
-            //得到该View的数组位置
-            posArr[0] = layoutManager.getPosition(topView)
-            //获取与该view的顶部的偏移量
-            posArr[1] = topView.top
-        }
-        return posArr;
+
+    private fun initView() {
+        list_rv.layoutManager = LinearLayoutManager(activity);
+        listAdapter = Nav1Adapter(viewModel.listData.value);
+        list_rv.adapter = listAdapter;
     }
 }

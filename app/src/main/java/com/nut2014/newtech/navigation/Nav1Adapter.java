@@ -13,13 +13,13 @@ import java.util.List;
 /**
  * @author feiltel 2020/4/24 0024
  */
-public class Nav1Adapter extends BaseQuickAdapter<String, BaseViewHolder> implements LoadMoreModule {
+public class Nav1Adapter extends BaseQuickAdapter<String, BaseViewHolder>  {
     /**
      * 构造方法，此示例中，在实例化Adapter时就传入了一个List。
      * 如果后期设置数据，不需要传入初始List，直接调用 super(layoutResId); 即可
      */
     public Nav1Adapter(List<String> list) {
-        super(R.layout.tab1_base_item, list);
+        super(R.layout.base_item, list);
     }
 
     /**

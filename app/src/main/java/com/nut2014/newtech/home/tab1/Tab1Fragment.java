@@ -109,6 +109,12 @@ public class Tab1Fragment extends Fragment {
         tab1Adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+
+            }
+        });
+        tab1Adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 MToast.show(getActivity(), "测试diff :" + position);
                 //测试diff
                 if (position==0){

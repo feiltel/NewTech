@@ -9,7 +9,7 @@ class NavigationHomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        StatusBarUtil.setTransparent(this)
         setContentView(R.layout.activity_navigation_home)
+
     }
 }

@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".navigation.NavigationHomeActivity"></activity>
+        <activity android:name=".navigation.NavigationHomeActivity" />
         <activity android:name=".dataBinding.VmDbActivity" />
         <activity
             android:name=".splash.SplashActivity"
@@ -37,8 +37,8 @@
             android:process=":remote"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.nut2014.newtech.action"></action>
-                <category android:name="android.intent.category.DEFAULT"></category>
+                <action android:name="com.nut2014.newtech.action" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
     </application>
