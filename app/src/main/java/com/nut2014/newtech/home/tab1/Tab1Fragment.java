@@ -57,6 +57,13 @@ public class Tab1Fragment extends Fragment {
         ButterKnife.bind(this, rootView);
         linearLayoutManager = new LinearLayoutManager(getActivity());
         home_list_rv.setLayoutManager(linearLayoutManager);
+        home_list_rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                System.out.println(dx+">>"+dy);
+            }
+        });
         main_top_bar1.setPadding(0, WindowUtils.getStatusBarHeight(getActivity()), 0, 0);
         int all = 20;
         for (int i = 0; i < all; i++) {
