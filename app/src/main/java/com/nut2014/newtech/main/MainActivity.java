@@ -12,6 +12,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -53,9 +54,10 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        setLightMode();
         bindService();
         NetWorkManager.getDefault().registerObserver(this);
-        listRv.setLayoutManager(new LinearLayoutManager(this));
+        listRv.setLayoutManager(new GridLayoutManager(this,2));
         List<String> titleList = new ArrayList<>();
         titleList.add("1.约束布局");
         titleList.add("2.MVP架构");
@@ -221,7 +223,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public BaseParam getBaseParam() {
-        return new BaseParam().setHaveToolbar(true).setTitle(getString(R.string.app_name));
+
+        return new BaseParam().setTransparent(true);
     }
 
     @Override

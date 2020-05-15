@@ -5,6 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".constraint.ConstraintActivity">
+
+<!-- https://juejin.im/post/5adc8bd251882567236e58c1-->
+   <!-- <androidx.constraintlayout.widget.Placeholder
+    <androidx.constraintlayout.widget.Barrier
+    <androidx.constraintlayout.widget.ConstraintHelper
+    <androidx.constraintlayout.widget.Constraints
+    <androidx.constraintlayout.widget.Group
+    <androidx.constraintlayout.widget.Guideline-->
     <!--一、基本属性:
     相对于控件布局
 layout_constraintLeft_toRightOf
@@ -29,6 +37,8 @@ layout_constraintEnd_toEndOf
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
 
     <!--layout_goneMarginLeft属性使用
     layout_goneMarginStart
@@ -79,21 +89,21 @@ layout_constraintEnd_toEndOf
     layout_constraintCircleAngle : which angle the widget should be at (in degrees, from 0 to 360) 角度
     -->
     <Button
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="圆心定位"
         app:layout_constraintCircle="@id/btn3"
-        app:layout_constraintCircleRadius="80dp"
         app:layout_constraintCircleAngle="45"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        app:layout_constraintCircleRadius="80dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <!--WRAP_CONTENT : 强制约束（ enforcing constraints ）
     app:layout_constrainedWidth=”true|false”
     app:layout_constrainedHeight=”true|false”
     -->
-  <Button
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

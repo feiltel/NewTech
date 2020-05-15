@@ -24,17 +24,17 @@ import com.nut2014.newtech.R;
  * <pre>
  *     ItemListDialogFragment.newInstance(30).show(getSupportFragmentManager(), "dialog");
  * </pre>
- * <p>You activity (or fragment) needs to implement {@link ItemListDialogFragment.Listener}.</p>
+ * <p>You activity (or fragment) needs to implement {@link BottomDialogFragment.Listener}.</p>
  */
-public class ItemListDialogFragment extends BottomSheetDialogFragment {
+public class BottomDialogFragment extends BottomSheetDialogFragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_ITEM_COUNT = "item_count";
     private Listener mListener;
 
     // TODO: Customize parameters
-    public static ItemListDialogFragment newInstance(int itemCount) {
-        final ItemListDialogFragment fragment = new ItemListDialogFragment();
+    public static BottomDialogFragment newInstance(int itemCount) {
+        final BottomDialogFragment fragment = new BottomDialogFragment();
         final Bundle args = new Bundle();
         args.putInt(ARG_ITEM_COUNT, itemCount);
         fragment.setArguments(args);

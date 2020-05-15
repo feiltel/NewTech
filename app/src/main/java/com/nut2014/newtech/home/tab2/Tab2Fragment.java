@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.listener.OnLoadMoreListener;
 import com.nut2014.newtech.R;
-import com.nut2014.newtech.test.ItemListDialogFragment;
 import com.nut2014.newtech.viewModel.ShareViewModel;
 
 import java.util.List;
