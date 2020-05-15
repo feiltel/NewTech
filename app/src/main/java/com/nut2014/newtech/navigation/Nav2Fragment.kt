@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.jaeger.library.StatusBarUtil
+import com.nut2014.baselibrary.utils.MToast
 import com.nut2014.newtech.R
 import kotlinx.android.synthetic.main.nav2_fragment.*
 
@@ -22,6 +23,12 @@ class Nav2Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.nav2_fragment, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val string = arguments?.getString("data")
+        MToast.show(activity,string);
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

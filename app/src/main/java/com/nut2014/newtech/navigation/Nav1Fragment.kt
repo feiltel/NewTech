@@ -58,7 +58,11 @@ class Nav1Fragment : Fragment() {
             val value = viewModel.listData.value!!.toMutableList()
             value[position] = "已点击"
             viewModel.listData.value = value;
-            findNavController().navigate(R.id.acton_nav1_to_nav2)
+            //带参数跳转
+            val args = Bundle()
+            args.putString("data", "带参数跳转")
+            findNavController().navigate(R.id.acton_nav1_to_nav2,args)
+            //findNavController().navigate(R.id.acton_nav1_to_nav2)
         })
     }
 
