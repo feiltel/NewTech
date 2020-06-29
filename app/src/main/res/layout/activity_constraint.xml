@@ -52,31 +52,40 @@ layout_constraintEnd_toEndOf
     当相对的控件为gone 时 边距为多少
     -->
     <Button
+        android:layout_marginStart="32dp"
         android:id="@+id/buttonGone1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="相对控件"
+
         android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:textSize="12sp"
+        android:textAllCaps="false"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
         android:id="@+id/buttonGone2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        app:layout_constraintRight_toRightOf="parent"
         android:layout_height="wrap_content"
-        android:text="goneMargin控件"
+        android:text="goneMarginLeft:当左边的控件为gone 时,边距为32dp"
         app:layout_constraintLeft_toRightOf="@id/buttonGone1"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_goneMarginLeft="80dp" />
+        app:layout_goneMarginLeft="32dp" />
     <!--  1，偏移（Bias）
     layout_constraintHorizontal_bias 水平偏移
     layout_constraintVertical_bias 纵向偏移
     -->
     <Button
+        android:textAllCaps="false"
+        android:textSize="12sp"
         android:id="@+id/btn3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="偏移"
+        android:text="Horizontal_bias:水平偏移0.5 Vertical_bias:纵向偏移0.3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -89,9 +98,10 @@ layout_constraintEnd_toEndOf
     layout_constraintCircleAngle : which angle the widget should be at (in degrees, from 0 to 360) 角度
     -->
     <Button
+        android:textAllCaps="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="圆心定位"
+        android:text="圆心定位:Circle Angle Radius"
         app:layout_constraintCircle="@id/btn3"
         app:layout_constraintCircleAngle="45"
         app:layout_constraintCircleRadius="80dp"
@@ -101,9 +111,6 @@ layout_constraintEnd_toEndOf
     app:layout_constrainedWidth=”true|false”
     app:layout_constrainedHeight=”true|false”
     -->
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
