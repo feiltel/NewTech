@@ -21,7 +21,7 @@ public class ContentModel {
     public static void loginRequest(String userName, String password, LoginCallBack callback) {
         String url = Constant.baseUrl + "login?userName=" + userName + "&password=" + password;
 
-        OkHttpManager.getAsyn(url, new OkHttpManager.ResultCallback() {
+         OkHttpManager.getAsyn(url, new OkHttpManager.ResultCallback() {
             @Override
             public void onError(Exception e) {
                 if (callback != null) {
