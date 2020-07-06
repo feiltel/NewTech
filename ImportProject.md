@@ -4,4 +4,5 @@
 + 3.修改为本地可运行的build tools 的版本 //导致无法编译(\app\build.gradle  buildToolsVersion = '')  
 ![构建工具和gradle对应版本.png](image/构建工具和gradle对应版本.png)  
 ![翻墙环境下代理配置.png](image/翻墙环境下代理配置.png)
++ 镜像设置  mirrors.neusoft.edu.cn:80
 
