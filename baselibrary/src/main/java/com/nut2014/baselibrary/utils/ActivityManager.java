@@ -6,6 +6,7 @@ import java.lang.ref.WeakReference;
 
 /**
  * @author feiltel 2020/4/20 0020
+ * Activity 管理类 获取当前Activity
  */
 public class ActivityManager {
     private static ActivityManager mInstance = new ActivityManager();
@@ -18,6 +19,11 @@ public class ActivityManager {
         return mInstance;
     }
 
+    /**
+     * 获取当前 Activity
+     *
+     * @return 活动
+     */
     public Activity getCurrentActivity() {
         if (mCurrentActivityWeakRef != null) {
             return mCurrentActivityWeakRef.get();
@@ -25,6 +31,11 @@ public class ActivityManager {
         return null;
     }
 
+    /**
+     * 设置当前activity
+     *
+     * @param activity 活动
+     */
     public void setCurrentActivity(Activity activity) {
         mCurrentActivityWeakRef = new WeakReference<>(activity);
     }
