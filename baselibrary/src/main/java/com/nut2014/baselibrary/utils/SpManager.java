@@ -9,7 +9,7 @@ import android.content.Context;
 public class SpManager {
     private static final SpManager ourInstance = new SpManager();
 
-    public  static SpManager getInstance() {
+    public static SpManager getInstance() {
         return ourInstance;
     }
 

@@ -1,24 +1,11 @@
 package com.nut2014.baselibrary.http;
 
 
-import android.app.Activity;
-import android.content.Intent;
-
-import com.nut2014.baselibrary.utils.ActivityManager;
-import com.nut2014.baselibrary.utils.FLog;
-import com.nut2014.baselibrary.utils.JsonUtil;
-
-import java.nio.charset.Charset;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
-import okio.Buffer;
-import okio.BufferedSource;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -45,7 +32,8 @@ public class RetrofitManager {
 
     /**
      * 初始化
-     * @param baseUrl 基础URL
+     *
+     * @param baseUrl     基础URL
      * @param interceptor 拦截器 可以为null
      */
     public void init(String baseUrl, Interceptor interceptor) {
@@ -55,7 +43,7 @@ public class RetrofitManager {
                     .connectTimeout(30000, TimeUnit.MILLISECONDS)
                     .readTimeout(30000, TimeUnit.MILLISECONDS)
                     .writeTimeout(30000, TimeUnit.MILLISECONDS);
-            if (interceptor!=null){
+            if (interceptor != null) {
                 builder.addInterceptor(interceptor);
             }
             //日志

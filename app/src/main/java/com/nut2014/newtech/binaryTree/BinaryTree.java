@@ -26,6 +26,7 @@ public class BinaryTree {
             System.out.println("二叉树为空无法遍历");
         }
     }
+
     public void centerNode(int num) {
         if (this.root != null) {
             this.root.centerNode(num);

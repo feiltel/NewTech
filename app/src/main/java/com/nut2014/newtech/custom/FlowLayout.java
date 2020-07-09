@@ -6,13 +6,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
-import static androidx.constraintlayout.widget.Constraints.TAG;
-
 /**
  * @author feiltel 2020/5/27 0027
  */
 public class FlowLayout extends ViewGroup {
-    private static final String TAG="FlowLayout";
+    private static final String TAG = "FlowLayout";
+
     public FlowLayout(Context context) {
         super(context);
     }
@@ -63,10 +62,10 @@ public class FlowLayout extends ViewGroup {
         int mLeftWidth = 0;
 
         final int count = getChildCount();
-        Log.d(TAG,"Child count is " + count);
-        final int widthSize =  MeasureSpec.getSize(widthMeasureSpec);
+        Log.d(TAG, "Child count is " + count);
+        final int widthSize = MeasureSpec.getSize(widthMeasureSpec);
 
-        Log.d(TAG,"widthSize in Measure is :"+ widthSize);
+        Log.d(TAG, "widthSize in Measure is :" + widthSize);
 
 
         // 遍历我们的子View，并测量它们，根据它们要求的尺寸进而计算我们的StaggerLayout需要的尺寸。
@@ -92,7 +91,7 @@ public class FlowLayout extends ViewGroup {
 
             } else {
 
-                mLeftHeight = Math.max(mLeftHeight,   child.getMeasuredHeight());
+                mLeftHeight = Math.max(mLeftHeight, child.getMeasuredHeight());
             }
 
         }
@@ -120,7 +119,7 @@ public class FlowLayout extends ViewGroup {
 
         //childRight代表在StaggerLayout的坐标系中，能够用来layout子View的区域的
         //右边那条边的坐标。
-        final int childRight = r -  l - getPaddingRight();
+        final int childRight = r - l - getPaddingRight();
 
 
         /*

@@ -42,13 +42,13 @@ class Nav1Fragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView();
-        initEvent();
+        initView()
+        initEvent()
     }
 
     private fun initEvent() {
         //数据变化监听
-        viewModel.listData.observe(activity!!, Observer {
+        viewModel.listData.observe(requireActivity(), Observer {
             //(list_rv.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(viewModel.scrollInfoPos.value!!, viewModel.scrollInfoY.value!!)
             listAdapter.setList(it)
             println("数据变化监听:$it")
@@ -57,18 +57,18 @@ class Nav1Fragment : Fragment() {
         listAdapter.setOnItemClickListener(OnItemClickListener { adapter, view, position ->
             val value = viewModel.listData.value!!.toMutableList()
             value[position] = "已点击"
-            viewModel.listData.value = value;
+            viewModel.listData.value = value
             //带参数跳转
             val args = Bundle()
             args.putString("data", "带参数跳转")
-            findNavController().navigate(R.id.acton_nav1_to_nav2,args)
+            findNavController().navigate(R.id.acton_nav1_to_nav2, args)
             //findNavController().navigate(R.id.acton_nav1_to_nav2)
         })
     }
 
     private fun initView() {
-        list_rv.layoutManager = LinearLayoutManager(activity);
-        listAdapter = Nav1Adapter(viewModel.listData.value);
-        list_rv.adapter = listAdapter;
+        list_rv.layoutManager = LinearLayoutManager(activity)
+        listAdapter = Nav1Adapter(viewModel.listData.value)
+        list_rv.adapter = listAdapter
     }
 }

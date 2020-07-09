@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.List;
 
 
-
 public class CompressModel {
     private static final String TAG = "CompressModel";
     private Context context;
@@ -57,10 +56,10 @@ public class CompressModel {
                     for (File file1 : photos) {
                         FileUtil.isImage(file1);
                         sendMsg(file1.getName() + "\n压缩前大小：" + FileSizeUtil.getAutoFileOrFilesSize(file1.getPath()) + "\n");
-                        File lubanFile = CompressUtils.compressWithLuban(context, file1,lubanTargetPath);
+                        File lubanFile = CompressUtils.compressWithLuban(context, file1, lubanTargetPath);
                         if (lubanFile != null) {
                             sendMsg("Luban压缩后大小：" + FileSizeUtil.getAutoFileOrFilesSize(lubanFile.getPath()) + "\n");
-                            File file2 = CompressUtils.compressWithCompressor(context, lubanFile, quality, maxHeight, maxWidth,compressorTargetPath);
+                            File file2 = CompressUtils.compressWithCompressor(context, lubanFile, quality, maxHeight, maxWidth, compressorTargetPath);
                             sendMsg("Compressor压缩后大小：" + FileSizeUtil.getAutoFileOrFilesSize(file2.getPath()) + "\n\n");
                         }
                         finishNum++;

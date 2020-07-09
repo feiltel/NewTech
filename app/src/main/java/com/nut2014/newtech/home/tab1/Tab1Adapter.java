@@ -5,7 +5,6 @@ import com.chad.library.adapter.base.module.LoadMoreModule;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.nut2014.newtech.R;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -27,6 +26,6 @@ public class Tab1Adapter extends BaseQuickAdapter<Tab1ListItemBean, BaseViewHold
      */
     @Override
     protected void convert(@NotNull BaseViewHolder helper, @NotNull Tab1ListItemBean item) {
-        helper.setText(R.id.cov_tv,item.getName());
+        helper.setText(R.id.cov_tv, item.getName());
     }
 }

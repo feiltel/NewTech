@@ -5,9 +5,9 @@ import android.widget.Button;
 
 import androidx.appcompat.widget.AppCompatEditText;
 
-import com.nut2014.newtech.R;
 import com.nut2014.baselibrary.base.BaseMvpActivity;
 import com.nut2014.baselibrary.base.BaseParam;
+import com.nut2014.newtech.R;
 import com.nut2014.newtech.main.MainActivity;
 
 import java.util.Objects;
@@ -79,7 +79,7 @@ public class ContentActivity extends BaseMvpActivity<ContentView, ContentPresent
 
     @Override
     public int[] hideSoftByEditViewIds() {
-        int[] ids={R.id.user_name,R.id.password};
+        int[] ids = {R.id.user_name, R.id.password};
         return ids;
     }
 }

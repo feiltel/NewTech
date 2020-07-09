@@ -34,14 +34,17 @@ public abstract class BaseActivity extends AppCompatActivity {
     public BaseParam getBaseParam() {
         return new BaseParam();
     }
-    private Bundle savedInstanceState=null;
-    public Bundle getSavedInstanceState(){
+
+    private Bundle savedInstanceState = null;
+
+    public Bundle getSavedInstanceState() {
         return savedInstanceState;
     }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.savedInstanceState=savedInstanceState;
+        this.savedInstanceState = savedInstanceState;
         if (getBaseParam() == null) {
             throw new NullPointerException("配置参数不能返回空");
         }
@@ -71,18 +74,20 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 设置暗色模式
      */
-    public void setDarkMode(){
+    public void setDarkMode() {
         StatusBarUtil.setDarkMode(this);
     }
 
     /**
      * 设置为亮色模式
      */
-    public void setLightMode(){
+    public void setLightMode() {
         StatusBarUtil.setLightMode(this);
     }
+
     /**
      * 设置toolBar title
+     *
      * @param title 标题
      */
     protected void setTitle(String title) {
@@ -115,7 +120,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * 显示加载进度条
-     * @param msg 进度信息
+     *
+     * @param msg         进度信息
      * @param hasProgress 是否显示进度
      */
     protected void showProgress(String msg, boolean hasProgress) {
@@ -124,13 +130,16 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * 设置对话框进度
+     *
      * @param progress 进度
      */
     protected void setDialogProgress(int progress) {
         FProgressDialog.getInstance().setProgress(progress);
     }
+
     /**
      * 显示加载进度条
+     *
      * @param msg 进度信息
      */
     protected void showProgress(String msg) {
@@ -145,7 +154,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -157,8 +165,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
-
     long lastClick = 0;
+
     /**
      * 防止重复点击
      */
@@ -183,9 +191,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         startActivity(intent);
     }
+
     protected void jumpActivity(Class<?> cls) {
-        jumpActivity(cls,null);
+        jumpActivity(cls, null);
     }
+
     protected void jumpActivity(Class<?> cls, int requestCode, Bundle bundle) {
         Intent intent = new Intent(this, cls);
         if (bundle != null) {
@@ -196,13 +206,12 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * 显示toast
+     *
      * @param msg toast信息
      */
     protected void showToast(String msg) {
         MToast.show(this, msg);
     }
-
-
 
 
     /**

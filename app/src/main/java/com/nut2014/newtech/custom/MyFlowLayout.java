@@ -2,7 +2,6 @@ package com.nut2014.newtech.custom;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -10,7 +9,8 @@ import android.view.ViewGroup;
  * @author feiltel 2020/5/27 0027
  */
 public class MyFlowLayout extends ViewGroup {
-    private static final String TAG="FlowLayout";
+    private static final String TAG = "FlowLayout";
+
     public MyFlowLayout(Context context) {
         super(context);
     }
@@ -35,25 +35,25 @@ public class MyFlowLayout extends ViewGroup {
         int mLeftHeight = 0;
         int mLeftWidth = 0;
         //实际测量的高度宽度
-        int maxHeight=0;
-        int maxWidth=0;
-        final int widthSize =  MeasureSpec.getSize(widthMeasureSpec);
+        int maxHeight = 0;
+        int maxWidth = 0;
+        final int widthSize = MeasureSpec.getSize(widthMeasureSpec);
         for (int i = 0; i < childCount; i++) {
             View childAt = getChildAt(i);
-            measureChild(childAt,widthMeasureSpec,heightMeasureSpec);
-            mLeftWidth+=childAt.getMeasuredWidth();
-            maxWidth+=childAt.getMeasuredWidth();
+            measureChild(childAt, widthMeasureSpec, heightMeasureSpec);
+            mLeftWidth += childAt.getMeasuredWidth();
+            maxWidth += childAt.getMeasuredWidth();
             //如果子view 相加的宽度大于总宽度
-            if (mLeftWidth>widthSize){
+            if (mLeftWidth > widthSize) {
                 //加上上一行的高度
                 maxHeight += mLeftHeight;
 
                 //初始化当前宽度当前宽度高度
                 mLeftWidth = childAt.getMeasuredWidth();
                 mLeftHeight = childAt.getMeasuredHeight();
-            }else {
+            } else {
                 //获取当前行数总最高的一行
-                mLeftHeight = Math.max(mLeftHeight,   childAt.getMeasuredHeight());
+                mLeftHeight = Math.max(mLeftHeight, childAt.getMeasuredHeight());
             }
         }
         maxHeight += mLeftHeight;
@@ -73,7 +73,7 @@ public class MyFlowLayout extends ViewGroup {
 
         //childRight代表在StaggerLayout的坐标系中，能够用来layout子View的区域的
         //右边那条边的坐标。
-        final int childRight = r -  l - getPaddingRight();
+        final int childRight = r - l - getPaddingRight();
 
 
         /*

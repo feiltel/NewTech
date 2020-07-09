@@ -36,12 +36,11 @@ public class VmDbActivity extends AppCompatActivity {
         });
 
 
-
     }
 
     public class GoodsHandler {
         public void changeGoodsName() {
-            vmDbBean.setName(">>>>>>>>"+ new Random().nextInt(100));
+            vmDbBean.setName(">>>>>>>>" + new Random().nextInt(100));
         }
 
         public void changeGoodsDetails() {

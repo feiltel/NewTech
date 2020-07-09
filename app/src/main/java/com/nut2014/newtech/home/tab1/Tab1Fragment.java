@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.listener.OnLoadMoreListener;
-import com.jaeger.library.StatusBarUtil;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.nut2014.baselibrary.utils.FLog;
@@ -61,7 +60,7 @@ public class Tab1Fragment extends Fragment {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                System.out.println(dx+">>"+dy);
+                System.out.println(dx + ">>" + dy);
             }
         });
         main_top_bar1.setPadding(0, WindowUtils.getStatusBarHeight(getActivity()), 0, 0);
@@ -78,12 +77,12 @@ public class Tab1Fragment extends Fragment {
 
         /*banner*/
         Banner banner = (Banner) hearderView.findViewById(R.id.banner);
-        List<User> mDatas=new ArrayList<>();
-        mDatas.add(new User(0,""));
-        mDatas.add(new User(0,""));
-        mDatas.add(new User(0,""));
-        mDatas.add(new User(0,""));
-        mDatas.add(new User(0,""));
+        List<User> mDatas = new ArrayList<>();
+        mDatas.add(new User(0, ""));
+        mDatas.add(new User(0, ""));
+        mDatas.add(new User(0, ""));
+        mDatas.add(new User(0, ""));
+        mDatas.add(new User(0, ""));
         banner.setAdapter(new ImageBannerAdapter(mDatas));
         banner.setIndicator(new CircleIndicator(getActivity()));
 
@@ -117,7 +116,7 @@ public class Tab1Fragment extends Fragment {
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 MToast.show(getActivity(), "测试diff :" + position);
                 //测试diff
-                if (position==0){
+                if (position == 0) {
                     tab1Adapter.setDiffNewData(getNewData());
                 }
 
@@ -138,13 +137,13 @@ public class Tab1Fragment extends Fragment {
 
 
                         //加载状态
-                        if (listData.size()>100){
+                        if (listData.size() > 100) {
                             tab1Adapter.getLoadMoreModule().loadMoreEnd();
-                        }else {
+                        } else {
                             tab1Adapter.getLoadMoreModule().loadMoreComplete();
                         }
                     }
-                },2000);
+                }, 2000);
 
 
                /* MToast.show(getContext(),">>>");
@@ -180,14 +179,15 @@ public class Tab1Fragment extends Fragment {
         });
         return rootView;
     }
-    private List<Tab1ListItemBean> getNewData(){
-        List<Tab1ListItemBean> newDataList=new ArrayList<>();
-        newDataList.add(new Tab1ListItemBean(11,">>>>"));
-        newDataList.add(new Tab1ListItemBean(12,">>>>"));
-        newDataList.add(new Tab1ListItemBean(13,">>>>"));
-        newDataList.add(new Tab1ListItemBean(14,">>>>"));
+
+    private List<Tab1ListItemBean> getNewData() {
+        List<Tab1ListItemBean> newDataList = new ArrayList<>();
+        newDataList.add(new Tab1ListItemBean(11, ">>>>"));
+        newDataList.add(new Tab1ListItemBean(12, ">>>>"));
+        newDataList.add(new Tab1ListItemBean(13, ">>>>"));
+        newDataList.add(new Tab1ListItemBean(14, ">>>>"));
         newDataList.addAll(listData);
-        newDataList.add(5,new Tab1ListItemBean(333,"插入"));
+        newDataList.add(5, new Tab1ListItemBean(333, "插入"));
         return newDataList;
     }
 

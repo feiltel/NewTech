@@ -45,7 +45,7 @@ public class AIDLService extends Service {
         @Override
         public List<Book> getBookList() throws RemoteException {
             for (Book book : bookList) {
-                Log.e("SSS",book.toString());
+                Log.e("SSS", book.toString());
             }
 
             return bookList;
@@ -56,7 +56,7 @@ public class AIDLService extends Service {
             if (book != null) {
                 book.setName("服务器改了新书的名字 InOut");
                 bookList.add(book);
-                Log.e("SSS ADD",book.toString());
+                Log.e("SSS ADD", book.toString());
             } else {
                 Log.e(TAG, "接收到了一个空对象 InOut");
             }

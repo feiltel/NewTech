@@ -7,7 +7,7 @@ import android.widget.EditText;
 /**
  * @author feiltel 2020/4/10 0010
  */
-public  class TouchOutHideKeyBoard {
+public class TouchOutHideKeyBoard {
 
 
     /**

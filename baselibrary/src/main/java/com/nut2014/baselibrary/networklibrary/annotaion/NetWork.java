@@ -1,7 +1,6 @@
 package com.nut2014.baselibrary.networklibrary.annotaion;
 
 
-
 import com.nut2014.baselibrary.networklibrary.type.NetType;
 
 import java.lang.annotation.ElementType;

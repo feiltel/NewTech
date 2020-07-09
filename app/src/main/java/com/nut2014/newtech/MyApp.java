@@ -45,12 +45,12 @@ public class MyApp extends BaseApplication {
                  .setRequiresStorageNotLow(true)                 // 不在存储容量不足时执行
                  .setRequiresDeviceIdle(true)      */              // 在待机状态下执行，需要 API 23
                 .build();
-         //单次执行
+        //单次执行
         OneTimeWorkRequest uploadWorkRequest = new OneTimeWorkRequest.Builder(LogWorker.class)
                 .setConstraints(constraints)
                 .build();
         //每隔15分钟执行一次  最小间隔为15分钟
-        PeriodicWorkRequest periodicWorkRequest=  new PeriodicWorkRequest
+        PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest
                 .Builder(LogWorker.class, 15, TimeUnit.MINUTES)
                 .setConstraints(constraints)
                 .build();

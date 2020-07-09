@@ -12,10 +12,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.nut2014.newtech.R;
 import com.nut2014.baselibrary.base.BaseMvpActivity;
 import com.nut2014.baselibrary.base.BaseParam;
 import com.nut2014.baselibrary.utils.FPermission;
+import com.nut2014.newtech.R;
 
 import butterknife.BindView;
 

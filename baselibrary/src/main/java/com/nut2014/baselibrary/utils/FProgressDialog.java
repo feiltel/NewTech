@@ -13,6 +13,7 @@ import com.nut2014.baselibrary.R;
 
 public class FProgressDialog {
     private volatile static FProgressDialog instance;
+
     private FProgressDialog() {
     }
 
@@ -35,7 +36,7 @@ public class FProgressDialog {
         if (alertDialog == null) {
             alertDialog = new AlertDialog.Builder(context, R.style.ProgressDialog).create();
             View inflate = LayoutInflater.from(context).inflate(R.layout.layout_alert_progress, null);
-            TextView  tv_tip = inflate.findViewById(R.id.tv_tip);
+            TextView tv_tip = inflate.findViewById(R.id.tv_tip);
             progress_tv = inflate.findViewById(R.id.progress_tv);
             progressBar1 = inflate.findViewById(R.id.iv_pb1);
             ProgressBar progressBar2 = inflate.findViewById(R.id.iv_pb2);
@@ -51,9 +52,9 @@ public class FProgressDialog {
     }
 
     public void setProgress(int progress) {
-        if (alertDialog != null && alertDialog.isShowing() && progressBar1 != null&& progress_tv != null) {
+        if (alertDialog != null && alertDialog.isShowing() && progressBar1 != null && progress_tv != null) {
             progressBar1.setProgress(progress);
-            progress_tv.setText(progress+"%");
+            progress_tv.setText(progress + "%");
         }
     }
 

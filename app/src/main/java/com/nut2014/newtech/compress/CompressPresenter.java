@@ -8,6 +8,7 @@ import com.nut2014.newtech.MyApp;
 public class CompressPresenter extends BaseMvpPresenter<CompressView> {
     private CompressModel compressModel;
     private Context context = MyApp.context;
+
     public CompressPresenter() {
         compressModel = new CompressModel(context);
     }

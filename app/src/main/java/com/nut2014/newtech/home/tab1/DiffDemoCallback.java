@@ -14,7 +14,7 @@ public class DiffDemoCallback extends DiffUtil.ItemCallback<Tab1ListItemBean> {
      */
     @Override
     public boolean areItemsTheSame(@NonNull Tab1ListItemBean oldItem, @NonNull Tab1ListItemBean newItem) {
-        return oldItem.getId() == newItem.getId()&&oldItem.getName().equals(newItem.getName());
+        return oldItem.getId() == newItem.getId() && oldItem.getName().equals(newItem.getName());
     }
 
     /**

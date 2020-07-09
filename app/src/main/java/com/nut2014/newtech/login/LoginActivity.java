@@ -36,6 +36,7 @@ public class LoginActivity extends BaseMvpActivity<LoginView, LoginPresenter> im
     TextView title_tv;
     @BindView(R.id.info_iv)
     ImageView info_iv;
+
     @Override
     protected int getViewId() {
         return R.layout.activity_login;
@@ -59,12 +60,12 @@ public class LoginActivity extends BaseMvpActivity<LoginView, LoginPresenter> im
     }
 
 
-
     private static int getStatusBarHeight(Context context) {
         // 获得状态栏高度
         int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
         return context.getResources().getDimensionPixelSize(resourceId);
     }
+
     @Override
     public void initEvent() {
         login_btn.setOnClickListener(v -> {

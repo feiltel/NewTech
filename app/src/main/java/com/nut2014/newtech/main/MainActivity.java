@@ -13,7 +13,6 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -57,7 +56,7 @@ public class MainActivity extends BaseActivity {
         setLightMode();
         bindService();
         NetWorkManager.getDefault().registerObserver(this);
-        listRv.setLayoutManager(new GridLayoutManager(this,2));
+        listRv.setLayoutManager(new GridLayoutManager(this, 2));
         List<String> titleList = new ArrayList<>();
         titleList.add("1.约束布局");
         titleList.add("2.MVP架构");
@@ -99,7 +98,7 @@ public class MainActivity extends BaseActivity {
                             jumpActivity(HomeActivity.class, null);
                             break;
                         case 6:
-                              jumpActivity(VmDbActivity.class, null);
+                            jumpActivity(VmDbActivity.class, null);
                             break;
                         case 7:
                             jumpActivity(NavigationHomeActivity.class, null);
@@ -151,6 +150,7 @@ public class MainActivity extends BaseActivity {
             connected = false;
         }
     };
+
     private void bindService() {
         Intent intent = new Intent();
         intent.setPackage("com.nut2014.newtech");
@@ -163,6 +163,7 @@ public class MainActivity extends BaseActivity {
             Log.e(TAG, book.toString());
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

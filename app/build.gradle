@@ -45,16 +45,14 @@ dependencies {
     //glide
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
-  // implementation 'com.github.feiltel.NewTech:baselibrary:1.5'
-  // implementation 'com.github.feiltel.NewTech:crashlib:1.5'
+    // implementation 'com.github.feiltel.NewTech:baselibrary:1.5'
+    // implementation 'com.github.feiltel.NewTech:crashlib:1.5'
     //baseLib
     implementation project(path: ':crashlib')
     implementation project(path: ':baselibrary')
 
 
     implementation "androidx.work:work-runtime:2.3.4"
-
-
 
 
 }

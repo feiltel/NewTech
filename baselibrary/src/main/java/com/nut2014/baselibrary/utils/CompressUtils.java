@@ -10,9 +10,10 @@ import id.zelory.compressor.Compressor;
 import top.zibin.luban.Luban;
 
 public class CompressUtils {
-    private static final String TAG="CompressUtils";
+    private static final String TAG = "CompressUtils";
+
     //使用Luban 压缩
-    public static List<File> compressWithLuban(Context context, List<File> files,String targetPath) throws IOException {
+    public static List<File> compressWithLuban(Context context, List<File> files, String targetPath) throws IOException {
         FLog.d(TAG, files.size() + "");
         return Luban.with(context).ignoreBy(1).setRenameListener(filePath -> {
             File file = new File(filePath);
@@ -20,7 +21,7 @@ public class CompressUtils {
         }).load(files).setTargetDir(targetPath).get();
     }
 
-    public static File compressWithLuban(Context context, File file,String targetPath) throws IOException {
+    public static File compressWithLuban(Context context, File file, String targetPath) throws IOException {
         if (file.isDirectory()) {
             return null;
         }
@@ -36,7 +37,7 @@ public class CompressUtils {
     }
 
     //使用Compressor压缩
-    public static File compressWithCompressor(Context context, File file, int quality, int maxHeight, int maxWidth,String targetPath) throws IOException {
+    public static File compressWithCompressor(Context context, File file, int quality, int maxHeight, int maxWidth, String targetPath) throws IOException {
         FLog.d(TAG, file.getName() + "");
         return new Compressor(context)
                 .setQuality(quality)

@@ -21,6 +21,7 @@ public class VmDbBean extends BaseObservable {
     public String name;
     @Bindable
     public String title;
+
     public int getId() {
         return id;
     }

@@ -130,7 +130,8 @@ public class FPermission {
             }
         }
     }
-    private boolean checkPass(@NonNull int[] grantResults){
+
+    private boolean checkPass(@NonNull int[] grantResults) {
         for (int grantResult : grantResults) {
             if (grantResult != PackageManager.PERMISSION_GRANTED) {
                 return false;
@@ -141,6 +142,7 @@ public class FPermission {
 
     /**
      * 多权限检查 只有所以权限都通过才返回已授权
+     *
      * @param requestCode
      * @param permissions
      * @param grantResults
@@ -159,6 +161,7 @@ public class FPermission {
             }
         }
     }
+
     public void onRequestResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (this.requestCode == requestCode) {
             if (grantResults.length > 0

@@ -62,7 +62,7 @@ public class SoundPoolHelper {
 
     public SoundPoolHelper(int maxStream, @TYPE int streamType) {
         //soundPool = new SoundPool(maxStream, streamType, 1);
-        AudioAttributes  audioAttributes = new AudioAttributes.Builder()
+        AudioAttributes audioAttributes = new AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_MEDIA)
                 .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                 .build();
@@ -147,9 +147,9 @@ public class SoundPoolHelper {
      * 6) rate 指定播放的比率，数值可从 0.5 到 2 ， 1 为正常比率。
      */
     public void play(@NonNull String ringtoneName, boolean isLoop) {
-        if (ringtoneIds!=null&&ringtoneIds.containsKey(ringtoneName)) {
+        if (ringtoneIds != null && ringtoneIds.containsKey(ringtoneName)) {
             Integer soundKey = ringtoneIds.get(ringtoneName);
-            if (soundKey!=null){
+            if (soundKey != null) {
                 soundPool.play(soundKey, 1, 1, 1, isLoop ? -1 : 0, 1);
             }
         }

@@ -10,6 +10,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{title}" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,21 +25,24 @@
             android:text="测试"
             android:onClick="@{()->goodsHandler.changeGoodsName()}"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <data >
+    <data>
+
         <variable
             name="title"
             type="java.lang.String" />
 
         <!-- import alias=""  可以使用别名-->
-        <import type="com.nut2014.newtech.dataBinding.VmDbBean"/>
-        <import type="com.nut2014.newtech.dataBinding.VmDbActivity.GoodsHandler"/>
+        <import type="com.nut2014.newtech.dataBinding.VmDbBean" />
+
+        <import type="com.nut2014.newtech.dataBinding.VmDbActivity.GoodsHandler" />
 
         <variable
             name="vmdb"
             type="VmDbBean" />
+
         <variable
             name="goodsHandler"
             type="GoodsHandler" />

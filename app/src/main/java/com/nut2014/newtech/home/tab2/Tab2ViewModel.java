@@ -33,7 +33,7 @@ public class Tab2ViewModel extends ViewModel {
 
 
     public void loadUsers() {
-         loadNum = 1;
+        loadNum = 1;
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

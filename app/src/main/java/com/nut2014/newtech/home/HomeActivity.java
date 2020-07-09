@@ -16,7 +16,6 @@ import com.nut2014.baselibrary.utils.MToast;
 import com.nut2014.newtech.R;
 import com.nut2014.newtech.home.tab1.Tab1Fragment;
 import com.nut2014.newtech.home.tab2.Tab2Fragment;
-
 import com.nut2014.newtech.viewModel.ShareFragment;
 
 import butterknife.BindView;
@@ -29,7 +28,7 @@ public class HomeActivity extends BaseMvpActivity<HomeView, HomePresenter> imple
     BottomNavigationView bottom_nv;
     private final Tab1Fragment fragment1 = Tab1Fragment.newInstance();
     private final Tab2Fragment fragment2 = Tab2Fragment.newInstance();
-    private final ShareFragment fragment3 =new ShareFragment();
+    private final ShareFragment fragment3 = new ShareFragment();
     private final FragmentManager fm = getSupportFragmentManager();
     private Fragment activeFragment = fragment1;
 
@@ -49,7 +48,7 @@ public class HomeActivity extends BaseMvpActivity<HomeView, HomePresenter> imple
 
         fm.beginTransaction().add(R.id.main_fl, fragment3, "3").hide(fragment3).commit();
         fm.beginTransaction().add(R.id.main_fl, fragment2, "2").hide(fragment2).commit();
-        fm.beginTransaction().add(R.id.main_fl,fragment1, "1").commit();
+        fm.beginTransaction().add(R.id.main_fl, fragment1, "1").commit();
         bottom_nv.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.bottom_navigation_blue:
