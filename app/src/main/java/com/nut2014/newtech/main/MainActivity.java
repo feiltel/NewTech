@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
@@ -17,12 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.jaeger.library.StatusBarUtil;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
-import com.nut2014.baselibrary.base.BaseActivity;
-import com.nut2014.baselibrary.base.BaseParam;
+import com.nut2014.baselibrary.base.MActivity;
 import com.nut2014.baselibrary.networklibrary.NetWorkManager;
 import com.nut2014.baselibrary.networklibrary.annotaion.NetWork;
 import com.nut2014.baselibrary.networklibrary.type.NetType;
@@ -43,15 +44,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends MActivity {
 
     private static final String TAG = "MainActivity";
     @BindView(R.id.list_rv)
     RecyclerView listRv;
 
-
     @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        StatusBarUtil.setTransparent(this);
+        ButterKnife.bind(this);
+        initView();
+        initEvent();
+    }
+
+
     protected void initView() {
         setLightMode();
         bindService();
@@ -205,7 +216,6 @@ public class MainActivity extends BaseActivity {
         showToast(netType.name());
     }
 
-    @Override
     protected void initEvent() {
         //请求权限
         String[] permissionStr = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -220,17 +230,6 @@ public class MainActivity extends BaseActivity {
                 showToast("权限：拒绝");
             }
         });
-    }
-
-    @Override
-    public BaseParam getBaseParam() {
-
-        return new BaseParam().setTransparent(true);
-    }
-
-    @Override
-    protected int getViewId() {
-        return R.layout.activity_main;
     }
 
 

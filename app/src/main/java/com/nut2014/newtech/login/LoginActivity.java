@@ -2,22 +2,25 @@ package com.nut2014.newtech.login;
 
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.jaeger.library.StatusBarUtil;
 import com.nut2014.baselibrary.base.BaseMvpActivity;
-import com.nut2014.baselibrary.base.BaseParam;
 import com.nut2014.baselibrary.utils.MToast;
 import com.nut2014.newtech.R;
 
 import java.util.Objects;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * @author feiltel 2020/4/21 0021
@@ -39,11 +42,15 @@ public class LoginActivity extends BaseMvpActivity<LoginView, LoginPresenter> im
     ImageView info_iv;
 
     @Override
-    protected int getViewId() {
-        return R.layout.activity_login;
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        StatusBarUtil.setTransparent(this);
+        ButterKnife.bind(this);
+        initView();
     }
 
-    @Override
+
     public void initView() {
         setLightMode();
         back_iv.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +74,7 @@ public class LoginActivity extends BaseMvpActivity<LoginView, LoginPresenter> im
         return context.getResources().getDimensionPixelSize(resourceId);
     }
 
-    @Override
+
     public void initEvent() {
         login_btn.setOnClickListener(v -> {
             String userNameStr = Objects.requireNonNull(user_name.getText()).toString();
@@ -81,10 +88,6 @@ public class LoginActivity extends BaseMvpActivity<LoginView, LoginPresenter> im
         return new LoginPresenter();
     }
 
-    @Override
-    public BaseParam getBaseParam() {
-        return super.getBaseParam().setTransparent(true);
-    }
 
     @Override
     public void jump2Main() {

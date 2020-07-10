@@ -4,13 +4,13 @@ import android.os.Bundle;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jaeger.library.StatusBarUtil;
 import com.nut2014.baselibrary.base.BaseMvpActivity;
-import com.nut2014.baselibrary.base.BaseParam;
 import com.nut2014.baselibrary.utils.FileSizeUtil;
 import com.nut2014.baselibrary.utils.MToast;
 import com.nut2014.newtech.R;
@@ -19,6 +19,7 @@ import com.nut2014.newtech.home.tab2.Tab2Fragment;
 import com.nut2014.newtech.viewModel.ShareFragment;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class HomeActivity extends BaseMvpActivity<HomeView, HomePresenter> implements HomeView {
     private static final String TAG = "MainActivity";
@@ -34,14 +35,14 @@ public class HomeActivity extends BaseMvpActivity<HomeView, HomePresenter> imple
 
 
     @Override
-    protected int getViewId() {
-        return R.layout.activity_home;
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
+        ButterKnife.bind(this);
+        initView();
     }
 
-
-    @Override
     public void initView() {
-        Bundle savedInstanceState = getSavedInstanceState();
         setLightMode();
         StatusBarUtil.setColor(this, getResources().getColor(android.R.color.transparent), 0);
         StatusBarUtil.hideFakeStatusBarView(this);
@@ -89,18 +90,8 @@ public class HomeActivity extends BaseMvpActivity<HomeView, HomePresenter> imple
 
 
     @Override
-    public void initEvent() {
-
-    }
-
-    @Override
     protected HomePresenter createPresenter() {
         return new HomePresenter();
-    }
-
-    @Override
-    public BaseParam getBaseParam() {
-        return super.getBaseParam();
     }
 
 

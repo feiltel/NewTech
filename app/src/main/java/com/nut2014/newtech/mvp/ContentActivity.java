@@ -1,18 +1,22 @@
 package com.nut2014.newtech.mvp;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.widget.Button;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
 
+import com.jaeger.library.StatusBarUtil;
 import com.nut2014.baselibrary.base.BaseMvpActivity;
-import com.nut2014.baselibrary.base.BaseParam;
+import com.nut2014.baselibrary.utils.FProgressDialog;
 import com.nut2014.newtech.R;
 import com.nut2014.newtech.main.MainActivity;
 
 import java.util.Objects;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class ContentActivity extends BaseMvpActivity<ContentView, ContentPresenter> implements ContentView {
     /**
@@ -27,13 +31,16 @@ public class ContentActivity extends BaseMvpActivity<ContentView, ContentPresent
     @BindView(R.id.login_btn)
     Button login_btn;
 
-
     @Override
-    public void initView() {
-        setTitle("MVP");
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_content);
+        StatusBarUtil.setTransparent(this);
+        ButterKnife.bind(this);
+        initEvent();
     }
 
-    @Override
+
     public void initEvent() {
         login_btn.setOnClickListener(v -> {
             String userNameStr = Objects.requireNonNull(user_name.getText()).toString();
@@ -42,15 +49,6 @@ public class ContentActivity extends BaseMvpActivity<ContentView, ContentPresent
         });
     }
 
-    @Override
-    protected int getViewId() {
-        return R.layout.activity_content;
-    }
-
-    @Override
-    public BaseParam getBaseParam() {
-        return new BaseParam().setTransparent(true);
-    }
 
     @Override
     protected ContentPresenter createPresenter() {
@@ -59,12 +57,12 @@ public class ContentActivity extends BaseMvpActivity<ContentView, ContentPresent
 
     @Override
     public void showLoad() {
-        showProgress("登录中");
+        FProgressDialog.getInstance().show(this, "登录中", false);
     }
 
     @Override
     public void hideLoad() {
-        hideProgress();
+        FProgressDialog.getInstance().dismiss();
     }
 
     @Override

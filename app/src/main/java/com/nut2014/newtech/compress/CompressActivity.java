@@ -1,6 +1,7 @@
 package com.nut2014.newtech.compress;
 
 import android.Manifest;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -10,14 +11,16 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.nut2014.baselibrary.base.BaseMvpActivity;
-import com.nut2014.baselibrary.base.BaseParam;
 import com.nut2014.baselibrary.utils.FPermission;
+import com.nut2014.baselibrary.utils.FProgressDialog;
 import com.nut2014.newtech.R;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 //压缩图片 调整图片尺寸
 public class CompressActivity extends BaseMvpActivity<CompressView, CompressPresenter> implements CompressView {
@@ -43,6 +46,13 @@ public class CompressActivity extends BaseMvpActivity<CompressView, CompressPres
     @BindView(R.id.info_sv)
     ScrollView info_sv;
 
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_compress);
+        ButterKnife.bind(this);
+        initEvent();
+    }
 
     @Override
     protected CompressPresenter createPresenter() {
@@ -59,27 +69,22 @@ public class CompressActivity extends BaseMvpActivity<CompressView, CompressPres
     @Override
     public void startCompress() {
         startBtn.setEnabled(false);
-        showProgress("压缩中...", true);
+        FProgressDialog.getInstance().show(this, "压缩中...", true);
     }
 
     @Override
     public void endCompress() {
         startBtn.setEnabled(true);
-        hideProgress();
+        FProgressDialog.getInstance().dismiss();
         showToast("压缩完成");
     }
 
     @Override
     public void compressProgress(int progress) {
-        setDialogProgress(progress);
+        FProgressDialog.getInstance().setProgress(progress);
     }
 
-    @Override
-    public void initView() {
 
-    }
-
-    @Override
     public void initEvent() {
         startBtn.setOnClickListener(v -> {
             FPermission.getInstance().checkPermission(CompressActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE_REQUEST_CODE, new FPermission.CallBack() {
@@ -112,15 +117,6 @@ public class CompressActivity extends BaseMvpActivity<CompressView, CompressPres
         });
     }
 
-    @Override
-    protected int getViewId() {
-        return R.layout.activity_compress;
-    }
-
-    @Override
-    public BaseParam getBaseParam() {
-        return new BaseParam().setHaveToolbar(true).setTitle("压缩工具").setHaveBackAction(true);
-    }
 
     private void compressAct() {
         String pathStr = pathEt.getText().toString();
