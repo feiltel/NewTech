@@ -1,11 +1,14 @@
-package com.nut2014.newtech.login;
+package com.nut2014.baselibrary.base;
 
-public class BaseResponseBean<T> {
+public class BaseResponse<T> {
+    private int code;
+    private String msg;
+    private T data;
 
-    public BaseResponseBean() {
+    public BaseResponse() {
     }
 
-    public BaseResponseBean(int code, String msg, T data) {
+    public BaseResponse(int code, String msg, T data) {
         this.code = code;
         this.msg = msg;
         this.data = data;
@@ -27,16 +30,11 @@ public class BaseResponseBean<T> {
         this.msg = msg;
     }
 
-    private int code;
-    private String msg;
-    private T data;
-
     public T getData() {
         return data;
     }
 
-    public BaseResponseBean<T> setData(T data) {
+    public void setData(T data) {
         this.data = data;
-        return this;
     }
 }

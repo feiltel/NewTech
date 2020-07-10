@@ -82,7 +82,7 @@ public class CompressActivity extends BaseMvpActivity<CompressView, CompressPres
     @Override
     public void initEvent() {
         startBtn.setOnClickListener(v -> {
-            FPermission.getInstance().checkPermission(CompressActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE_REQUEST_CODE, new FPermission.FPermissionCallBack() {
+            FPermission.getInstance().checkPermission(CompressActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE_REQUEST_CODE, new FPermission.CallBack() {
                 @Override
                 public void granted() {
                     compressAct();

@@ -119,6 +119,8 @@ public class RetrofitManager {
         if (currentActivity != null) {
             currentActivity.startActivity(new Intent(currentActivity, LoginActivity.class));
         }
-    }*/
+    }
+
+    */
 
 }

@@ -34,7 +34,7 @@ public class MyApp extends BaseApplication {
         //网络状态监听类注册
         NetWorkManager.getDefault().init(this);
         // Retrofit 初始化
-        final String BASE_URL = "http://x501.10015678.com/";
+        final String BASE_URL = "http://192.168.31.196:8080";
         RetrofitManager.getInstance().init(BASE_URL, authorization);
 
         //Worker

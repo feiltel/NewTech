@@ -10,4 +10,6 @@ public interface LoginView extends BaseMvpView {
 
 
     void jump2Main();
+
+    void showToast(String msg);
 }

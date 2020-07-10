@@ -209,7 +209,7 @@ public class MainActivity extends BaseActivity {
     protected void initEvent() {
         //请求权限
         String[] permissionStr = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        FPermission.getInstance().checkPermission(MainActivity.this, permissionStr, 1, new FPermission.FPermissionCallBack() {
+        FPermission.getInstance().checkPermission(MainActivity.this, permissionStr, 1, new FPermission.CallBack() {
             @Override
             public void granted() {
                 showToast("权限：允许");

@@ -1,5 +1,7 @@
 package com.nut2014.baselibrary.utils;
 
+import android.app.Application;
+import android.content.pm.ApplicationInfo;
 import android.util.Log;
 
 import java.io.File;
@@ -15,14 +17,9 @@ import java.util.Locale;
  */
 public class FLog {
     public static String get(Object show) {
-        boolean isShowLog = true;
-        if (isShowLog) {
-            Throwable stack = new Throwable().fillInStackTrace();
-            StackTraceElement[] trace = stack.getStackTrace();
-            return trace[1].getClassName() + "   " + trace[1].getMethodName() + "   line:" + trace[1].getLineNumber() + " >>> " + show.toString();
-        } else {
-            return "";
-        }
+        Throwable stack = new Throwable().fillInStackTrace();
+        StackTraceElement[] trace = stack.getStackTrace();
+        return trace[1].getClassName() + "   " + trace[1].getMethodName() + "   line:" + trace[1].getLineNumber() + " >>> " + show.toString();
     }
 
     private static String getDay() {
@@ -98,15 +95,16 @@ public class FLog {
     }
 
 
-    /*  private static boolean isDebugVersion() {
-          try {
-              ApplicationInfo info = MyApp.get().getApplicationInfo();
-              return (info.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
-          } catch (Exception e) {
-              e.printStackTrace();
-          }
-          return false;
-      }*/
+    private static boolean isDebugVersion(Application application) {
+        try {
+            ApplicationInfo info = application.getApplicationInfo();
+            return (info.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public static String showLog(Object object) {
         StackTraceElement[] stackTraceElement = Thread.currentThread()
                 .getStackTrace();

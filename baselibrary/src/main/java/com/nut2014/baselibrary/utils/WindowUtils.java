@@ -5,7 +5,6 @@ import android.content.Context;
 import android.util.DisplayMetrics;
 
 /**
- * Created by admin on 2016/4/2.
  * 屏幕工具类
  */
 public class WindowUtils {
@@ -23,12 +22,24 @@ public class WindowUtils {
         return (int) (metric.heightPixels);
     }
 
+    /**
+     * 货物屏幕像素宽度
+     *
+     * @param activity 活动
+     * @return 像素宽度
+     */
     public static int getWidthPixels(Activity activity) {
         DisplayMetrics metric = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(metric);
         return (int) (metric.widthPixels);
     }
 
+    /**
+     * 获取状态栏高度
+     *
+     * @param context 上下文
+     * @return 高度
+     */
     public static int getStatusBarHeight(Context context) {
         // 获得状态栏高度
         int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");

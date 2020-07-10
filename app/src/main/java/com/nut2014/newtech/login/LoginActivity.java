@@ -12,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.nut2014.baselibrary.base.BaseMvpActivity;
 import com.nut2014.baselibrary.base.BaseParam;
+import com.nut2014.baselibrary.utils.MToast;
 import com.nut2014.newtech.R;
 
 import java.util.Objects;
@@ -88,5 +89,10 @@ public class LoginActivity extends BaseMvpActivity<LoginView, LoginPresenter> im
     @Override
     public void jump2Main() {
         super.onBackPressed();
+    }
+
+    @Override
+    public void showToast(String msg) {
+        MToast.show(this, msg);
     }
 }
