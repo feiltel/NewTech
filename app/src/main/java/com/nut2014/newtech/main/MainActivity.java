@@ -1,14 +1,8 @@
 package com.nut2014.newtech.main;
 
 import android.Manifest;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.os.RemoteException;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -29,16 +23,14 @@ import com.nut2014.baselibrary.networklibrary.annotaion.NetWork;
 import com.nut2014.baselibrary.networklibrary.type.NetType;
 import com.nut2014.baselibrary.utils.FPermission;
 import com.nut2014.baselibrary.utils.GlideEngine;
-import com.nut2014.newtech.Book;
-import com.nut2014.newtech.BookController;
 import com.nut2014.newtech.R;
 import com.nut2014.newtech.compress.CompressActivity;
 import com.nut2014.newtech.constraint.ConstraintActivity;
 import com.nut2014.newtech.dataBinding.VmDbActivity;
 import com.nut2014.newtech.home.HomeActivity;
 import com.nut2014.newtech.login.LoginActivity;
-import com.nut2014.newtech.mvp.ContentActivity;
 import com.nut2014.newtech.navigation.NavigationHomeActivity;
+import com.nut2014.newtech.testAidl.TestAidlActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,12 +57,11 @@ public class MainActivity extends MActivity {
 
     protected void initView() {
         setLightMode();
-        bindService();
         NetWorkManager.getDefault().registerObserver(this);
         listRv.setLayoutManager(new GridLayoutManager(this, 2));
         List<String> titleList = new ArrayList<>();
         titleList.add("1.约束布局");
-        titleList.add("2.MVP架构");
+        titleList.add("2.AIDL");
         titleList.add("3.压缩图片工具");
         titleList.add("4.图片选择库");
         titleList.add("5.登录常见布局");
@@ -89,7 +80,7 @@ public class MainActivity extends MActivity {
                             jumpActivity(ConstraintActivity.class, null);
                             break;
                         case 1:
-                            jumpActivity(ContentActivity.class, null);
+                            jumpActivity(TestAidlActivity.class, null);
                             break;
                         case 2:
                             jumpActivity(CompressActivity.class, null);
@@ -115,26 +106,7 @@ public class MainActivity extends MActivity {
                             jumpActivity(NavigationHomeActivity.class, null);
                             break;
                         case 8:
-                            if (connected) {
-                                try {
-                                    bookList = bookController.getBookList();
-                                } catch (RemoteException e) {
-                                    e.printStackTrace();
-                                }
-                                log();
-                            }
-
-
-                            if (connected) {
-                                Book book = new Book("这是一本新书 InOut");
-                                try {
-                                    bookController.addBookInOut(book);
-                                    Log.e(TAG, "向服务器以InOut方式添加了一本新书");
-                                    Log.e(TAG, "新书名：" + book.getName());
-                                } catch (RemoteException e) {
-                                    e.printStackTrace();
-                                }
-                            }
+                            jumpActivity(TestAidlActivity.class);
                             break;
                     }
                 }
@@ -143,37 +115,6 @@ public class MainActivity extends MActivity {
 
     }
 
-    private BookController bookController;
-
-    private boolean connected;
-
-    private List<Book> bookList;
-
-    private ServiceConnection serviceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            bookController = BookController.Stub.asInterface(service);
-            connected = true;
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            connected = false;
-        }
-    };
-
-    private void bindService() {
-        Intent intent = new Intent();
-        intent.setPackage("com.nut2014.newtech");
-        intent.setAction("com.nut2014.newtech.action");
-        bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
-    }
-
-    private void log() {
-        for (Book book : bookList) {
-            Log.e(TAG, book.toString());
-        }
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -206,9 +147,6 @@ public class MainActivity extends MActivity {
     protected void onDestroy() {
         super.onDestroy();
         NetWorkManager.getDefault().unRegisterObserver(this);
-        if (connected) {
-            unbindService(serviceConnection);
-        }
     }
 
     @NetWork(netType = NetType.AUTO)

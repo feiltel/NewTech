@@ -51,8 +51,8 @@ dependencies {
 
     api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     //OkHttp
-    api 'com.squareup.okhttp3:logging-interceptor:4.5.0'
-    api 'com.squareup.okhttp3:okhttp:4.5.0'
+    api 'com.squareup.okhttp3:logging-interceptor:4.1.0'
+    api 'com.squareup.okhttp3:okhttp:4.1.0'
     //JSON
     api 'com.alibaba:fastjson:1.2.68'
     //压缩

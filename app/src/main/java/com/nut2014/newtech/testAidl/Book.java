@@ -1,4 +1,4 @@
-package com.nut2014.newtech;
+package com.nut2014.newtech.testAidl;
 
 import android.os.Parcel;
 import android.os.Parcelable;

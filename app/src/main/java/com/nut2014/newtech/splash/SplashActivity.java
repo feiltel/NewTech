@@ -16,7 +16,6 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StatusBarUtil.setLightMode(this);
-        StatusBarUtil.setTransparent(this);
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
