@@ -6,17 +6,15 @@ package com.nut2014.baselibrary.base;
 public class BaseParam {
 
     //设置为统一toolbar
-    private boolean haveToolbar=false;
+    private boolean haveToolbar = false;
     //设置toolbar 上标题
-    private String title="";
+    private String title = "";
     //toolbar是否有返回键
-    private boolean haveBackAction=false;
+    private boolean haveBackAction = false;
 
 
     //设置为全屏
-    private boolean isTransparent =false;
-
-
+    private boolean isTransparent = false;
 
 
     public String getTitle() {
@@ -36,6 +34,7 @@ public class BaseParam {
         this.haveBackAction = haveBackAction;
         return this;
     }
+
     public BaseParam setHaveToolbar(boolean haveToolbar) {
         this.haveToolbar = haveToolbar;
         return this;

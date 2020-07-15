@@ -57,6 +57,26 @@ public class FPermission {
      * permission:android.permission.SEND_SMS
      * permission:android.permission.READ_CELL_BROADCASTS
      */
+    /*使用方法
+    1.  FPermission.getInstance().checkPermission(CompressActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE_REQUEST_CODE, new FPermission.FPermissionCallBack() {
+                @Override
+                public void granted() {
+                    compressAct();
+                }
+
+                @Override
+                public void refuse() {
+                    showToast("存储权限被拒绝");
+                }
+            });
+      2.
+        @Override
+        public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            FPermission.getInstance().onRequestResult(requestCode, permissions, grantResults);
+        }
+
+     */
     private static FPermission manager;
 
     public static FPermission getInstance() {
@@ -70,16 +90,11 @@ public class FPermission {
         return manager;
     }
 
-    public interface FPermissionCallBack {
-        void granted();//允许
-
-        void refuse();//拒绝
-    }
+    private CallBack callBack;
 
     private int requestCode = 0;
-    private FPermissionCallBack callBack;
 
-    public void checkPermission(final @NonNull Activity activity, @NonNull String permission, final @IntRange(from = 0) int requestCode, FPermissionCallBack callBack) {
+    public void checkPermission(final @NonNull Activity activity, @NonNull String permission, final @IntRange(from = 0) int requestCode, CallBack callBack) {
         this.requestCode = requestCode;
         this.callBack = callBack;
         if (ContextCompat.checkSelfPermission(activity, permission)
@@ -105,17 +120,7 @@ public class FPermission {
         }
     }
 
-    private boolean checkGranted(Activity activity, String[] permissions) {
-        for (String permission : permissions) {
-            if (ContextCompat.checkSelfPermission(activity, permission)
-                    != PackageManager.PERMISSION_GRANTED) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public void checkPermission(final @NonNull Activity activity, @NonNull String[] permissions, final @IntRange(from = 0) int requestCode, FPermissionCallBack callBack) {
+    public void checkPermission(final @NonNull Activity activity, @NonNull String[] permissions, final @IntRange(from = 0) int requestCode, CallBack callBack) {
         this.requestCode = requestCode;
         this.callBack = callBack;
         if (!checkGranted(activity, permissions)) {
@@ -130,7 +135,24 @@ public class FPermission {
             }
         }
     }
-    private boolean checkPass(@NonNull int[] grantResults){
+
+    private boolean checkGranted(Activity activity, String[] permissions) {
+        for (String permission : permissions) {
+            if (ContextCompat.checkSelfPermission(activity, permission)
+                    != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public interface CallBack {
+        void granted();//允许
+
+        void refuse();//拒绝
+    }
+
+    private boolean checkPass(@NonNull int[] grantResults) {
         for (int grantResult : grantResults) {
             if (grantResult != PackageManager.PERMISSION_GRANTED) {
                 return false;
@@ -141,6 +163,7 @@ public class FPermission {
 
     /**
      * 多权限检查 只有所以权限都通过才返回已授权
+     *
      * @param requestCode
      * @param permissions
      * @param grantResults
@@ -159,6 +182,7 @@ public class FPermission {
             }
         }
     }
+
     public void onRequestResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (this.requestCode == requestCode) {
             if (grantResults.length > 0

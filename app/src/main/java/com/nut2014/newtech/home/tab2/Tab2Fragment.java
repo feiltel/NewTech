@@ -34,6 +34,7 @@ public class Tab2Fragment extends Fragment {
     RecyclerView list_rv;
     private Tab2Adapter adapter;
     private static final Tab2Fragment ourInstance = new Tab2Fragment();
+
     public static Tab2Fragment newInstance() {
         return ourInstance;
     }
@@ -61,7 +62,7 @@ public class Tab2Fragment extends Fragment {
 
     }
 
-    private void  initModelView(){
+    private void initModelView() {
         mViewModel = ViewModelProviders.of(getActivity()).get(Tab2ViewModel.class);
         shareViewModel = ViewModelProviders.of(getActivity()).get(ShareViewModel.class);
         mViewModel.getListData().observe(this, new Observer<List<User>>() {
@@ -88,11 +89,11 @@ public class Tab2Fragment extends Fragment {
         mViewModel.getLoadMoreStatue().observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
-                if (integer==1){
+                if (integer == 1) {
                     adapter.getLoadMoreModule().loadMoreComplete();
-                }else if (integer==2){
+                } else if (integer == 2) {
                     adapter.getLoadMoreModule().loadMoreEnd();
-                }else {
+                } else {
                     adapter.getLoadMoreModule().loadMoreEnd();
                 }
             }

@@ -9,7 +9,9 @@ import android.graphics.PointF;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
-
+/**
+ * 属性动画示例
+ */
 public class AnimalTools {
 
 
@@ -22,14 +24,17 @@ public class AnimalTools {
                 0.5f, 1f);
         ObjectAnimator.ofPropertyValuesHolder(view, pvhX, pvhY, pvhZ).setDuration(1500).start();
     }
+
     public static void propertyAlpha(View view) {
         PropertyValuesHolder pvhX = PropertyValuesHolder.ofFloat("alpha", 0f,
                 0.5f, 1f);
         ObjectAnimator.ofPropertyValuesHolder(view, pvhX).setDuration(1500).start();
     }
+
     /**
      * 抛物线
-     * @param view
+     *
+     * @param view 视图
      */
     public void parabola(final View view) {
 
@@ -37,28 +42,21 @@ public class AnimalTools {
         valueAnimator.setDuration(3000);
         valueAnimator.setObjectValues(new PointF(0, 0));
         valueAnimator.setInterpolator(new LinearInterpolator());
-        valueAnimator.setEvaluator(new TypeEvaluator<PointF>() {
-            // fraction = t / duration
-            @Override
-            public PointF evaluate(float fraction, PointF startValue,
-                                   PointF endValue) {
-                PointF point = new PointF();
-                point.x = 200 * fraction * 3;
-                point.y = 0.5f * 200 * (fraction * 3) * (fraction * 3);
-                return point;
-            }
+        // fraction = t / duration
+        valueAnimator.setEvaluator((TypeEvaluator<PointF>) (fraction, startValue, endValue) -> {
+            PointF point = new PointF();
+            point.x = 200 * fraction * 3;
+            point.y = 0.5f * 200 * (fraction * 3) * (fraction * 3);
+            return point;
         });
 
         valueAnimator.start();
-        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
+        valueAnimator.addUpdateListener(animation -> {
 
 
-                PointF point = (PointF) animation.getAnimatedValue();
-                view.setX(point.x);
-                view.setY(point.y);
-            }
+            PointF point = (PointF) animation.getAnimatedValue();
+            view.setX(point.x);
+            view.setY(point.y);
         });
     }
 
@@ -66,7 +64,7 @@ public class AnimalTools {
     public static void playWithAfter(View view) {
 
         int[] location = new int[2];
-       view.getLocationOnScreen(location);
+        view.getLocationOnScreen(location);
 //        int x = location[0];
         //int y = location[1];
         float cx = view.getX();

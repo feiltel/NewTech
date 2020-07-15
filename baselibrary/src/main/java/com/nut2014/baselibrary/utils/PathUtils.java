@@ -34,7 +34,6 @@ public class PathUtils {
      * <b>Description:</b> <br>
      *
      * @param mUri
-     *
      * @return
      */
     public static String getAbsolutePathFromNoStandardUri(Uri mUri) {
@@ -62,7 +61,6 @@ public class PathUtils {
      *
      * @param c
      * @param uri
-     *
      * @return
      */
     public static String getAbsoluteUriPath(Context c, Uri uri) {
@@ -86,7 +84,6 @@ public class PathUtils {
      * directory what is name "Android/data/PACKAGE_NAME/cache" for 2.2 system"<br>
      *
      * @param context
-     *
      * @return
      */
     public static File getExternalCacheDir(Context context) {
@@ -104,7 +101,6 @@ public class PathUtils {
      *
      * @param parent
      * @param dirName
-     *
      * @return
      */
     public static File findOrCreateDir(File parent, String dirName) {
@@ -195,15 +191,10 @@ public class PathUtils {
      * Get the value of the data column for this Uri. This is useful for
      * MediaStore Uris, and other file-based ContentProviders.
      *
-     * @param context
-     *     The context.
-     * @param uri
-     *     The Uri to query.
-     * @param selection
-     *     (Optional) Filter used in the query.
-     * @param selectionArgs
-     *     (Optional) Selection arguments used in the query.
-     *
+     * @param context       The context.
+     * @param uri           The Uri to query.
+     * @param selection     (Optional) Filter used in the query.
+     * @param selectionArgs (Optional) Selection arguments used in the query.
      * @return The value of the _data column, which is typically a file path.
      */
     public static String getDataColumn(Context context, Uri uri, String selection,
@@ -231,9 +222,7 @@ public class PathUtils {
 
 
     /**
-     * @param uri
-     *     The Uri to check.
-     *
+     * @param uri The Uri to check.
      * @return Whether the Uri authority is ExternalStorageProvider.
      */
     public static boolean isExternalStorageDocument(Uri uri) {
@@ -241,9 +230,7 @@ public class PathUtils {
     }
 
     /**
-     * @param uri
-     *     The Uri to check.
-     *
+     * @param uri The Uri to check.
      * @return Whether the Uri authority is DownloadsProvider.
      */
     public static boolean isDownloadsDocument(Uri uri) {
@@ -251,9 +238,7 @@ public class PathUtils {
     }
 
     /**
-     * @param uri
-     *     The Uri to check.
-     *
+     * @param uri The Uri to check.
      * @return Whether the Uri authority is MediaProvider.
      */
     public static boolean isMediaDocument(Uri uri) {
@@ -261,9 +246,7 @@ public class PathUtils {
     }
 
     /**
-     * @param uri
-     *     The Uri to check.
-     *
+     * @param uri The Uri to check.
      * @return Whether the Uri authority is Google Photos.
      */
     public static boolean isGooglePhotosUri(Uri uri) {

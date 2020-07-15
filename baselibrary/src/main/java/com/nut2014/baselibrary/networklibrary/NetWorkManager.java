@@ -37,17 +37,18 @@ public class NetWorkManager {
     public void init(Application application) {
         this.application = application;
         //动态注册广播
-        IntentFilter filter=new IntentFilter();
+        IntentFilter filter = new IntentFilter();
         filter.addAction(Constants.ANDROID_NET_CHANGE_ACTION);
-        application.registerReceiver(receiver,filter);
+        application.registerReceiver(receiver, filter);
     }
 
     //注册
-    public void registerObserver(Object object){
+    public void registerObserver(Object object) {
         receiver.register(object);
     }
+
     //解除注册
-    public void unRegisterObserver(Object object){
+    public void unRegisterObserver(Object object) {
         receiver.unRegister(object);
     }
 }

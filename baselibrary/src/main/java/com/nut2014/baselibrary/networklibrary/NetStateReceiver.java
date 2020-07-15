@@ -32,7 +32,7 @@ public class NetStateReceiver extends BroadcastReceiver {
 
     public NetStateReceiver() {
         netType = NetType.NONE;
-        networkList=new HashMap<>();
+        networkList = new HashMap<>();
     }
 
     @Override
@@ -60,6 +60,7 @@ public class NetStateReceiver extends BroadcastReceiver {
         }
 
     }
+
     //同时分发事件
     private void post(NetType netType) {
         Set<Object> set = networkList.keySet();
@@ -67,26 +68,26 @@ public class NetStateReceiver extends BroadcastReceiver {
         for (Object getter : set) {
             //所有注解的方法
             List<MethodManager> functionManagerList = networkList.get(getter);
-            if (functionManagerList!=null){
+            if (functionManagerList != null) {
                 for (MethodManager functionManager : functionManagerList) {
-                    if (functionManager.getType().isAssignableFrom(netType.getClass())){
-                        switch (functionManager.getNetType()){
+                    if (functionManager.getType().isAssignableFrom(netType.getClass())) {
+                        switch (functionManager.getNetType()) {
                             case AUTO:
-                               invoke(functionManager,getter,netType);
+                                invoke(functionManager, getter, netType);
                                 break;
                             case WIFI:
-                                if (netType==NetType.WIFI||netType==NetType.NONE){
-                                    invoke(functionManager,getter,netType);
+                                if (netType == NetType.WIFI || netType == NetType.NONE) {
+                                    invoke(functionManager, getter, netType);
                                 }
                                 break;
                             case CNNET:
-                                if (netType==NetType.CNNET||netType==NetType.NONE){
-                                    invoke(functionManager,getter,netType);
+                                if (netType == NetType.CNNET || netType == NetType.NONE) {
+                                    invoke(functionManager, getter, netType);
                                 }
                                 break;
                             case CNWAP:
-                                if (netType==NetType.CNWAP||netType==NetType.NONE){
-                                    invoke(functionManager,getter,netType);
+                                if (netType == NetType.CNWAP || netType == NetType.NONE) {
+                                    invoke(functionManager, getter, netType);
                                 }
                                 break;
                         }
@@ -99,7 +100,7 @@ public class NetStateReceiver extends BroadcastReceiver {
 
     private void invoke(MethodManager functionManager, Object getter, NetType netType) {
         try {
-            functionManager.getMethod().invoke(getter,netType);
+            functionManager.getMethod().invoke(getter, netType);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
@@ -110,28 +111,29 @@ public class NetStateReceiver extends BroadcastReceiver {
 
     //注册的方法添加到集合
     public void register(Object object) {
-        List<MethodManager> functionManagerList=networkList.get(object);
-        if (functionManagerList==null){
-            functionManagerList=findAnnotationFunction(object);
-            networkList.put(object,functionManagerList);
-            Log.d(Constants.LOG_TAG,networkList.size()+">>"+functionManagerList.size());
+        List<MethodManager> functionManagerList = networkList.get(object);
+        if (functionManagerList == null) {
+            functionManagerList = findAnnotationFunction(object);
+            networkList.put(object, functionManagerList);
+            Log.d(Constants.LOG_TAG, networkList.size() + ">>" + functionManagerList.size());
         }
     }
 
     /**
      * 获取当前类所有注解方法
+     *
      * @param object 当前类
      * @return
      */
     private List<MethodManager> findAnnotationFunction(Object object) {
-        List<MethodManager> functionManagerList=new ArrayList<>();
-        Class<?> clazz=object.getClass();
+        List<MethodManager> functionManagerList = new ArrayList<>();
+        Class<?> clazz = object.getClass();
         //货物所有方法
         Method[] methods = clazz.getMethods();
         for (final Method method : methods) {
             //获取每个方法的注解
             NetWork netWork = method.getAnnotation(NetWork.class);
-            if (netWork==null){
+            if (netWork == null) {
                 continue;
             }
             //方法返回值校验
@@ -139,39 +141,39 @@ public class NetStateReceiver extends BroadcastReceiver {
 
 
             Class<?>[] parameterTypes = method.getParameterTypes();
-            Log.d("mmm",method.getName()+">>"+parameterTypes.length);
-            if (parameterTypes.length!=1){
-                Log.e(Constants.LOG_TAG,method.getName()+"方法有且只有一个参数");
+            Log.d("mmm", method.getName() + ">>" + parameterTypes.length);
+            if (parameterTypes.length != 1) {
+                Log.e(Constants.LOG_TAG, method.getName() + "方法有且只有一个参数");
                 continue;
             }
-            if (!parameterTypes[0].isAssignableFrom(NetType.class)){
-                Log.e(Constants.LOG_TAG,method.getName()+"方法第一个参数必须是NetType");
+            if (!parameterTypes[0].isAssignableFrom(NetType.class)) {
+                Log.e(Constants.LOG_TAG, method.getName() + "方法第一个参数必须是NetType");
                 continue;
             }
             //过滤方法完成
 
-            functionManagerList.add(new MethodManager(parameterTypes[0],netWork.netType(),method));
+            functionManagerList.add(new MethodManager(parameterTypes[0], netWork.netType(), method));
         }
         return functionManagerList;
     }
 
     public void unRegister(Object object) {
-        if (!networkList.isEmpty()){
+        if (!networkList.isEmpty()) {
             networkList.remove(object);
         }
-        Log.d(Constants.LOG_TAG,object.getClass().getName()+"注销成功");
-
+        Log.d(Constants.LOG_TAG, object.getClass().getName() + "注销成功");
 
 
     }
-    public void unRegisterAll(){
+
+    public void unRegisterAll() {
         //应用退出时，
-        if (!networkList.isEmpty()){
+        if (!networkList.isEmpty()) {
             networkList.clear();
         }
         NetWorkManager.getDefault().getApplication().unregisterReceiver(this);
-        networkList=null;
+        networkList = null;
 
-        Log.d(Constants.LOG_TAG,"注销所有成功");
+        Log.d(Constants.LOG_TAG, "注销所有成功");
     }
 }

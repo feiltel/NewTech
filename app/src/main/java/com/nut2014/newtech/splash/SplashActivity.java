@@ -11,11 +11,11 @@ import com.nut2014.newtech.main.MainActivity;
 
 public class SplashActivity extends AppCompatActivity {
     private Handler handler = new Handler();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StatusBarUtil.setLightMode(this);
-        StatusBarUtil.setTransparent(this);
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -24,6 +24,7 @@ public class SplashActivity extends AppCompatActivity {
             }
         }, 300);
     }
+
     @Override
     protected void onDestroy() {
         handler.removeCallbacksAndMessages(null);

@@ -1,6 +1,6 @@
 package com.nut2014.baselibrary.networklibrary.type;
 
-public enum  NetType {
+public enum NetType {
     //有网络
     AUTO,
     WIFI,

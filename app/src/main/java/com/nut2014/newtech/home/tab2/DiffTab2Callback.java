@@ -3,8 +3,6 @@ package com.nut2014.newtech.home.tab2;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 
-import com.nut2014.newtech.home.tab1.Tab1ListItemBean;
-
 public class DiffTab2Callback extends DiffUtil.ItemCallback<User> {
 
     /**
@@ -16,7 +14,7 @@ public class DiffTab2Callback extends DiffUtil.ItemCallback<User> {
      */
     @Override
     public boolean areItemsTheSame(@NonNull User oldItem, @NonNull User newItem) {
-        return oldItem.getId() == newItem.getId()&&oldItem.getName().equals(newItem.getName());
+        return oldItem.getId() == newItem.getId() && oldItem.getName().equals(newItem.getName());
     }
 
     /**

@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".constraint.ConstraintActivity">
 
-<!-- https://juejin.im/post/5adc8bd251882567236e58c1-->
-   <!-- <androidx.constraintlayout.widget.Placeholder
-    <androidx.constraintlayout.widget.Barrier
-    <androidx.constraintlayout.widget.ConstraintHelper
-    <androidx.constraintlayout.widget.Constraints
-    <androidx.constraintlayout.widget.Group
-    <androidx.constraintlayout.widget.Guideline-->
+    <!-- https://juejin.im/post/5adc8bd251882567236e58c1-->
+    <!-- <androidx.constraintlayout.widget.Placeholder
+     <androidx.constraintlayout.widget.Barrier
+     <androidx.constraintlayout.widget.ConstraintHelper
+     <androidx.constraintlayout.widget.Constraints
+     <androidx.constraintlayout.widget.Group
+     <androidx.constraintlayout.widget.Guideline-->
     <!--一、基本属性:
     相对于控件布局
 layout_constraintLeft_toRightOf
@@ -37,7 +37,6 @@ layout_constraintEnd_toEndOf
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 
     <!--layout_goneMarginLeft属性使用

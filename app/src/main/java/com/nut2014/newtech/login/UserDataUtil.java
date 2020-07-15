@@ -11,7 +11,8 @@ public class UserDataUtil {
     public static void saveAuthKey(String auth) {
         SpManager.getInstance().setString(MyApp.context, "auth", "Authorization", auth);
     }
+
     public static String getAuthKey() {
-       return SpManager.getInstance().getString(MyApp.context, "auth", "Authorization");
+        return SpManager.getInstance().getString(MyApp.context, "auth", "Authorization");
     }
 }

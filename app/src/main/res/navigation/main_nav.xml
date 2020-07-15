@@ -22,13 +22,13 @@
         android:id="@+id/nav2Fragment"
         android:name="com.nut2014.newtech.navigation.Nav2Fragment"
         android:label="fragment_nav2"
-        tools:layout="@layout/nav2_fragment" >
-       <!-- <action
-            android:id="@+id/acton_nav2_to_nav1"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:destination="@id/nav1Fragment" />-->
+        tools:layout="@layout/nav2_fragment">
+        <!-- <action
+             android:id="@+id/acton_nav2_to_nav1"
+             app:enterAnim="@anim/slide_in_right"
+             app:exitAnim="@anim/slide_out_left"
+             app:popEnterAnim="@anim/slide_in_left"
+             app:popExitAnim="@anim/slide_out_right"
+             app:destination="@id/nav1Fragment" />-->
     </fragment>
 </navigation>

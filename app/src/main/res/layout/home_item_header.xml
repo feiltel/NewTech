@@ -8,8 +8,7 @@
     <FrameLayout
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </FrameLayout>
+        android:layout_height="wrap_content"></FrameLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -50,8 +49,7 @@
             app:layout_constraintTop_toTopOf="@id/location_iv" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <include
-        layout="@layout/search_bar_layout"/>
+    <include layout="@layout/search_bar_layout" />
 
     <com.youth.banner.Banner
         android:id="@+id/banner"

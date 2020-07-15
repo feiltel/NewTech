@@ -10,7 +10,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.wanjian.cockroach.compat.ActivityKillerV15_V20;
 import com.wanjian.cockroach.compat.ActivityKillerV21_V23;

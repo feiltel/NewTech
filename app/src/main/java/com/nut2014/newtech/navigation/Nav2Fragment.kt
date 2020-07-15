@@ -28,7 +28,7 @@ class Nav2Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val string = arguments?.getString("data")
-        MToast.show(activity,string);
+        MToast.show(activity, string)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -39,7 +39,7 @@ class Nav2Fragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(Nav2ViewModel::class.java)
         // TODO: Use the ViewModel
         back_btn.setOnClickListener(View.OnClickListener {
-            findNavController().navigateUp();
+            findNavController().navigateUp()
         })
     }
 

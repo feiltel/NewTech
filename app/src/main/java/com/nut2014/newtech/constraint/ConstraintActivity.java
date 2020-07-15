@@ -1,26 +1,17 @@
 package com.nut2014.newtech.constraint;
 
+import android.os.Bundle;
+
+import androidx.annotation.Nullable;
+
+import com.nut2014.baselibrary.base.MActivity;
 import com.nut2014.newtech.R;
-import com.nut2014.baselibrary.base.BaseActivity;
 
-public class ConstraintActivity extends BaseActivity {
-
-    @Override
-    protected void initView() {
-
-    }
+public class ConstraintActivity extends MActivity {
 
     @Override
-    protected void initEvent() {
-
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_constraint);
     }
-
-    @Override
-    protected int getViewId() {
-        return R.layout.activity_constraint;
-    }
-
-
-
-
 }

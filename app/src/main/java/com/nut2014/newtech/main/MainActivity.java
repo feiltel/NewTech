@@ -1,66 +1,67 @@
 package com.nut2014.newtech.main;
 
 import android.Manifest;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
-import android.os.IBinder;
-import android.os.RemoteException;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.jaeger.library.StatusBarUtil;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
-import com.nut2014.baselibrary.base.BaseActivity;
-import com.nut2014.baselibrary.base.BaseParam;
+import com.nut2014.baselibrary.base.MActivity;
 import com.nut2014.baselibrary.networklibrary.NetWorkManager;
 import com.nut2014.baselibrary.networklibrary.annotaion.NetWork;
 import com.nut2014.baselibrary.networklibrary.type.NetType;
 import com.nut2014.baselibrary.utils.FPermission;
 import com.nut2014.baselibrary.utils.GlideEngine;
-import com.nut2014.newtech.Book;
-import com.nut2014.newtech.BookController;
 import com.nut2014.newtech.R;
 import com.nut2014.newtech.compress.CompressActivity;
 import com.nut2014.newtech.constraint.ConstraintActivity;
 import com.nut2014.newtech.dataBinding.VmDbActivity;
 import com.nut2014.newtech.home.HomeActivity;
 import com.nut2014.newtech.login.LoginActivity;
-import com.nut2014.newtech.mvp.ContentActivity;
 import com.nut2014.newtech.navigation.NavigationHomeActivity;
+import com.nut2014.newtech.testAidl.TestAidlActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends MActivity {
 
     private static final String TAG = "MainActivity";
     @BindView(R.id.list_rv)
     RecyclerView listRv;
 
-
     @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        StatusBarUtil.setTransparent(this);
+        ButterKnife.bind(this);
+        initView();
+        initEvent();
+    }
+
+
     protected void initView() {
         setLightMode();
-        bindService();
         NetWorkManager.getDefault().registerObserver(this);
-        listRv.setLayoutManager(new GridLayoutManager(this,2));
+        listRv.setLayoutManager(new GridLayoutManager(this, 2));
         List<String> titleList = new ArrayList<>();
         titleList.add("1.约束布局");
-        titleList.add("2.MVP架构");
+        titleList.add("2.AIDL");
         titleList.add("3.压缩图片工具");
         titleList.add("4.图片选择库");
         titleList.add("5.登录常见布局");
@@ -79,7 +80,7 @@ public class MainActivity extends BaseActivity {
                             jumpActivity(ConstraintActivity.class, null);
                             break;
                         case 1:
-                            jumpActivity(ContentActivity.class, null);
+                            jumpActivity(TestAidlActivity.class, null);
                             break;
                         case 2:
                             jumpActivity(CompressActivity.class, null);
@@ -99,32 +100,13 @@ public class MainActivity extends BaseActivity {
                             jumpActivity(HomeActivity.class, null);
                             break;
                         case 6:
-                              jumpActivity(VmDbActivity.class, null);
+                            jumpActivity(VmDbActivity.class, null);
                             break;
                         case 7:
                             jumpActivity(NavigationHomeActivity.class, null);
                             break;
                         case 8:
-                            if (connected) {
-                                try {
-                                    bookList = bookController.getBookList();
-                                } catch (RemoteException e) {
-                                    e.printStackTrace();
-                                }
-                                log();
-                            }
-
-
-                            if (connected) {
-                                Book book = new Book("这是一本新书 InOut");
-                                try {
-                                    bookController.addBookInOut(book);
-                                    Log.e(TAG, "向服务器以InOut方式添加了一本新书");
-                                    Log.e(TAG, "新书名：" + book.getName());
-                                } catch (RemoteException e) {
-                                    e.printStackTrace();
-                                }
-                            }
+                            jumpActivity(TestAidlActivity.class);
                             break;
                     }
                 }
@@ -133,36 +115,7 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    private BookController bookController;
 
-    private boolean connected;
-
-    private List<Book> bookList;
-
-    private ServiceConnection serviceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            bookController = BookController.Stub.asInterface(service);
-            connected = true;
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            connected = false;
-        }
-    };
-    private void bindService() {
-        Intent intent = new Intent();
-        intent.setPackage("com.nut2014.newtech");
-        intent.setAction("com.nut2014.newtech.action");
-        bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
-    }
-
-    private void log() {
-        for (Book book : bookList) {
-            Log.e(TAG, book.toString());
-        }
-    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -194,9 +147,6 @@ public class MainActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         NetWorkManager.getDefault().unRegisterObserver(this);
-        if (connected) {
-            unbindService(serviceConnection);
-        }
     }
 
     @NetWork(netType = NetType.AUTO)
@@ -204,11 +154,10 @@ public class MainActivity extends BaseActivity {
         showToast(netType.name());
     }
 
-    @Override
     protected void initEvent() {
         //请求权限
         String[] permissionStr = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        FPermission.getInstance().checkPermission(MainActivity.this, permissionStr, 1, new FPermission.FPermissionCallBack() {
+        FPermission.getInstance().checkPermission(MainActivity.this, permissionStr, 1, new FPermission.CallBack() {
             @Override
             public void granted() {
                 showToast("权限：允许");
@@ -219,17 +168,6 @@ public class MainActivity extends BaseActivity {
                 showToast("权限：拒绝");
             }
         });
-    }
-
-    @Override
-    public BaseParam getBaseParam() {
-
-        return new BaseParam().setTransparent(true);
-    }
-
-    @Override
-    protected int getViewId() {
-        return R.layout.activity_main;
     }
 
 

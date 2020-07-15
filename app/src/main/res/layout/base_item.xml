@@ -10,11 +10,11 @@
     app:cardElevation="8dp">
 
 
-        <TextView
-            android:textSize="16sp"
-            android:id="@+id/cov_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+    <TextView
+        android:id="@+id/cov_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="16sp" />
 
 </androidx.cardview.widget.CardView>

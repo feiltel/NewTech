@@ -4,5 +4,6 @@ import com.nut2014.baselibrary.networklibrary.type.NetType;
 
 public interface NetChangeObServer {
     void onConnect(NetType type);
+
     void onDisConnect();
 }

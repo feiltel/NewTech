@@ -20,19 +20,21 @@ public class FileUtil {
             return "";
         }
     }
-    public static List<File> filterImage(List<File> files){
-        List<File> fileList=new ArrayList<>();
+
+    public static List<File> filterImage(List<File> files) {
+        List<File> fileList = new ArrayList<>();
         for (File file : files) {
-            if (isImage(file)){
+            if (isImage(file)) {
                 fileList.add(file);
             }
         }
         return fileList;
     }
-    public static List<File> filterImage(File[] files){
-        List<File> fileList=new ArrayList<>();
+
+    public static List<File> filterImage(File[] files) {
+        List<File> fileList = new ArrayList<>();
         for (File file : files) {
-            if (isImage(file)){
+            if (isImage(file)) {
                 fileList.add(file);
             }
         }
@@ -40,7 +42,7 @@ public class FileUtil {
     }
 
     public static boolean isImage(File file) {
-        String[] imageType = {".png", ".jpg",".jpeg"};
+        String[] imageType = {".png", ".jpg", ".jpeg"};
         String extension = getExtension(file);
         if (extension != null) {
             for (String s : imageType) {
