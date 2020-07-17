@@ -3,15 +3,20 @@ package com.nut2014.newtech.main;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.chad.library.adapter.base.listener.OnLoadMoreListener;
+import com.chad.library.adapter.base.module.LoadMoreModule;
 import com.jaeger.library.StatusBarUtil;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
@@ -38,7 +43,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends MActivity {
+public class MainActivity extends MActivity implements LoadMoreModule {
 
     private static final String TAG = "MainActivity";
     @BindView(R.id.list_rv)
@@ -53,12 +58,24 @@ public class MainActivity extends MActivity {
         initView();
         initEvent();
     }
-
-
+    private    MainListAdapter mainListAdapter;
+    private Handler handler=new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            List<String> itemData = new ArrayList<>();
+            for (int i = 0; i < 20; i++) {
+                itemData.add("ITEM>>"+i);
+            }
+            mainListAdapter.addData(itemData);
+            mainListAdapter.getLoadMoreModule().loadMoreComplete();
+            return false;
+        }
+    });
     protected void initView() {
         setLightMode();
         NetWorkManager.getDefault().registerObserver(this);
-        listRv.setLayoutManager(new GridLayoutManager(this, 2));
+       // listRv.setLayoutManager(new GridLayoutManager(this, 2));
+        listRv.setLayoutManager(new LinearLayoutManager(this));
         List<String> titleList = new ArrayList<>();
         titleList.add("1.约束布局");
         titleList.add("2.AIDL");
@@ -69,8 +86,25 @@ public class MainActivity extends MActivity {
         titleList.add("7.DataBiding");
         titleList.add("8.Navigation");
         titleList.add("测试");
-        MainListAdapter mainListAdapter = new MainListAdapter(titleList);
+         mainListAdapter = new MainListAdapter(titleList);
         listRv.setAdapter(mainListAdapter);
+        mainListAdapter.getLoadMoreModule().setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        handler.sendEmptyMessage(1);
+                    }
+                }).start();
+
+            }
+        });
         mainListAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
