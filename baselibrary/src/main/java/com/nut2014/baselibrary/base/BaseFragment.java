@@ -13,7 +13,7 @@ import com.nut2014.baselibrary.utils.MToast;
  * @author feiltel 2020/4/9 0009
  * 基础Activity
  */
-public abstract class MFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
     /**
      * 防止重复点击
      */

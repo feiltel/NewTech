@@ -4,10 +4,10 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
-import com.nut2014.baselibrary.base.MActivity;
+import com.nut2014.baselibrary.base.BaseActivity;
 import com.nut2014.newtech.R;
 
-public class ConstraintActivity extends MActivity {
+public class ConstraintActivity extends BaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

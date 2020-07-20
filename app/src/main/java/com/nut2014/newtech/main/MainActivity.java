@@ -17,7 +17,7 @@ import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
-import com.nut2014.baselibrary.base.MActivity;
+import com.nut2014.baselibrary.base.BaseActivity;
 import com.nut2014.baselibrary.networklibrary.NetWorkManager;
 import com.nut2014.baselibrary.networklibrary.annotaion.NetWork;
 import com.nut2014.baselibrary.networklibrary.type.NetType;
@@ -38,7 +38,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends MActivity {
+public class MainActivity extends BaseActivity {
 
     private static final String TAG = "MainActivity";
     @BindView(R.id.list_rv)

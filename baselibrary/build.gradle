@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 android {
-    compileSdkVersion rootProject.compileSdkVersion
+    compileSdkVersion 29
     buildToolsVersion "29.0.3"
     dataBinding {
         enabled true
@@ -92,5 +92,8 @@ dependencies {
     //lombok
     api 'org.projectlombok:lombok:1.18.12'
     annotationProcessor 'org.projectlombok:lombok:1.18.12'
+
+    //toast
+    implementation 'com.github.GrenderG:Toasty:1.4.2'
 
 }

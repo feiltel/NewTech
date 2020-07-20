@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 /**
  * @author feiltel 2020/3/31 0031
  */
-public abstract class BaseMvpFragment<V extends BaseMvpView, P extends BaseMvpPresenter<V>> extends MFragment implements BaseMvpView {
+public abstract class BaseMvpFragment<V extends BaseMvpView, P extends BaseMvpPresenter<V>> extends BaseFragment implements BaseMvpView {
     private P presenter;
 
     @Nullable

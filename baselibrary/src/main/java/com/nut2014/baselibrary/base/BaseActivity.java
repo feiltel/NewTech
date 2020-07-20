@@ -16,7 +16,7 @@ import com.nut2014.baselibrary.utils.TouchOutHideKeyBoard;
  * @author feiltel 2020/4/9 0009
  * 基础Activity
  */
-public abstract class MActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 防止重复点击
      */
