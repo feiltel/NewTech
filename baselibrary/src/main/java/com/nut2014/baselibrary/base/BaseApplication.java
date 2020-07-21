@@ -17,48 +17,55 @@ public class BaseApplication extends Application {
     private int activityCounter = 0;
     public static Context context;
 
+    ActivityLifecycleCallbacks activityLifecycleCallbacks = new ActivityLifecycleCallbacks() {
+        @Override
+        public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle bundle) {
+
+        }
+
+        @Override
+        public void onActivityStarted(@NonNull Activity activity) {
+            activityCounter++;
+        }
+
+        @Override
+        public void onActivityResumed(@NonNull Activity activity) {
+            ActivityManager.getInstance().setCurrentActivity(activity);
+        }
+
+        @Override
+        public void onActivityPaused(@NonNull Activity activity) {
+
+        }
+
+        @Override
+        public void onActivityStopped(@NonNull Activity activity) {
+            activityCounter--;
+        }
+
+        @Override
+        public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle bundle) {
+
+        }
+
+        @Override
+        public void onActivityDestroyed(@NonNull Activity activity) {
+
+        }
+    };
+
     @Override
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
-        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
-            @Override
-            public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle bundle) {
-
-            }
-
-            @Override
-            public void onActivityStarted(@NonNull Activity activity) {
-                activityCounter++;
-            }
-
-            @Override
-            public void onActivityResumed(@NonNull Activity activity) {
-                ActivityManager.getInstance().setCurrentActivity(activity);
-            }
-
-            @Override
-            public void onActivityPaused(@NonNull Activity activity) {
-
-            }
-
-            @Override
-            public void onActivityStopped(@NonNull Activity activity) {
-                activityCounter--;
-            }
-
-            @Override
-            public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle bundle) {
-
-            }
-
-            @Override
-            public void onActivityDestroyed(@NonNull Activity activity) {
-
-            }
-        });
+        registerActivityLifecycleCallbacks(activityLifecycleCallbacks);
     }
 
+    @Override
+    public void onTerminate() {
+        unregisterActivityLifecycleCallbacks(activityLifecycleCallbacks);
+        super.onTerminate();
+    }
 
     public boolean getAppFrontRunning() {
         return activityCounter > 0;

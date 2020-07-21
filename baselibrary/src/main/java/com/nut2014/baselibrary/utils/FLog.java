@@ -57,7 +57,13 @@ public class FLog {
 
     }
 
-    public static void d(String TAG, String msg) {
+    public static void d(String tag, Object object) {
+        if (object != null) {
+            d(tag, object.toString());
+        }
+    }
+
+    private static void d(String TAG, String msg) {
 
         int LOG_MAXLENGTH = 2000;
         int strLength = msg.length();
@@ -76,7 +82,13 @@ public class FLog {
         }
     }
 
-    public static void e(String TAG, String msg) {
+    public static void e(String tag, Object object) {
+        if (object != null) {
+            d(tag, object.toString());
+        }
+    }
+
+    private static void e(String TAG, String msg) {
         int LOG_MAXLENGTH = 2000;
         int strLength = msg.length();
         int start = 0;
