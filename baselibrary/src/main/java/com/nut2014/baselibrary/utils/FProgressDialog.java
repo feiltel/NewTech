@@ -11,6 +11,9 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.nut2014.baselibrary.R;
 
+import java.lang.ref.WeakReference;
+import java.util.Locale;
+
 public class FProgressDialog {
     private volatile static FProgressDialog instance;
 
@@ -32,7 +35,12 @@ public class FProgressDialog {
     private ProgressBar progressBar1;
     private TextView progress_tv;
 
-    public void show(Context context, String msg, boolean hasProgress) {
+    public void show(Context activityContext, String msg, boolean hasProgress) {
+        WeakReference<Context> mContext = new WeakReference<>(activityContext);
+        Context context = mContext.get();
+        if (context == null) {
+            return;
+        }
         if (alertDialog == null) {
             alertDialog = new AlertDialog.Builder(context, R.style.ProgressDialog).create();
             View inflate = LayoutInflater.from(context).inflate(R.layout.layout_alert_progress, null);
@@ -54,7 +62,7 @@ public class FProgressDialog {
     public void setProgress(int progress) {
         if (alertDialog != null && alertDialog.isShowing() && progressBar1 != null && progress_tv != null) {
             progressBar1.setProgress(progress);
-            progress_tv.setText(progress + "%");
+            progress_tv.setText(String.format(Locale.CHINA, "%d%%", progress));
         }
     }
 
