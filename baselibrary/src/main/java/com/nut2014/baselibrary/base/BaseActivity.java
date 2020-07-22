@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.jaeger.library.StatusBarUtil;
+import com.nut2014.baselibrary.utils.FProgressDialog;
 import com.nut2014.baselibrary.utils.KeyBoardUtils;
 import com.nut2014.baselibrary.utils.MToast;
 import com.nut2014.baselibrary.utils.TouchOutHideKeyBoard;
@@ -17,6 +19,38 @@ import com.nut2014.baselibrary.utils.TouchOutHideKeyBoard;
  * 基础Activity
  */
 public abstract class BaseActivity extends AppCompatActivity {
+    FProgressDialog progressDialog;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        progressDialog = new FProgressDialog(this);
+    }
+
+    public void showLoading(String msg, boolean hasProgress) {
+        if (progressDialog != null) {
+            progressDialog.show(msg, hasProgress);
+        }
+    }
+
+    public void setLoadingProgress(int progress) {
+        if (progressDialog != null) {
+            progressDialog.setProgress(progress);
+        }
+    }
+
+    public void hideLoading() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        hideLoading();
+    }
+
     /**
      * 防止重复点击
      */

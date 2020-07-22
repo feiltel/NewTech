@@ -16,7 +16,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.nut2014.baselibrary.base.BaseMvpActivity;
 import com.nut2014.baselibrary.utils.FPermission;
-import com.nut2014.baselibrary.utils.FProgressDialog;
 import com.nut2014.newtech.R;
 
 import butterknife.BindView;
@@ -69,19 +68,19 @@ public class CompressActivity extends BaseMvpActivity<CompressView, CompressPres
     @Override
     public void startCompress() {
         startBtn.setEnabled(false);
-        FProgressDialog.getInstance().show(this, "压缩中...", true);
+        showLoading("压缩中...", true);
     }
 
     @Override
     public void endCompress() {
         startBtn.setEnabled(true);
-        FProgressDialog.getInstance().dismiss();
+        hideLoading();
         showToast("压缩完成");
     }
 
     @Override
     public void compressProgress(int progress) {
-        FProgressDialog.getInstance().setProgress(progress);
+        setLoadingProgress(progress);
     }
 
 

@@ -11,36 +11,20 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.nut2014.baselibrary.R;
 
-import java.lang.ref.WeakReference;
 import java.util.Locale;
 
 public class FProgressDialog {
-    private volatile static FProgressDialog instance;
+    private Context context;
 
-    private FProgressDialog() {
-    }
-
-    public static FProgressDialog getInstance() {
-        if (instance == null) {
-            synchronized (FProgressDialog.class) {
-                if (instance == null) {
-                    instance = new FProgressDialog();
-                }
-            }
-        }
-        return instance;
+    public FProgressDialog(Context context) {
+        this.context = context;
     }
 
     private AlertDialog alertDialog;
     private ProgressBar progressBar1;
     private TextView progress_tv;
 
-    public void show(Context activityContext, String msg, boolean hasProgress) {
-        WeakReference<Context> mContext = new WeakReference<>(activityContext);
-        Context context = mContext.get();
-        if (context == null) {
-            return;
-        }
+    public void show(String msg, boolean hasProgress) {
         if (alertDialog == null) {
             alertDialog = new AlertDialog.Builder(context, R.style.ProgressDialog).create();
             View inflate = LayoutInflater.from(context).inflate(R.layout.layout_alert_progress, null);
