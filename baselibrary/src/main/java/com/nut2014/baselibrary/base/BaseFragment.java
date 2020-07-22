@@ -1,10 +1,10 @@
 package com.nut2014.baselibrary.base;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.nut2014.baselibrary.utils.MToast;
@@ -19,8 +19,8 @@ public abstract class BaseFragment extends Fragment {
      */
     long lastClick = 0;
 
-    public AppCompatActivity getContext() {
-        return getContext();
+    public Context getContext() {
+        return requireContext();
     }
 
     protected boolean fastClick() {
