@@ -1,6 +1,5 @@
 package com.nut2014.baselibrary.base;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,10 +17,6 @@ public abstract class BaseFragment extends Fragment {
      * 防止重复点击
      */
     long lastClick = 0;
-
-    public Context getContext() {
-        return requireContext();
-    }
 
     protected boolean fastClick() {
         if (System.currentTimeMillis() - lastClick <= 1000) {
